@@ -1,0 +1,28 @@
+<div class="filter-selector">
+  <div ng-repeat="field in $ctrl.fields | filter: {role: 'filter'}">
+    <p> Filter by "{{field['label']}}": </p>
+    <div class="btn-group btn-group-toggle" >
+      <label class="btn btn-secondary"
+          ng-repeat="value in $ctrl.fieldValues[field['name']]"
+          ng-class="{active : confirmed}">
+        {{value}}
+        <input type="checkbox" id="{{value}}" ng-model="confirmed"
+            ng-click="$ctrl.onClickFilter(field, value, confirmed)">
+        </input>
+      </label>
+    </div>
+    <br>
+  </div>
+  <div ng-repeat="field in $ctrl.fields | filter: {role: 'selection'}">
+    <h5> {{field['label']}} </h5>
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action"
+          href=""
+          ng-repeat="row in $ctrl.fieldData | inArrayByKeyFilter: $ctrl.activeFilters: row"
+          ng-click="$ctrl.onClickSelection(row, field['name'])"
+          ng-class="{active : row[field['name']] === $ctrl.activeSelection}">
+        {{row[field['name']]}}
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<section>
+  <navbar current-page="Response Rate"></navbar>
+</section>
+<section>
+  <filter-pane></filter-pane>
+  <br/><br/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col-xs-3 m-2"
+              ng-repeat="ids in $ctrl.qlikIds"
+              style="max-width:310px;">
+            <div class="qlik-card">
+              <div class="text-center" style="height:3.2em;">
+                <h5>{{ids.title}}</h5>
+              </div>
+              <div style="margin-top:2em">
+                <qlik-object obj-id="{{ids.kpi}}" height="100px" width="300px"></qlik-object>
+                <br>
+                <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px"></qlik-object>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

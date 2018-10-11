@@ -1,0 +1,8 @@
+.filter-selector {
+  .btn-secondary:not(:disabled):not(.disabled).active,
+  .btn-secondary:not(:disabled):not(.disabled):active,
+  .show > .btn-secondary.dropdown-toggle {
+    color: #000088;
+    background-color:#AAAAFF;
+  }
+}

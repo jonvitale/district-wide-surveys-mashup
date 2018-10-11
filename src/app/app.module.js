@@ -1,0 +1,43 @@
+import { AppComponent } from './app.component';
+import { QlikService } from './qlik.service';
+import { SharedModule } from './shared/shared.module';
+import { ComponentsModule } from './components/components.module';
+// import './app.scss';
+import config from './config';
+import ngTouch from 'angular-touch';
+import ngRoute from 'angular-route';
+import bootstrap from 'bootstrap';
+
+export const AppModule = qlik => (
+  angular.module('app', [
+    ComponentsModule,
+    SharedModule,
+    ngRoute,
+    ngTouch
+  ])
+  .service('$openApp', ()=> qlik.openApp(config.app, config))
+  .component('app', AppComponent)
+  .config(['$locationProvider', '$routeProvider',
+    ($locationProvider, $routeProvider) => {
+      $routeProvider
+        .when('/home', {
+          template: '<home></home>'
+        })
+        .when('/focus-questions', {
+          template: '<focus-questions></focus-questions>'
+        })
+        .when('/question-compare', {
+          template: '<question-compare></question-compare>'
+        })
+        .when('/response-rate', {
+          template: '<response-rate></response-rate>'
+        })
+        .when('/topics', {
+          template: '<topics></topics>'
+        })
+        .otherwise('/home');
+    }
+  ])
+  .name
+)
+;

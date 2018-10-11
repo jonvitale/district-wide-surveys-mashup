@@ -1,0 +1,47 @@
+.qlik-card {
+  padding:4px;
+  box-shadow:4px 4px 2px #AAAAAA;
+  background-color:#FAFAFF;
+  border-style:solid;
+  border-radius:4px;
+  border-color: #AAAAAA;
+  border-width:0.5px;
+}
+
+.btn-sdp {
+  color: #eef;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-sdp:hover {
+  color: #eef;
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.btn-sdp.focus,
+.btn-sdp:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+
+.btn-sdp.disabled,
+.btn-sdp:disabled {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-sdp:not(:disabled):not(.disabled).active,
+.btn-sdp:not(:disabled):not(.disabled):active,
+.show > .btn-sdp.dropdown-toggle {
+  color: #fff;
+  background-color: #545b62;
+  border-color: #4e555b;
+}
+
+.btn-sdp:not(:disabled):not(.disabled).active:focus,
+.btn-sdp:not(:disabled):not(.disabled):active:focus,
+.show > .btn-sdp.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}

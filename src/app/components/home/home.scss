@@ -1,0 +1,48 @@
+.home {
+  .home-banner {
+    background: url("../img/headers/home.jpg") no-repeat center center;
+    background-size: cover;
+    .home-gradient {
+        background: -moz-linear-gradient(45deg, rgba(22, 17, 101, 0.6), rgba(29, 210, 177, 0.6) 100%);
+        background: -webkit-linear-gradient(45deg, rgba(22, 17, 101, 0.6), rgba(29, 210, 177, 0.6) 100%);
+        background: -webkit-gradient(linear, 45deg, from(rgba(22, 17, 101, 0.6)), to(rgba(29, 210, 177, 0.6)));
+        background: -o-linear-gradient(45deg, rgba(22, 17, 101, 0.6), rgba(29, 210, 177, 0.6) 100%);
+        background: linear-gradient(to 45deg, rgba(22, 17, 101, 0.6), rgba(29, 210, 177, 0.6) 100%);
+    }
+    .home-banner-title {
+      color: #CCCCFF;
+      margin-top:20px;
+      font-style: italic;
+    }
+    .home-banner-content {
+      color: white;
+      border-color: white;
+      margin-top: 100px;
+      margin-bottom: 100px;
+
+      hr {
+        border-color: white;
+        color: white;
+        background-color: white;
+      }
+    }
+  }
+  .home-cards {
+    padding-top: 40px;
+    color: #555588;
+    background-color: #F2F2FF;
+
+    .card {
+      box-shadow:4px 4px 2px #AAAAAA;
+
+      p {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+      }
+    }
+  }
+}
