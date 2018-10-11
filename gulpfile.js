@@ -11,8 +11,8 @@ const rename = require('gulp-rename')
 const zip = require('gulp-zip')
 const concatCss = require('gulp-concat-css');
 const sourcemaps = require('gulp-sourcemaps');
-const project = 'surveys-new'
-const extensionpath = 'C:\\Users\\jvitale\\Documents\\Qlik\\Sense\\Extensions'
+const project = 'district-wide-surveys';
+const extensionpath = 'C:\\Users\\jvitale\\Documents\\Qlik\\Sense\\Extensions';
 const base = '';
 
 gulp.task('qext', function(){
