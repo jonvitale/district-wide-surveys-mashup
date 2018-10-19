@@ -2,8 +2,12 @@ import templateUrl from './focus-questions.html';
 
 const FocusQuestionsComponent = {
   template: templateUrl,
+  $inject: ['$openApp'],
   controller: class FocusQuestionsComponent {
-    constructor(){
+    constructor($openApp){
+      'ngInject';
+      this.$openApp = $openApp;
+     
       this.groups = ['Student', 'Teacher', 'Parent'];
 
       this.qlikIds = {
@@ -40,6 +44,7 @@ const FocusQuestionsComponent = {
       };
 
       this.selectActiveGroup('Student');
+      //this.$openApp.field('Survey').selectMatch("Teacher", true);
     }
 
     onClickGroup(group){

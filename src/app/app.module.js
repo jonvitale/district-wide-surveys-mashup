@@ -1,5 +1,5 @@
 import { AppComponent } from './app.component';
-import { QlikService } from './qlik.service';
+import { QlikVariablesService } from './qlik.variables.service';
 import { SharedModule } from './shared/shared.module';
 import { ComponentsModule } from './components/components.module';
 // import './app.scss';
@@ -16,6 +16,8 @@ export const AppModule = qlik => (
     ngTouch
   ])
   .service('$openApp', ()=> qlik.openApp(config.app, config))
+  .service('qlik', ()=> qlik)
+  .service('QlikVariablesService', QlikVariablesService)
   .component('app', AppComponent)
   .config(['$locationProvider', '$routeProvider',
     ($locationProvider, $routeProvider) => {
@@ -39,5 +41,4 @@ export const AppModule = qlik => (
     }
   ])
   .name
-)
-;
+);

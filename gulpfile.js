@@ -29,7 +29,7 @@ gulp.task('html', function(){
 })
 
 gulp.task('style', function(){
-    gulp.src(['./src/app/**/*.scss', './src/*.css'])
+    gulp.src(['./src/app/**/*.scss', './src/app/*.scss', './src/*.css'])
     .pipe(sass())
     //.pipe(sass({ outputStyle: 'compressed'}))
     //.pipe(autoprefixer())
@@ -67,7 +67,7 @@ gulp.src(`./${project}/**`)
 
 gulp.task('watch', function(){
     gulp.watch('./src/app/**/*.js', ['js'])
-    gulp.watch('./src/app/**/*.scss', ['style'])
+    gulp.watch(['./src/app/**/*.scss', './src/app/*.scss', './src/*.css'], ['style'])
     gulp.watch(['./src/index.html'], ['html'])
     gulp.watch('./src/app/**/*.html', ['js'])
 })

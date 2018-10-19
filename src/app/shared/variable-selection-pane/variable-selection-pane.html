@@ -1,0 +1,38 @@
+<div class="variable-selection-pane container-fluid">
+	<div class="row">
+		<div class="col">
+			<div class="container-fluid">
+				<div class="row">
+					<variable-selector 
+							ng-repeat="selector in $ctrl.selectorParams"
+							class="col"
+							ng-class="'{{selector.cssClass}}'"
+							variable-name={{selector.variableName}}
+							variable-label={{selector.variableLabel}}
+							source-array="selector.sourceArray"
+							source-field={{selector.sourceField}}
+							governing-state={{selector.governingState}}
+							governing-fields="selector.governingFields"
+							orientation={{selector.orientation}}
+							on-selection="$ctrl.onSelection(name, value, variable)"
+							selections="$ctrl.selections" 
+					></variable-selector>
+				</div>
+			</div>
+		</div>
+		<variable-selector 
+				ng-if="$ctrl.questionText != null"
+				class="col"
+				ng-class="'{{$ctrl.questionText.cssClass}}'"
+				variable-name={{$ctrl.questionText.variableName}}
+				variable-label={{$ctrl.questionText.variableLabel}}
+				source-array="$ctrl.questionText.sourceArray"
+				source-field={{$ctrl.questionText.sourceField}}
+				governing-state={{$ctrl.questionText.governingState}}
+				governing-fields="$ctrl.questionText.governingFields"
+				orientation={{$ctrl.questionText.orientation}}
+				on-selection="$ctrl.onSelection(name, value, variable)"
+				selections="$ctrl.selections" 
+		></variable-selector>
+	</div>
+</div>

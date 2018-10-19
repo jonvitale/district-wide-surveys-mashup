@@ -2,31 +2,63 @@ import templateUrl from './question-compare.html';
 
 const QuestionCompareComponent = {
   template:  templateUrl,
+  $inject: ['qlik', '$openApp', 'QlikVariablesService'],
   controller: class QuestionCompareComponent {
-     constructor($openApp){
+     constructor(qlik, $openApp, QlikVariablesService){
       'ngInject';
+      this.qlik = qlik;
       this.$openApp = $openApp;
-      console.log($openApp);
-      this.$openApp.variable.setStringValue('vSurvey_Selected', 'Student');
-      this.$openApp.variable.setStringValue('vConstruct_Selected', 'School Climate');
-      this.$openApp.variable.setStringValue('vQuestionText_Selected', 'I enjoy being in school.');
-
+      this.QlikVariablesService = QlikVariablesService
+      this.survey = 'Student';
+      this.construct = 'School Climate';
+      this.questionText = '';
     }
-/*
+
     $onInit(){
-      this.$openApp.variable.setStringValue('0204dcbd-87e1-4c7d-8e6c-9130fba1a712', 'Parent');
-      this.$openApp.variable.setStringValue('c8253b5d-96d1-4197-99ae-9e226831fac2', 'School Climate');
-      this.$openApp.variable.setStringValue('ddea6d9a-1c44-4155-8379-2535158317f4', 'Q3f');
-      this.$openApp.variable.setStringValue('59015a80-55d8-42d9-b408-3b62ac806595', 'I am bullied at school');
-    }
-    $onChanges(){
-      this.$openApp.variable.setStringValue('0204dcbd-87e1-4c7d-8e6c-9130fba1a712', 'Parent');
-      this.$openApp.variable.setStringValue('c8253b5d-96d1-4197-99ae-9e226831fac2', 'School Climate');
-      this.$openApp.variable.setStringValue('ddea6d9a-1c44-4155-8379-2535158317f4', 'Q3f');
-      this.$openApp.variable.setStringValue('59015a80-55d8-42d9-b408-3b62ac806595', 'I am bullied at school');
+      this.$openApp.getObject('CurrentSelections', 'CurrentSelections');
+      this.QlikVariablesService.getVariableValue('vSurvey_Selected').then(value => {
+        this.survey = value;
+      });
+      this.QlikVariablesService.getVariableValue('vConstruct_Selected').then(value => {
+        this.construct = value;
+      });
+      this.QlikVariablesService.getVariableValue('vQuestionText_Selected').then(value => {
+        this.questionText = value;
+      });
+
+      //register listeners
+      this.QlikVariablesService.registerVariableObserver('vSurvey_Selected', value => {
+        this.survey = value;
+      });
+      this.QlikVariablesService.registerVariableObserver('vConstruct_Selected', value => {
+        this.construct = value;
+      });
+      this.QlikVariablesService.registerVariableObserver('vQuestionText_Selected', value => {
+        this.questionText = value;
+      });
     }
 
-    */
+    $onDestroy(){
+      // unregister listeners
+      console.log("---onDestroy question-compare--");
+      this.QlikVariablesService.unregisterVariableObservers('vSurvey_Selected');
+      this.QlikVariablesService.unregisterVariableObservers('vConstruct_Selected');
+      this.QlikVariablesService.unregisterVariableObservers('vQuestionText_Selected');
+    }
+
+    onVariableSelection(survey, topic, questionText){
+      this.survey = survey;
+      this.topic = topic;
+      this.questionText = questionText;
+    }
+
+    clearSelections(stateName){
+      this.$openApp.clearAll(true, stateName);
+    }
+
+    refreshQlik(){
+      this.qlik.resize();
+    }
   }
 }
 

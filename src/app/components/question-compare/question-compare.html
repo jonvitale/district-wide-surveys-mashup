@@ -1,20 +1,76 @@
-<section>
-  <navbar current-page="Question Compare"></navbar>
-</section>
-<section>
-  <filter-pane></filter-pane>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <filter-selector></filter-selector>
-      </div>
-      <qlik-object obj-id="EnFzL" height="300px" width="300px">></qlik-object>
-      <div class="col">
-        <qlik-object obj-id="DQBUdJ" height="300px" width="300px">></qlik-object>
-      </div>
-      <div class="col">
-        <qlik-object obj-id="wkKPMz" height="300px" width="300px"></qlik-object>
+<div class="question-compare">
+  <section class="sticky-top" style="background-color: rgba(84,83,82, 1.0)">
+   <navbar current-page="Question Compare"></navbar> 
+    <filter-pane></filter-pane>
+    <!-- Question Selection - works like accordion but always at top -->
+    <div class="container-fluid accordion" id="accordion">   
+      <div class="row card">
+        <div class="card-header card-header-question" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" ng-click="$ctrl.refreshQlik()">
+              <span class="symbol"></span>
+              Select a Question
+            </button>            
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="row">
+            <div class="card-body">           
+              <variable-selection-pane orient-survey="vert" orient-construct="vert" orient-question-text="list"></variable-selection-pane>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  <section> 
+    <!-- Visualization accordion -->
+    <div class="container-fluid accordion" id="accordion">
+      <!-- Compare Groups -->
+      <div class="row card">
+        <div class="card-header"id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" ng-click="$ctrl.refreshQlik()">
+              <span class="symbol"></span>
+              Compare Groups
+            </button>            
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div class="card-body"> 
+            <div class="row">
+              <div class="col">              
+                <h3 style="text-align:center; padding-bottom: 20px">
+                  {{$ctrl.survey}} - {{$ctrl.construct}}
+                  <br> 
+                  <i>{{$ctrl.questionText}}</i>
+                </h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col" style="text-align:center">      
+                <h4>Main Selections</h4>
+                <qlik-object obj-id="wkKPMz" height="300px" width="300px" style="display: inline-block"></qlik-object>
+              </div>
+              <div class="col" style="background-color:#eeeeff">  
+                <h4 style="text-align:center">Comparison Selections</h4>
+                <div class="row">            
+                  <div class="col">                   
+                    <qlik-object obj-id="DQBUdJ" height="300px" width="300px"></qlik-object>
+                  </div>
+                  <div class="col">
+                    <br>
+                    <qlik-object obj-id="YAtp" height="220px" width="300px"></qlik-object>
+                    <button type="button" class="btn btn-primary" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
+                      Clear comparison selections
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

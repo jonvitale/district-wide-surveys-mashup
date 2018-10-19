@@ -1,5 +1,6 @@
 .qlik-card {
-  padding:4px;
+  padding:10px;
+  padding-bottom:10px;
   box-shadow:4px 4px 2px #AAAAAA;
   background-color:#FAFAFF;
   border-style:solid;
@@ -8,40 +9,101 @@
   border-width:0.5px;
 }
 
+.accordion {
+  .card-header {
+    color: #fff;
+    width: 100%;
+    background-color:rgba(22, 17, 101, 0.6);
+    text-align: left;
+    .mb-0 {
+      width: 100%;
+      .btn {
+        text-align: left;
+        color: #fff;
+        width: 100%;
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+  }
+}
+
+.panel-heading {
+  color: #fff; 
+  border-bottom: 0;
+  content: "Test" !important;
+  width:100%;
+  text-align: left;
+  padding: 4px;
+}
+
+.symbol span {
+  display: none !important;
+}
+.symbol:after {
+  content: "-" !important;
+}
+.collapsed .symbol:after {
+  content: "+" !important;
+}
+
+.panel-group {
+  margin-bottom: 15px;
+}
+.panel-group .panel {
+  margin-bottom: 0;
+  border-radius: 4px;
+}
+.panel-group .panel + .panel {
+  margin-top: 5px;
+}
+.panel-group .panel-heading {
+  border-bottom: 0;
+  background-color: rgba(22, 17, 101, 0.6);
+} 
+.panel-group .panel-heading + .panel-collapse > .list-group,
+.panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: 1px solid #ddd;
+}
+.panel-group .panel-footer {
+  border-top: 0;
+}
+.panel-group .panel-footer + .panel-collapse .panel-default {
+  background-color: rgba(22, 17, 101, 0.6) !important;
+}
+
 .btn-sdp {
-  color: #eef;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  color: #002266;
+  background-color: #dddddd;
+  border-color: #aaaaaa;
+  margin-bottom:2px;
+  margin-right:2px;
 }
 
 .btn-sdp:hover {
-  color: #eef;
-  background-color: #5a6268;
-  border-color: #545b62;
+  color: #002266;
+  background-color: #bbbbcc;
+  border-color: #aaaaaa;
 }
 
-.btn-sdp.focus,
-.btn-sdp:focus {
+.btn-sdp:focus, .btn-sdp.focus {
   box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
 }
 
-.btn-sdp.disabled,
-.btn-sdp:disabled {
+.btn-sdp.disabled, .btn-sdp:disabled {
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
 }
 
-.btn-sdp:not(:disabled):not(.disabled).active,
-.btn-sdp:not(:disabled):not(.disabled):active,
+.btn-sdp:not(:disabled):not(.disabled):active, .btn-sdp:not(:disabled):not(.disabled).active,
 .show > .btn-sdp.dropdown-toggle {
   color: #fff;
-  background-color: #545b62;
-  border-color: #4e555b;
+  border-color: rgb(68, 68, 136);
+  background-color: rgb(68, 68, 136);
 }
 
-.btn-sdp:not(:disabled):not(.disabled).active:focus,
-.btn-sdp:not(:disabled):not(.disabled):active:focus,
+.btn-sdp:not(:disabled):not(.disabled):active:focus, .btn-sdp:not(:disabled):not(.disabled).active:focus,
 .show > .btn-sdp.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+  // box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
 }

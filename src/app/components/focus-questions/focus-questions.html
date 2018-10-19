@@ -8,15 +8,13 @@
     <div class="row">
       <div class="col-xs-1 ml-2 mr-5">
         <h5>Choose a group:</h5>
-        <div class="list-group"
-          aria-label="Choose a group to focus on">
-          <a class="list-group-item list-group-item-secondary list-group-item-action"
+        <div class="btn-group-vertical" style="width:100%" role="group" aria-label="Respondent Group">
+          <button type="button" class="btn btn-sdp"
               ng-repeat="group in $ctrl.groups"
               ng-click="$ctrl.onClickGroup(group)"
-              ng-class="{active : group === $ctrl.activeGroup}"
-              href="">
+              ng-class="{active : group === $ctrl.activeGroup}">
             {{group}}
-          </a>
+          </button>
         </div>
       </div>
       <div class="col">

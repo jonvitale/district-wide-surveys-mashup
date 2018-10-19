@@ -1,29 +1,127 @@
-<section>
-  <navbar current-page="Response Rate"></navbar>
-</section>
-<section>
-  <filter-pane></filter-pane>
-  <br/><br/>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
+<div class="response-rate">
+  <section class="sticky-top">
+    <navbar current-page="Response Rate"></navbar>
+    <filter-pane></filter-pane>
+  </section>
+  <section>
+    <div class="instructions">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-3 m-2"
-              ng-repeat="ids in $ctrl.qlikIds"
-              style="max-width:310px;">
-            <div class="qlik-card">
-              <div class="text-center" style="height:3.2em;">
-                <h5>{{ids.title}}</h5>
+          <div class="col col-s-12 col-m-8">
+            <div style="padding:20px">
+              <h4 style="text-align:center"> Response Rate </h4>
+              <p>
+                What percent of student, parents, teachers, and principals
+                responded to the survey?
+                <br><br> 
+                How does this chance to previous years?
+                <br><br>
+                How do networks and schools compare to each other?
+              </p>
+            </div>
+          </div>
+          <div class="col hidden-s col-m-4">
+            <img src="http://localhost:4848/extensions/district-wide-surveys/img/headers/4.jpg" width="410" height="273")>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container-fluid accordion" id="accordion">
+      <!-- Overview -->
+      <div class="row card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" ng-click="$ctrl.refreshQlik()">
+              <span class="symbol"></span>
+              Overview
+            </button>            
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body"> 
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-3 m-2"
+                    ng-repeat="ids in $ctrl.qlikIds"
+                    style="max-width:310px;">
+                  <div>
+                    <div class="text-center" style="height:3.2em;">
+                      <h5>{{ids.title}}</h5>
+                    </div>
+                    <div style="padding-bottom: 5px;">
+                      <qlik-object obj-id="{{ids.kpi}}" height="100px" width="300px"></qlik-object>
+                    </div>
+                  </div>
+                  <div class="qlik-card" style="padding-top:15px">
+                    <div class="text-center" style="height:3.2em;">
+                      <h5>{{ids.title}} - 3 year trend</h5>
+                    </div>
+                    <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px"></qlik-object>
+                  </div>
+                </div>
               </div>
-              <div style="margin-top:2em">
-                <qlik-object obj-id="{{ids.kpi}}" height="100px" width="300px"></qlik-object>
-                <br>
-                <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px"></qlik-object>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- YOY -->
+      <div class="row card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" ng-click="$ctrl.refreshQlik()">
+              <span class="symbol"></span>
+              Yearly Change by Network, School, or Grade
+            </button>            
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div class="card-body"> 
+            <div class="container-fluid">
+              <div class="row">
+                 <variable-selection-pane  orient-survey="horiz"></variable-selection-pane>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="qlik-card">
+                    <qlik-object obj-id="{{$ctrl.qlikId_YOY}}" height="300px" width="80%"></qlik-object>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </div>
+
+      <!-- Map -->
+       <div class="row card">
+        <div class="card-header" id="headingThree">
+          <h5 class="mb-0">
+            <button class="btn collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" ng-click="$ctrl.refreshQlik()">
+              <span class="symbol"></span>
+              Map
+            </button>            
+          </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+          <div class="card-body"> 
+            <div class="container-fluid">
+              <div class="row">
+                 <variable-selection-pane orient-survey="horiz"></variable-selection-pane>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="qlik-card">
+                    <qlik-object obj-id="{{$ctrl.qlikId_Map}}" height="1200px" width="80%"></qlik-object>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

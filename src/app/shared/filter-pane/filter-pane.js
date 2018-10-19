@@ -1,14 +1,7 @@
-import './filter-pane.scss';
+import templateUrl from './filter-pane.html';
 
 const FilterPaneComponent = {
-  template: `
-    <div id="CurrentSelections">Current Selections Loading...</div>
-    <qlik-object obj-id="{{$ctrl.objId}}" height="5rem" width="100%"></qlik-object>
-  `
-  // <div id="{{$ctrl.objId}}" class="qvobject" ng-style="{ 'height': '5rem', 'width': '100%' }">
-      // Loading...
-    // </div>
-  ,
+  template: templateUrl,
   bindings: {
       objId: '@',
       height: '@',
