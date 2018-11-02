@@ -1,29 +1,42 @@
 <div class="variable-selector">
-	<h5 style="text-align:center">
+	<h5 style="text-align:center; color:#888;">
 	{{$ctrl.variableLabel}}
 	</h5>
 	<div class="btn-group btn-group-toggle flex-wrap" 
-		ng-class="{'btn-group-vertical': $ctrl.orientation === 'vert'}" 
-		ng-if="$ctrl.orientation === 'horiz' || $ctrl.orientation === 'vert'"
-		>
+			ng-class="{'btn-group-vertical': $ctrl.orientation === 'vert'}" 
+			ng-if="$ctrl.orientation === 'horiz' || $ctrl.orientation === 'vert'">
 		<button type="button" class="btn btn-sdp"
-				id="{{val}}"
+				id="input-{{$ctrl.variableName}}-{{$index}}"
 				ng-repeat="val in $ctrl.values"
-				ng-class="{active: val === $ctrl.currentValue}"
-				style="width:100%"
-				ng-click="$ctrl.onClick(val)">
-			{{val}}
+				ng-class="[{active: val.value === $ctrl.currentValue}, 
+						{disabled: !val.selectable}]"
+				ng-click="$ctrl.onClick(val, $index)">
+			{{val.value}}
 		</button>
 	</div>
+
+	<div class="btn-group btn-group-vertical flex-wrap" 
+			ng-if="$ctrl.orientation === 'combo'">
+		<label class="btn btn-sdp" style="text-align:left; white-space: normal"
+				ng-repeat="val in $ctrl.values | matchBooleanFilter: 'selectable': true"
+				>
+			<input type="checkbox" 					
+					id="input-{{$ctrl.variableName}}-{{$index}}"				
+					ng-checked="$ctrl.currentValues.indexOf(val.value) >= 0"
+					ng-click="$ctrl.onClick(val, $index)">
+				{{val.value}}
+			</input>
+		</label>
+	</div>
+
 	<ul class="list-group"
-			ng-if="$ctrl.orientation === 'list'"
-			style="overflow: scroll">
+			ng-if="$ctrl.orientation === 'list'">
 		<li class="list-group-item btn-sdp"
-			ng-repeat="val in $ctrl.values"
-			ng-class="{active: val === $ctrl.currentValue}"
-			ng-click="$ctrl.onClick(val)"
-			id="{{val}}">
-			{{val}}
+				ng-repeat="val in $ctrl.values | matchBooleanFilter: 'selectable': true"
+				id="input-{{$ctrl.variableName}}-{{$index}}"
+				ng-class="{active: val.value === $ctrl.currentValue}"
+				ng-click="$ctrl.onClick(val, $index)">
+			{{val.value}}
 		</li>
 	</ul>
 </div>

@@ -1,5 +1,129 @@
 .question-compare {
-	.card-header-question {
-		background-color: rgba(84,136,82, 1.0);
+	.instructions {
+		.btn {
+			display:block; 
+			height: 3em;
+			width: 250px;
+			background-color:#ffaa30;
+			box-shadow:4px 4px 2px #AAAAAA;
+			color: white;
+			span {
+				font-weight: bold;
+			}			
+		}
+		.btn:hover,
+		.btn:focus {
+			border-color:#ef9a20 !important;
+		}
+	}
+	.survey-topic {
+		display:block;			
+		margin-top: 0.5em;
+		text-align:center;
+		.pill {
+			display: inline-block;
+			box-shadow:2px 2px 1px #aac;
+			text-align:center;
+			background-color: #47aad8;
+			color: #fff;
+			border-radius:20px;
+			// border-color: #278ab8;
+   //  	border-style: solid;
+   //  	border-width: thin;
+			padding: 2px 1em 2px 1em;
+			margin-bottom: 4px;
+			font-size: 10pt;
+			user-select: none;
+		}
+	}
+
+	.primary-selections{
+		text-align: center; 
+		background-color: #f0fff8;
+		border-radius: 8px;
+		border-color: #e0f0e8;
+		border-style: solid;
+		border-width: thin;
+		display: block;
+		.banner {
+			border-radius: 8px 8px 0px 0px;
+			padding: 5px; 
+			background-color: #398635; 
+			color: #fff; 
+			width: 100%;
+		}
+		.qlik-card {
+			width: 350px;
+			text-align: center;
+			display: block;
+		}
+	}
+
+	.alternative-selections{
+		text-align:center; 
+		background-color:#fff0f8;
+		border-radius:8px;
+		border-color:#f0e0e8;
+		border-style: solid;
+		border-width: thin;
+		.banner {
+			border-radius:8px 8px 0px 0px;
+			padding:5px; 
+			background-color:#99082e; 
+			color:#fff; 
+			width:100%;
+		}
+		.qlik-card {
+			margin-left: 1em;
+			width:350px;
+		}
+		.btn {
+			box-shadow:4px 4px 2px #AAAAAA;
+		}
+	}
+
+	.question-display {
+		.question-stem {
+			color: #888;
+		}
+		.question-text {
+			font-style: oblique;
+			font-weight: bold;
+			color: #47aad8;
+		}
+		.question-body {
+			display: block;
+		}
+	}
+	#question-picker {
+	  .card-header {
+	  	padding: 2px;
+	    
+	    width: 400px;
+	    background-color:#ffaa30;
+	    text-align: right;
+	    .mb-0 {
+	      .btn {
+	      	color: #22779f;
+	      	font-weight: bold;
+	        text-align: center;
+	        background-color: transparent;
+	        border-color: transparent;
+	      }
+	    }
+	  }
+	  .question-select-placeholder span {
+			display: none !important;
+		}
+		.question-select-placeholder:after {
+			content: 'Click to close' !important;
+		}
+		.collapsed .question-select-placeholder:after {
+			content: '⨁ Select a new question' !important;
+		}
+	}
+	
+	#accordion {
+		padding-top: 5px;
 	}
 }

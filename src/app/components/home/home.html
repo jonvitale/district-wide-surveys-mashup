@@ -1,83 +1,104 @@
 <div class="home">
-  <div class="home-banner">
-    <div class="home-gradient">
+  <div class="main">
+    <div class="home-banner">
+      <div class="home-gradient">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xs-12">
+              <div class="home-banner-title">
+                <h1>The School District of Philadelphia</h1>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-md-left">
+              <div class="home-banner-content">
+                <h1>
+                  District-Wide Surveys
+                </h1>
+                <hr>
+                <p>
+                  Each year all School District of Philadelphia parents, teachers,
+                  principals, and students (grades 3+) are invited to participate
+                  in a survey about their school. This feedback helps identify what
+                  is working well and what areas need to be improved.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="home-content-block">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-xs-12">
-            <div class="home-banner-title">
-              <h1>The School District of Philadelphia</h1>
-            </div>
+          <h1>Viewing the Results</h1>
+        </div>
+        <div>
+          <p>
+            The results are displayed in charts and tables to make comparisons and
+            year-to-year changes easy to read and understand. As you view the results
+            you may focus on response rate, responses to individual questions (including
+            selected focus questions), and major topics (e.g., "school climate"). Click
+            one of the following to navigate to the data.
+          </p>
+          <div class="card-deck">
+            <route-card
+                title="Response Rate"
+                route="response-rate"
+                img-src="img/routes/response-rate.png"
+                class="card">
+              What percent of student, parents, teachers, and principals
+              responded to the survey? How does this compare to previous years?
+            </route-card>
+            <route-card
+                title="Highlights"
+                route="focus-questions"
+                img-src="img/routes/focus-questions.png"
+                class="card">
+              How do students, parents, and teachers respond to key selected questions about their schools?
+            </route-card>          
+            <route-card
+                title="Survey Topics"
+                route="topics"
+                img-src="img/routes/topics.png"
+                class="card">
+                How do networks and schools compare on the five survey topics?
+            </route-card>
+            <route-card
+                title="All Questions"
+                route="question-compare"
+                img-src="img/routes/question-compare.png"
+                class="card">
+                How do students, parents, teachers, and principals respond to all questions? Compare schools, networks, or groups within schools.
+            </route-card>    
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6 text-md-left">
-            <div class="home-banner-content">
-              <h1>
-                District-Wide Surveys
-              </h1>
-              <hr>
-              <p>
-                Each year all School District of Philadelphia parents, teachers,
-                principals, and students (grades 3+) are invited to participate
-                in a survey about their school. This feedback helps identify what
-                is working well and what areas need to be improved.
-              </p>
-            </div>
-          </div>
+      </div>
+      <br>
+    </div>
+    <div class="home-content-block">
+      <hr>
+      <div class="container">
+        <div class="row justify-content-center">
+          <h1>More Information</h1>
+        </div>
+        <div>
+          <p>
+            The district-wide surveys are designed, implemented, and evaluated by the Office of Research and Evaluation at the School District of Philadelphia
+              <a href="mailto:schoolsurveys@philasd.org">schoolsurveys@philasd.org</a>. Click the link below to learn more about the surveys.
+          </p>
+          <route-card
+            title="More about the surveys"
+            route="survey-resources"
+            hide-text="true"
+            class="card mx-auto"
+            style="width:300px; display:block-inline;">
+          </route-card>
         </div>
       </div>
-    </div>
+    </div>  
   </div>
-  <div class="home-cards">
-    <div class="container">
-      <div class="row justify-content-center">
-        <h1>Viewing the Results</h1>
-      </div>
-      <div>
-        <p>
-          The results are displayed in charts and tables to make comparisons and
-          year-to-year changes easy to read and understand. As you view the results
-          you may focus on response rate, responses to individual questions (including
-          selected focus questions), and major topics (e.g., "school climate"). Click
-          one of the following to navigate to the data.
-        </p>
-        <div class="card-deck">
-          <route-card
-              title="Response Rate"
-              route="response-rate"
-              img-src="img/routes/response-rate.png"
-              class="card">
-            What percent of student, parents, teachers, and principals
-            responded to the survey? How does this compare to previous years?
-          </route-card>
-          <route-card
-              title="Focus Questions"
-              route="focus-questions"
-              img-src="img/routes/focus-questions.png"
-              class="card">
-            How do students, parents, and teachers respond to key selected questions
-            about their schools?
-          </route-card>
-          <route-card
-              title="All Questions"
-              route="question-compare"
-              img-src="img/routes/question-compare.png"
-              class="card">
-              How do students, parents, teachers, and principals respond to all questions? Compare schools, networks, or groups within schools.
-          </route-card>
-          <route-card
-              title="Survey Topics"
-              route="topics"
-              img-src="img/routes/topics.png"
-              class="card">
-              How do networks and schools compare on the five survey topics?
-          </route-card>    
-        </div>
-      </div>
-    </div>
-    <br>
-  </div>  
-  <div>
-      Copyright, The School District of Philadelphia, 2018.
-  </div>
+
+  <sdp-footer></sdp-footer>
 </div>

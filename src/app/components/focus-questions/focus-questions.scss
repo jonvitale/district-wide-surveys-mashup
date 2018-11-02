@@ -1,0 +1,23 @@
+.focus-questions {
+	.question-header {
+	  width:100%; 
+	  text-align:center;	  
+	  .question-intro {
+	  	color: #888;
+	  }
+	  .question-response {
+	  	color: #888;
+	  	font-weight: bold;
+	  }
+	  .question-stem {
+	  	color: #888;
+	  }
+	}
+	.question-text {
+		text-align: center;
+  	font-style: oblique;
+		font-weight: bold;
+		color: #47aad8;
+		height:3.2em;
+  }
+}

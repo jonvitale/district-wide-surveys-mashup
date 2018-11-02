@@ -1,34 +1,51 @@
-<div class="variable-selection-pane container-fluid">
-	<div class="row">
-		<div class="col">
-			<div class="container-fluid">
-				<div class="row">
-					<variable-selector 
-							ng-repeat="selector in $ctrl.selectorParams"
-							class="col"
-							ng-class="'{{selector.cssClass}}'"
-							variable-name={{selector.variableName}}
-							variable-label={{selector.variableLabel}}
-							source-array="selector.sourceArray"
-							source-field={{selector.sourceField}}
-							governing-state={{selector.governingState}}
-							governing-fields="selector.governingFields"
-							orientation={{selector.orientation}}
-							on-selection="$ctrl.onSelection(name, value, variable)"
-							selections="$ctrl.selections" 
-					></variable-selector>
-				</div>
-			</div>
-		</div>
+<div class="variable-selection-pane">
+	<div class="d-flex flex-wrap">
+		<variable-selector 
+				ng-if="$ctrl.survey != null"
+				style="padding-right:20px;"
+				ng-class="'{{$ctrl.survey.cssClass}}'"
+				variable-name={{$ctrl.survey.variableName}}
+				variable-label={{$ctrl.survey.variableLabel}}
+				source-array="$ctrl.survey.sourceArray"
+				source-field={{$ctrl.survey.sourceField}}
+				governing-fields="$ctrl.survey.governingFields"
+				orientation={{$ctrl.survey.orientation}}
+				on-selection="$ctrl.onSelection(name, value, variable)"
+				selections="$ctrl.selections" 
+		></variable-selector>
+		<variable-selector 
+				ng-if="$ctrl.construct != null"
+				style="padding-right:20px;"
+				ng-class="'{{$ctrl.construct.cssClass}}'"
+				variable-name={{$ctrl.construct.variableName}}
+				variable-label={{$ctrl.construct.variableLabel}}
+				source-array="$ctrl.construct.sourceArray"
+				source-field={{$ctrl.construct.sourceField}}
+				governing-fields="$ctrl.construct.governingFields"
+				orientation={{$ctrl.construct.orientation}}
+				on-selection="$ctrl.onSelection(name, value, variable)"
+				selections="$ctrl.selections" 
+		></variable-selector>
+		<variable-selector 
+				ng-if="$ctrl.subConstruct != null"
+				style="padding-right:20px; max-width:16em;"
+				ng-class="'{{$ctrl.subConstruct.cssClass}}'"
+				variable-name={{$ctrl.subConstruct.variableName}}
+				variable-label={{$ctrl.subConstruct.variableLabel}}
+				source-array="$ctrl.subConstruct.sourceArray"
+				source-field={{$ctrl.subConstruct.sourceField}}
+				governing-fields="$ctrl.subConstruct.governingFields"
+				orientation={{$ctrl.subConstruct.orientation}}
+				on-selection="$ctrl.onSelection(name, value, variable)"
+				selections="$ctrl.selections" 
+		></variable-selector>
 		<variable-selector 
 				ng-if="$ctrl.questionText != null"
-				class="col"
 				ng-class="'{{$ctrl.questionText.cssClass}}'"
 				variable-name={{$ctrl.questionText.variableName}}
 				variable-label={{$ctrl.questionText.variableLabel}}
 				source-array="$ctrl.questionText.sourceArray"
 				source-field={{$ctrl.questionText.sourceField}}
-				governing-state={{$ctrl.questionText.governingState}}
 				governing-fields="$ctrl.questionText.governingFields"
 				orientation={{$ctrl.questionText.orientation}}
 				on-selection="$ctrl.onSelection(name, value, variable)"

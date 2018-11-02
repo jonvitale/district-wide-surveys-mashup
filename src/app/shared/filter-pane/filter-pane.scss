@@ -1,10 +1,54 @@
 .filter-pane {
-	background-color: rgba(84,83,82, 1.0);
-	margin-bottom: 5px;
-	//padding-bottom: 5px;
-	.qv-filterpane {
-		background-color: rgba(84,83,82, 1.0);
-		// color: rgba(84,83,82, 1.0);
-		margin-bottom: 5px;
+	.filter-header {
+		background-color: #398635;
+		//display: flex;
+		//border: 5px solid white;
+
+		.btn {
+			color: #fff;
+			background-color: #398635;
+			overflow: hidden;
+		}
+
+		.text-demo span {
+			display: none !important;
+		}
+		.text-demo:after {
+			content: 'Click to close' !important;
+		}
+		.collapsed .text-demo:after {
+			content: 'Select schools and student groups' !important;
+		}
+
+		.text-nondemo span {
+			display: none !important;
+		}
+		.text-nondemo:after {
+			content: 'Click to close' !important;
+		}
+		.collapsed .text-nondemo:after {
+			content: 'Select schools' !important;
+		}
+
+		.current-selections {			
+			.qv-panel-current-selections {
+				background-color: #398635;
+				height: 100% !important;
+				//display: inline;
+			}
+			.buttons {
+				display: none;
+			}
+			.buttons-end {
+				display: none;
+			}
+		}
 	}
+
+	#collapseMainFilter {
+		background-color:#fff;
+	}
+
 }
+
+		

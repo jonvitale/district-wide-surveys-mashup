@@ -1,0 +1,22 @@
+.main-nav {
+	a {
+		color: #fff !important;
+	}
+	a:hover {
+		background-color: #2b416b;
+		border-color: #3b517b;
+	}
+
+	.active {
+		border-color: #fff;
+		border-bottow-width: 1px;
+		border-bottom-style: solid;
+		max-width: 12em;
+	}
+	.active:hover {
+		border-color: #fff;
+		border-bottow-width: 1px;
+		border-bottom-style: solid;
+		max-width: 12em;
+	}
+}

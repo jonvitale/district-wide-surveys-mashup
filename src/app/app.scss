@@ -1,3 +1,79 @@
+$color-sdp-navy: #0b315b;
+$color-sdp-gold: #ffaa30;
+$color-sdp-blue: #22779f;
+$color-sdp-green: #398635;
+$color-sdp-light-blue: #47aad8;
+$color-sdp-red: #99082e;
+
+html, body {
+  height: 100%;
+}
+
+.main {
+  min-height: calc(100vh - 2em);
+  // height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+  // height: 100%;
+  margin: 0 auto -2em;
+}
+
+.sdp-footer {
+  position: relative;
+  height: 5em;
+  margin-top: 2em;
+  background-color: #fff;
+  color: #444;
+
+  .social {
+    display: inline-block;
+    margin-left: 1em;
+    a {      
+      margin: 4px 8px 0px 0px;
+      width: 40px;
+      height: 40px;
+      color: #22779f;
+      
+    }
+  }  
+}
+
+.bg-sdp { 
+  background-color: $color-sdp-navy !important;
+}
+
+
+.instructions {
+  color: #444;
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-left:20px;
+  padding-right:20px;
+  .text-block {
+    background-color: #f0f0f8;
+    //box-shadow:2px 2px 2px #ccc;
+    max-width: 50em;
+    padding: 1em;
+    border-radius:8px;
+    border-color:#e0e0e0;
+    border-style: solid;
+    border-width: thin;
+  }
+  .vis-block {
+    margin-left: 2em;
+  }
+  h1, h2, h3, h4, h5 {
+    color: #888;
+  }
+  .body {
+    padding-left: 10px;
+  }
+}
+
+a.bg-sdp:hover, a.bg-sdp:focus,
+button.bg-sdp:hover,
+button.bg-sdp:focus {
+  background-color: #6666AA !important;
+}
+
 .qlik-card {
   padding:10px;
   padding-bottom:10px;
@@ -5,83 +81,59 @@
   background-color:#FAFAFF;
   border-style:solid;
   border-radius:4px;
-  border-color: #AAAAAA;
+  border-color: #ccc;
   border-width:0.5px;
+
+  .qv-object-content-container {
+    position: static !important;
+  }
 }
 
 .accordion {
   .card-header {
     color: #fff;
     width: 100%;
-    background-color:rgba(22, 17, 101, 0.6);
-    text-align: left;
+    background-color:$color-sdp-blue;
+    padding: 0px;
     .mb-0 {
       width: 100%;
       .btn {
         text-align: left;
         color: #fff;
         width: 100%;
+        min-height: 3em;
         background-color: transparent;
         border-color: transparent;
+        .icon {
+          height: 24px;
+          margin-right: 2em;
+        }
       }
     }
   }
 }
 
-.panel-heading {
-  color: #fff; 
-  border-bottom: 0;
-  content: "Test" !important;
-  width:100%;
-  text-align: left;
-  padding: 4px;
-}
-
 .symbol span {
   display: none !important;
 }
-.symbol:after {
+.symbol:before {
   content: "-" !important;
 }
-.collapsed .symbol:after {
+.collapsed .symbol:before {
   content: "+" !important;
 }
 
-.panel-group {
-  margin-bottom: 15px;
-}
-.panel-group .panel {
-  margin-bottom: 0;
-  border-radius: 4px;
-}
-.panel-group .panel + .panel {
-  margin-top: 5px;
-}
-.panel-group .panel-heading {
-  border-bottom: 0;
-  background-color: rgba(22, 17, 101, 0.6);
-} 
-.panel-group .panel-heading + .panel-collapse > .list-group,
-.panel-group .panel-heading + .panel-collapse > .panel-body {
-  border-top: 1px solid #ddd;
-}
-.panel-group .panel-footer {
-  border-top: 0;
-}
-.panel-group .panel-footer + .panel-collapse .panel-default {
-  background-color: rgba(22, 17, 101, 0.6) !important;
-}
-
 .btn-sdp {
-  color: #002266;
+  color: $color-sdp-navy;
   background-color: #dddddd;
   border-color: #aaaaaa;
   margin-bottom:2px;
   margin-right:2px;
+  min-width: 100px;
 }
 
 .btn-sdp:hover {
-  color: #002266;
+  color: $color-sdp-navy;
   background-color: #bbbbcc;
   border-color: #aaaaaa;
 }
@@ -91,7 +143,7 @@
 }
 
 .btn-sdp.disabled, .btn-sdp:disabled {
-  color: #fff;
+  color: #aaa;
   background-color: #6c757d;
   border-color: #6c757d;
 }

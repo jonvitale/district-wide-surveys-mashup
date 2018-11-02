@@ -6,13 +6,16 @@ const RouteCardComponent = {
   bindings: {
     title: '@',
     imgSrc: '@',
-    route: '@'
+    route: '@',
+    hideText: '@',
   },
   controller: class RouteCardComponent {
     constructor(){
       this.title = "Loading...";
+      this.imgSrc = null;
+      this.hideText = false;
       //this.imgSrc = "img/headers/3.jpg";
-      this.imgSrc = "img/headers/home.jpg";
+      //this.imgSrc = "img/headers/home.jpg";
     }
 
     navigateToRoute(){

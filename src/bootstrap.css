@@ -6155,15 +6155,6 @@ button.bg-dark:focus {
   background-color: #1d2124 !important;
 }
 
-.bg-sdp { 
-  background-color: #444488 !important;
-}
-
-a.bg-sdp:hover, a.bg-sdp:focus,
-button.bg-sdp:hover,
-button.bg-sdp:focus {
-  background-color: #6666AA !important;
-}
 
 .bg-white {
   background-color: #fff !important;

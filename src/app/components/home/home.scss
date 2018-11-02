@@ -27,14 +27,16 @@
       }
     }
   }
-  .home-cards {
+  .home-content-block {
     padding-top: 40px;
     color: #555588;
     background-color: #F2F2FF;
 
     .card {
       box-shadow:4px 4px 2px #AAAAAA;
-
+      a:hover {
+        text-decoration: none;
+      }
       p {
         -webkit-touch-callout: none; /* iOS Safari */
         -webkit-user-select: none; /* Safari */
@@ -43,6 +45,9 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
       }
+    }
+    .card:hover {      
+      background-color: #F0F0FD;
     }
   }
 }

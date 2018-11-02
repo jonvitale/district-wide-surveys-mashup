@@ -1,0 +1,27 @@
+.survey-resources {
+	background-color: #fff;
+  color: #333;
+  h1 {
+  	color: #888;
+  	padding-top:20px;
+  }
+  h2, h3, h4, h5 {
+    color: #888;
+  }
+
+  .table {
+  	background-color: #f4f4ff;
+  	.topic-header {
+  		color: #fff;
+  		background-color: #22779f;
+  	}
+  	.subtopic-header {
+  		color: #fff;
+  		background-color: #47aad8;
+  	}
+  	.blank-col {
+  		background-color: #fff;
+  		border-color: #fff;
+  	}
+  }
+}

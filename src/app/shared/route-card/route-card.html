@@ -4,11 +4,12 @@
     style="background-color:#333355; color: #EEEEFF"
   >{{ $ctrl.title }}</div>
   <img class="card-img-top"
+    ng-if="$ctrl.imgSrc != null"
     ng-src="{{ $ctrl.imgSrc }}"
     alt="{{ $ctrl.title }}"
     style="margin-top:5px; margin-bottom: 5px;"
   >
-  <div class="card-body">
+  <div class="card-body" ng-if="!$ctrl.hideText">
       <p class="card-text" ng-transclude></p>
   </div>
 </a>

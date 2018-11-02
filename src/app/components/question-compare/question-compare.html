@@ -1,76 +1,237 @@
 <div class="question-compare">
-  <section class="sticky-top" style="background-color: rgba(84,83,82, 1.0)">
-   <navbar current-page="Question Compare"></navbar> 
-    <filter-pane></filter-pane>
-    <!-- Question Selection - works like accordion but always at top -->
-    <div class="container-fluid accordion" id="accordion">   
-      <div class="row card">
-        <div class="card-header card-header-question" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" ng-click="$ctrl.refreshQlik()">
-              <span class="symbol"></span>
-              Select a Question
-            </button>            
-          </h5>
-        </div>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="row">
-            <div class="card-body">           
-              <variable-selection-pane orient-survey="vert" orient-construct="vert" orient-question-text="list"></variable-selection-pane>
-            </div>
+  <div class="main">
+    <div class="modal fade" id="questionPicker" tabindex="-1" role="dialog" aria-labelledby="questionPickerTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="questionPickerTitle">Select a group, topic, sub-topics, and question</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <variable-selection-pane orient-survey="vert" orient-construct="vert" orient-sub-construct="combo" orient-question-text="list"></variable-selection-pane>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <section> 
-    <!-- Visualization accordion -->
-    <div class="container-fluid accordion" id="accordion">
-      <!-- Compare Groups -->
-      <div class="row card">
-        <div class="card-header"id="headingTwo">
-          <h5 class="mb-0">
-            <button class="btn" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" ng-click="$ctrl.refreshQlik()">
-              <span class="symbol"></span>
-              Compare Groups
-            </button>            
-          </h5>
-        </div>
-        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-          <div class="card-body"> 
-            <div class="row">
-              <div class="col">              
-                <h3 style="text-align:center; padding-bottom: 20px">
-                  {{$ctrl.survey}} - {{$ctrl.construct}}
-                  <br> 
-                  <i>{{$ctrl.questionText}}</i>
-                </h3>
+
+    <section class="sticky-top">
+     <navbar current-page="Question Compare"></navbar> 
+      <filter-pane></filter-pane>
+    </section>
+     <!-- Above-the-fold instructions and content -->
+    <section>
+      <div class="instructions">     
+        <div class="d-flex flex-wrap"> 
+          <div class="text-block">
+            <h2 class="header"> How were all questions answered? </h2>
+            <p class="body">
+              The {{$ctrl.CYTD}} District-Wide Surveys included <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
+              <strong>{{$ctrl.numQuestionsTeacher}} teacher </strong> questions, and
+              <strong>{{$ctrl.numQuestionsPrincipal}} principal </strong> questions. On this page you can view the responses to each of these questions.
+              <br><br>
+              Click the button <span style="background-color:#ffaa30; color:#fff; border-radius:4px; border-style:thin; border-color:#808000;padding:2px;">&nbsp;Select a new question&nbsp;</span> to choose a question by the type of respondent, the overall topic, and sub-topics. The chart displays the % of respondents who selected each of the possible responses. Blue bars represent the "most positive" response, while red bars represent the "least positive" response. You may hover over a bar to get the full response text.
+              <br><br>
+              In the tabs below you can compare two different groups of respondents or compare schools by year and location.
+            </p>
+          </div>
+          <div ng-if="$ctrl.accordionsCollapsed" class="vis-block" style="max-width:400px">
+            <button class="btn mx-auto" data-toggle="modal" data-target="#questionPicker">
+              ⊕ <span>Select a new question</span>
+            </button>
+            <div class="question-display">
+              <div class="survey-topic">
+                <div class="pill">{{$ctrl.survey}}</div>
+                <div class="pill">{{$ctrl.construct}}</div>
+                <hr>
+              </div>
+              <div style="margin: 0px 0px 4px 50px;">
+                <div class="question-stem d-block">{{$ctrl.questionStem}}</div>
+                <div class="question-text d-block">{{$ctrl.questionText}}</div>
+              </div>
+              <div class="qlik-card">
+                <qlik-object class="mx-auto"  obj-id="GSWQJ" height="220px" width="300px" obj-options="{noSelections:true}"></qlik-object>
               </div>
             </div>
-            <div class="row">
-              <div class="col" style="text-align:center">      
-                <h4>Main Selections</h4>
-                <qlik-object obj-id="wkKPMz" height="300px" width="300px" style="display: inline-block"></qlik-object>
-              </div>
-              <div class="col" style="background-color:#eeeeff">  
-                <h4 style="text-align:center">Comparison Selections</h4>
-                <div class="row">            
-                  <div class="col">                   
-                    <qlik-object obj-id="DQBUdJ" height="300px" width="300px"></qlik-object>
+          </div>
+        </div>      
+      </div>
+    </section>
+
+    <section> 
+      <!-- Visualization accordion -->
+      <div class="accordion" id="accordion">
+        <!-- Compare Groups -->
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                  <span class="symbol">&nbsp; Compare Groups</span>
+                  <div>
+                    <img class="icon" src="img/icons/icon-yoy.png"> 
+                    <img class="icon" src="img/icons/icon-yoy.png"> 
                   </div>
-                  <div class="col">
-                    <br>
-                    <qlik-object obj-id="YAtp" height="220px" width="300px"></qlik-object>
-                    <button type="button" class="btn btn-primary" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
-                      Clear comparison selections
+                </div>
+              </button>       
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body"> 
+              <div class="instructions">     
+                <div class="d-flex justify-content-between"> 
+                  <p class="text-block pr-3">
+                    Choose a comparison set of schools or student groups. Your main selections - from the green bar above - will display on the left graph. Schools and student groups in the blue panel, below, will display on the right graph.
+                  </p>
+                  <div>
+                    <button class="btn" data-toggle="modal" data-target="#questionPicker">
+                      ⊕ <span>Select a new question</span>
                     </button>
+                    <div class="survey-topic">
+                      <div class="pill">{{$ctrl.survey}}</div>
+                      <div class="pill">{{$ctrl.construct}}</div>
+                    </div>
+                  </div>
+                </div>              
+              </div>
+              <div class="question-display mb-4 text-center">                
+                <h3 class="question-stem d-inline">{{$ctrl.questionStem}}</h3>&nbsp;
+                <h3 class="question-text d-inline">{{$ctrl.questionText}}</h3>
+              </div>
+              <div class="row">
+                <div class="col col-lg-4" >
+                  <div class="primary-selections">
+                    <h4 class="banner">Main Selections</h4>
+                    <div class="row">
+                      <div class="col">
+                        <div class="qlik-card mx-auto" id="qlik-card-main">
+                          <qlik-object obj-id="DQBUdJ" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <br>
+                        <qlik-object obj-id="zWnZvf" width="300px"></qlik-object>                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col col-lg-8">  
+                  <div class="alternative-selections">
+                    <h4 class="banner">Comparison Selections</h4>
+                    <div class="row">            
+                      <div class="col">     
+                        <div class="qlik-card" id="qlik-card-alt">             
+                          <qlik-object obj-id="SFrRaJX" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
+                        </div>
+                      </div>
+                      <div class="col text-left">
+                        <qlik-object ng-if="$ctrl.useDemos" obj-id="YAtp" height="220px" width="300px"></qlik-object>
+                        <qlik-object ng-if="!$ctrl.useDemos" obj-id="KkpDM" height="150px" width="300px"></qlik-object>
+                        <br>
+                        <button type="button" class="btn btn-danger" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
+                        Clear comparison selections
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <br>
+                        <qlik-object obj-id="RMJqN" width="300px"></qlik-object>                      
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- YOY -->
+        <div class="card">
+          <div class="card-header"id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                  <span class="symbol">&nbsp; Yearly Change</span>
+                  <img class="icon" src="img/icons/icon-yoy.png"> 
+                </div>
+              </button>            
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div class="instructions">     
+                <div class="d-flex justify-content-between"> 
+                  <p class="text-block pr-3">
+                    On the following chart a bar represents the most current year's "% most positive" average. The circle represents the previous year. Each bar represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
+                  </p>
+                  <div>
+                    <button class="btn" data-toggle="modal" data-target="#questionPicker">
+                      ⊕ <span>Select a new question</span>
+                    </button>
+                    <div class="survey-topic">
+                      <div class="pill">{{$ctrl.survey}}</div>
+                      <div class="pill">{{$ctrl.construct}}</div>
+                    </div>
+                  </div>
+                </div>              
+              </div> 
+              <div class="question-display mb-4 text-center">                
+                <h3 class="question-stem d-inline">{{$ctrl.questionStem}}</h3>&nbsp;
+                <h3 class="question-text d-inline">{{$ctrl.questionText}}</h3>
+              </div>
+              <qlik-object obj-id="zmNpP" width="80%" height="500px"></qlik-object>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                  <span class="symbol">&nbsp; Map</span>
+                  <img class="icon" src="img/icons/icon-map.png"> 
+                </div>
+              </button>            
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body"> 
+              <div class="instructions">     
+                <div class="d-flex justify-content-between"> 
+                  <p class="text-block pr-3">
+                    On the following map you can see the "% most positive" for all schools.
+                  </p>
+                  <div>
+                    <button class="btn" data-toggle="modal" data-target="#questionPicker">
+                      ⊕ <span>Select a new question</span>
+                    </button>
+                    <div class="survey-topic">
+                      <div class="pill">{{$ctrl.survey}}</div>
+                      <div class="pill">{{$ctrl.construct}}</div>
+                    </div>
+                  </div>
+                </div>              
+              </div> 
+              <div class="question-display mb-4 text-center">                
+                <h3 class="question-stem d-inline">{{$ctrl.questionStem}}</h3>&nbsp;
+                <h3 class="question-text d-inline">{{$ctrl.questionText}}</h3>
+              </div>
+              <qlik-object obj-id="mmQp" height="600px" width="80%"></qlik-object>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
+  <sdp-footer></sdp-footer>
 </div>
