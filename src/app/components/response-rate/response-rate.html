@@ -36,12 +36,14 @@
                   </div>
                 </div>    
                 <div class="row">  
-                  <div class="col kpi" ng-repeat="ids in $ctrl.qlikIds" ng-style="ids.style">
-                    <div class="text-center">
-                      <h5>{{ids.title}}</h5>
-                    </div>
-                    <div>
-                      <qlik-object obj-id="{{ids.kpi}}" height="100px" width="200px" ></qlik-object>
+                  <div class="col" ng-repeat="(key, ids) in $ctrl.qlikIds">
+                    <div class="kpi" ng-attr-id="{{'kpi-' + key}}">
+                      <div class="text-center">
+                        <h5>{{ids.title}}</h5>
+                      </div>
+                      <div>
+                        <qlik-object obj-id="{{ids.kpi}}" height="100px" width="200px" ></qlik-object>
+                      </div>
                     </div>
                   </div>
                 </div>

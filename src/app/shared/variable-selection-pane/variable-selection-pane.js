@@ -11,34 +11,38 @@ const VariableSelectionPaneComponent = {
   $inject: ['QlikVariablesService'],
   controller: class VariableSelectionPaneComponent {
     constructor(QlikVariablesService){
+      this.QlikVariablesService = QlikVariablesService;
+    }
+
+    $onInit(){
      
       this.selections = {'_CYTD_Flag': 1};
       this.fieldNames = [];
       this.questionText = null;
 
       if (this.orientSurvey != null){
-        let survey = QlikVariablesService.getVariableDetails('Survey');
+        let survey = this.QlikVariablesService.getVariableDetails('Survey');
         survey.orientation = this.orientSurvey;
         this.survey = survey;
         this.selections[survey.sourceField] = null;
         this.fieldNames.push(survey.sourceField);
       }
       if (this.orientConstruct != null){
-        let construct = QlikVariablesService.getVariableDetails('Construct');
+        let construct = this.QlikVariablesService.getVariableDetails('Construct');
         construct.orientation = this.orientConstruct;
         this.construct = construct;
         this.selections[construct.sourceField] = null;
         this.fieldNames.push(construct.sourceField);
       }
       if (this.orientSubConstruct != null){
-        let subConstruct = QlikVariablesService.getVariableDetails('SubConstruct');
+        let subConstruct = this.QlikVariablesService.getVariableDetails('SubConstruct');
         subConstruct.orientation = this.orientSubConstruct;
         this.subConstruct = subConstruct;
         this.selections[subConstruct.sourceField] = null;
         this.fieldNames.push(subConstruct.sourceField);
       }
       if (this.orientQuestionText != null){
-        let questionText = QlikVariablesService.getVariableDetails('QuestionText');
+        let questionText = this.QlikVariablesService.getVariableDetails('QuestionText');
         questionText.orientation = this.orientQuestionText;
         this.questionText = questionText;
         this.selections[questionText.sourceField] = null;
@@ -49,10 +53,7 @@ const VariableSelectionPaneComponent = {
       this.selections['originField'] = null;
     }
 
-  	$onInit(){
-      
-    }
-
+  	
     onSelection(name, value, variable){
       console.log("--2. Inform parent of change (variable-selection-pane.js), from (", variable, ")", name, value);
       

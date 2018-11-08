@@ -60,12 +60,7 @@ button.bg-sdp:focus {
   background-color: #6666AA !important;
 }
 
-.qlik-card {
-  padding: 10px;
-  padding-bottom: 10px;
-}
-
-.qlik-card .qv-object-content-container {
+.qv-object-content-container {
   position: static !important;
 }
 
@@ -417,10 +412,27 @@ button.bg-sdp:focus {
   position: static !important;
 }
 .response-rate .instructions .kpi {
+  width: calc(200px + 2rem);
   color: 444;
   background-color: #f0f0f8;
-  margin: 1em;
-  padding: 1em;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+
+.response-rate .instructions #kpi-Student {
+  background-color: rgba(71, 170, 216, 0.2);
+}
+
+.response-rate .instructions #kpi-Parent {
+  background-color: rgba(57, 134, 53, 0.2);
+}
+
+.response-rate .instructions #kpi-Teacher {
+  background-color: rgba(255, 170, 48, 0.2);
+}
+
+.response-rate .instructions #kpi-Principal {
+  background-color: rgba(11, 49, 91, 0.1);
 }
 
 .response-rate .instructions .qv-object-footnote {

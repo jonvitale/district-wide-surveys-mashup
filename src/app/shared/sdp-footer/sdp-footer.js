@@ -6,9 +6,6 @@ const SdpFooterComponent = {
       currentPage: '@',
   },
   controller: class SdpFooterComponent {
-  	$onInit(){
-      console.log("init", this.currentPage);
-    }
   }
 }
 

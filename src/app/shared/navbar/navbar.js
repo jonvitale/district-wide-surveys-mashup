@@ -6,9 +6,6 @@ const NavBarComponent = {
       currentPage: '@',
   },
   controller: class NavBarComponent {
-  	$onInit(){
-      console.log("init", this.currentPage);
-    }
   }
 }
 

@@ -61,20 +61,24 @@ button.bg-sdp:focus {
   background-color: #6666AA !important;
 }
 
-.qlik-card {
-  padding:10px;
-  padding-bottom:10px;
-  //box-shadow:4px 4px 2px #ccc;
-  //background-color:#FAFAFF;
-  //border-style:solid;
-  //border-radius:4px;
-  //border-color: #ccc;
-  //border-width:0.5px;
-
-  .qv-object-content-container {
-    position: static !important;
-  }
+.qv-object-content-container {
+  position: static !important;
 }
+
+// .qlik-card {
+//   padding:10px;
+//   padding-bottom:10px;
+//   //box-shadow:4px 4px 2px #ccc;
+//   //background-color:#FAFAFF;
+//   //border-style:solid;
+//   //border-radius:4px;
+//   //border-color: #ccc;
+//   //border-width:0.5px;
+
+//   .qv-object-content-container {
+//     position: static !important;
+//   }
+// }
 
 .accordion {
   .card-header {

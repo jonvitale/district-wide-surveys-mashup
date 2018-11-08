@@ -8,18 +8,19 @@ const QuestionCompareComponent = {
       'ngInject';
       this.qlik = qlik;
       this.$openApp = $openApp;
-      this.QlikVariablesService = QlikVariablesService
-      this.survey = 'Student';
-      this.construct = 'School Climate';
-      this.subConstruct = '';
-      this.questionText = '';
-      this.questionStem = '';
-      this.useDemos = true;      
+      this.QlikVariablesService = QlikVariablesService;        
     }
 
     $onInit(){
       this.questionCollapsed = true;
       this.accordionsCollapsed = true;
+      this.survey = '';
+      this.construct = '';
+      this.subConstruct = '';
+      this.questionText = '';
+      this.questionStem = '';
+      this.useDemos = true;    
+
       this.$openApp.getObject('CurrentSelections', 'CurrentSelections');
 
       // what's the latest year

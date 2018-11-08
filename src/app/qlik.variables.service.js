@@ -257,6 +257,7 @@ export class QlikVariablesService {
   }
 
   setVariableValue(variableName, value){
+    //console.log("????qlik service - setVariableValue--", variableName, value);
   	return new Promise( (resolve, reject) => {
   		this.$openApp.variable.setStringValue(variableName, value).then(
   			success => {

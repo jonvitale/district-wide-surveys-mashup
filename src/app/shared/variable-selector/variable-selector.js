@@ -7,12 +7,14 @@ const VariableSelectorComponent = {
       variableLabel: '@',
       sourceField: '@',
       sourceArray: '<',
-      //governingState: '@',
       governingFields: '<',
       orientation: '@',
       onSelection: '&',
       selections: '<',
 
+  },
+  require: {
+    parent: '^variableSelectionPane'
   },
   $inject: ['$scope', '$openApp', 'QlikVariablesService'],
   controller: class VariableSelectorComponent {
@@ -21,17 +23,18 @@ const VariableSelectorComponent = {
       this.$scope = $scope;
       this.$openApp = $openApp;
       this.QlikVariablesService = QlikVariablesService;
-      this.inputStateName = typeof this.inputStateName !== 'undefined' ? this.inputStateName : '$';     
-      this.currentValue = null;
-      this.currentValues = null;
-      this.displayed = false;
+      
     }
  
     /**
      * On initialization set the current value based upon the variable value in the app
      */
     $onInit(){
-      // console.log("---onInit---", this.variableName, this.orientation);  
+      console.log("---onInit---", this.variableName, this.currentValue, this.currentValues, this.parent);  
+      this.inputStateName = typeof this.inputStateName !== 'undefined' ? this.inputStateName : '$';     
+      this.currentValue = null;
+      this.currentValues = null;
+      this.displayed = false;
       if (this.orientation == 'combo'){
         this.currentValues = [];
       } else {   
@@ -108,7 +111,7 @@ const VariableSelectorComponent = {
            
             let selectableValuesUpdated = !angular.equals(selectableValues, this.selectableValues);
 
-            console.log("----4. Get updated fields (", this.variableName, ")", selectableValues, this.currentValue, selectableValuesUpdated, values);
+            console.log("----4. Get updated fields (", this.variableName, ")", this.currentValue);//, selectableValues, selectableValuesUpdated, values);
             this.selectableValues = selectableValues;
 
             // set defaults based upon combo or not
@@ -128,8 +131,8 @@ const VariableSelectorComponent = {
               this.onSelection({'name': this.sourceField, 'value': this.currentValues, 'variable': this.variableName});
                             
             } else {
-              // if the current value is no longer on the list, use the first value  
-              if (selectableValues != null && selectableValues.length > 0 && selectableValues.indexOf(this.currentValue) < 0){
+              // if the (initialized, non-null) current value is no longer on the list, use the first value  
+              if (this.currentValue != null && selectableValues != null && selectableValues.length > 0 && selectableValues.indexOf(this.currentValue) < 0){
                 this.setVariableValue(selectableValues[0], true).then(
                   //success => this.$scope.$apply()
                 );
