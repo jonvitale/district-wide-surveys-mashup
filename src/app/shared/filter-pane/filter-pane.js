@@ -3,9 +3,7 @@ import templateUrl from './filter-pane.html';
 const FilterPaneComponent = {
   template: templateUrl,
   bindings: {
-      objId: '@',
-      height: '@',
-      objOptions: '<'
+      onClickHeader: '&',
   },
   $inject: ['qlik', '$openApp', 'QlikVariablesService'],
   controller: class FilterPaneComponent {
@@ -14,12 +12,12 @@ const FilterPaneComponent = {
       this.qlik = qlik;
       this.$openApp = $openApp;
       this.QlikVariablesService = QlikVariablesService;
-      this.height = "100px";
-      this.survey = 'Student';
-      this.useDemos = true;
     }
 
     $onInit(){
+      this.height = "100px";
+      this.survey = 'Student';
+      this.useDemos = true;
       this.$openApp.getObject('CurrentSelections', 'CurrentSelections');
       this.QlikVariablesService.getVariableValue('vSurvey_Selected').then(value => {
         this.survey = value;
@@ -43,19 +41,22 @@ const FilterPaneComponent = {
       });
     }
     $onChanges(){
-      //console.log("on change", this.$openApp, this.objId);
       this.$openApp.getObject('CurrentSelections', 'CurrentSelections');
-      //this.$openApp.getObject(this.objId,this.objId, this.objOptions || null);
     }
 
     $onDestroy(){
       // unregister listeners
-      console.log("---onDestroy question-compare--");
+      //console.log("---onDestroy question-compare--");
       this.QlikVariablesService.unregisterVariableObservers('vSurvey_Selected');
     }
 
-    onClickFilterHeader(){
+    /**
+     * Resize qlik but also sends information to parent from one-way binding
+     * @param  {Object} evt ng-event
+     */
+    onClickFilterHeader(evt){
       this.qlik.resize();
+      if (this.onClickHeader != null) this.onClickHeader();
     }
   }
 };

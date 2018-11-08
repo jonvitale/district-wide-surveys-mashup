@@ -5,30 +5,32 @@
       <filter-pane></filter-pane>  
     </section>
     <section>
-      <div class="instructions">  
-        <div class="d-flex flex-wrap"> 
-          <div class="text-block">   
-            <h2 class="header"> What are the main themes in the surveys? </h2>
-            <p>
-              Following analysis of survey results the Office of Research and Evaluated categorized each question into one of five general topics.
-              For each topic a score is constructed by calculating the % of answers to topic-related questions are the best possible choice.
+      <div class="above-fold">  
+        <div class="instructions">  
+          <div class="d-flex flex-wrap"> 
+            <div class="text-block">   
+              <h2 class="header"> What are the main topics in the surveys? </h2>
+              <p>
+                After analyzing survey results the Office of Research and Evaluation categorized each question into one of five general topics.
+                For each topic a score is constructed by calculating the % of responses to topic-related questions that are the best possible choice.
 
-              On this page you can choose a topic to compare schools and other groups of students for each of these topics.
-            </p>
-            <p class="ml-2">
-              <strong>School Climate</strong> - Questions addressing bullying, safety, attenandance, discipline, and relationships.
-              <br>
-              <strong>Instruction</strong> - Questions addressing teaching, student engagement, data usage, and district support.
-              <br>
-              <strong>Parent/Guardian-Community Ties</strong> - Questions addressing outreach, communication quality, guardian involvement, and networks (Parent, Teacher, and Principal only)
-              <br>
-              <strong>School Leadership</strong> - Questions addressing leadership decisions, feedback, and school focus priorities (Teacher and Principal only)
-              <br>
-              <strong>Professional Capacity</strong> - Questions addressing peer collaboration, professional development, and opportunites for innovation (Teacher and Principal only)
-            </p>
-          </div>
-          <div class="ml-4">
-            <img style="border:1px solid #ccc; max-width:400px;" src="img/survey-resources/constructs.jpg">
+                On this page you can choose a topic to compare schools and other groups of students for each of these topics.
+              </p>
+              <p class="ml-2">
+                <strong>School Climate</strong> - Questions addressing bullying, safety, attendance, discipline, and relationships
+                <br>
+                <strong>Instruction</strong> - Questions addressing teaching, student engagement, data usage, and district support
+                <br>
+                <strong>Parent/Guardian-Community Ties</strong> - Questions addressing outreach, communication quality, guardian involvement, and networks (Parent, Teacher, and Principal only)
+                <br>
+                <strong>School Leadership</strong> - Questions addressing leadership decisions, feedback, and school focus priorities (Teacher and Principal only)
+                <br>
+                <strong>Professional Capacity</strong> - Questions addressing peer collaboration, professional development, and opportunites for innovation (Teacher and Principal only)
+              </p>
+            </div>
+            <div class="ml-4">
+              <img style="max-width:400px;" src="img/survey-resources/constructs.jpg">
+            </div>
           </div>
         </div>
       </div>
@@ -49,10 +51,13 @@
           </div>
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
-              <variable-selection-pane  orient-survey="horiz" orient-construct="horiz"></variable-selection-pane> 
-              <div class="qlik-card">
-                <qlik-object obj-id="JPhNfNh" height="450px" width="80%"></qlik-object>                
+              <div class="instructions">
+                <p class="text-block pr-3">
+                  Select a respondent group and topic to view the average topic score by network. If a network is selected, schools within that network will be displayed. If a school is selected, grades may be displayed.
+                </p>
               </div>
+              <variable-selection-pane  orient-survey="horiz" orient-construct="horiz"></variable-selection-pane> 
+              <qlik-object obj-id="JPhNfNh" height="400px" width="100%"></qlik-object> 
             </div>
           </div>  
         </div>
@@ -61,7 +66,7 @@
         <div class="card">
           <div class="card-header" id="headingTwo">
             <h5 class="mb-0">
-              <button class="btn collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="$ctrl.onClickAccordion($event)">
+              <button class="btn collapsed icon map" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
                   <span class="symbol">&nbsp; Map</span>
                   <img class="icon" src="img/icons/icon-map.png"> 
@@ -71,10 +76,13 @@
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
+              <div class="instructions">
+                <p class="text-block pr-3">
+                   Select a respondent group and topic to view the average topic score by school on the map. You can zoom or scroll the area of the map
+                </p>
+              </div>
               <variable-selection-pane  orient-survey="horiz" orient-construct="horiz"></variable-selection-pane>
-                <div class="qlik-card">
-                  <qlik-object obj-id="BHWkS" height="600px" width="80%"></qlik-object>
-                </div>
+              <qlik-object obj-id="BHWkS" height="450px" width="100%"></qlik-object>
               </div>
             </div>
           </div>  

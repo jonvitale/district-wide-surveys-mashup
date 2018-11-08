@@ -8,10 +8,15 @@ const FocusQuestionsComponent = {
       'ngInject';
       this.qlik = qlik;
       this.$openApp = $openApp;
+    }
+
+    $onInit(){
      
       this.groups = ['Student', 'Teacher', 'Parent'];
       this.ags = ['AG1', 'AG2', 'AG3'];
-
+      this.ag1_Grades = '';
+      this.ag2_Grades = '';
+      
       this.demoHeaders = {
         'intro': '% of Students that selected',
         'response': '"Most or all the time"',
@@ -38,17 +43,17 @@ const FocusQuestionsComponent = {
 
       this.agHeaders = {
         'AG1': {
-          'intro': '% of Students that selected',
+          'intro': 'Students that selected',
           'response': '"Strongly agree"',
           'stem': 'How often are these things true?',
         },
         'AG2': {
-          'intro': '% of Parents that selected',
+          'intro': 'Parents that selected',
           'response': '"Strongly agree"',
           'stem': 'How much do you agree with the following statements?',
         },
         'AG3': {
-          'intro': '% of Teachers that selected',
+          'intro': 'Teachers that selected',
           'response': '"Not a challenge"',
           'stem': 'How much do you agree or disagree with the following statements?',
         },
@@ -56,8 +61,8 @@ const FocusQuestionsComponent = {
 
       this.demoIds = {
         kpi: "SkGwzt", 
-        comboChart:"EqPaCh",
-        nlines:1, 
+        comboChart: "EqPaCh",
+        nlines: 1, 
         title: "I enjoy being in school."
       }
 
@@ -108,7 +113,7 @@ const FocusQuestionsComponent = {
         "AG3": [
           {kpi: "NNZBNrb", comboChart:"XPnvme",
             nlines:2, title:"Teacher turnover."},
-          {kpi: "QJFda", comboChart:"qtCqfM",
+          {kpi: "QJFds", comboChart:"qtCqfM",
             nlines:2, title:"Shortage of highly qualified teachers."},
           {kpi: "YGfjEg", comboChart:"XfPpVFW",
             nlines:2, title:"Lack of high-quality professional development opportunities for teachers."},
@@ -118,7 +123,23 @@ const FocusQuestionsComponent = {
       this.selectActiveGroup('Student');
       this.selectActiveAG('AG1');
       this.accordionsCollapsed = true;
+      this.$openApp.variable.getContent('vCYTD', reply => {
+        this.CYTD = reply.qContent.qString;
+      });
+      this.$openApp.variable.getContent('vPYTD', reply => {
+        this.PYTD = reply.qContent.qString;
+      });
       //this.$openApp.field('Survey').selectMatch("Teacher", true);
+    }
+
+
+    onClickFilterHeader(){
+      this.$openApp.variable.getContent('vGrades_AG1', reply => {
+        this.ag1_Grades = reply.qContent.qString;
+      });
+      this.$openApp.variable.getContent('vGrades_AG2', reply => {
+        this.ag2_Grades = reply.qContent.qString;
+      });
     }
 
     onClickGroup(group){
@@ -146,6 +167,12 @@ const FocusQuestionsComponent = {
       // is the target of this event going from or to a collapsed state
       if (evt.currentTarget.className.includes("collapsed")){
         this.accordionsCollapsed = false;
+        this.$openApp.variable.getContent('vGrades_AG1', reply => {
+          this.ag1_Grades = reply.qContent.qString;
+        });
+        this.$openApp.variable.getContent('vGrades_AG2', reply => {
+          this.ag2_Grades = reply.qContent.qString;
+        });
       } else {
         this.accordionsCollapsed = true;
       }

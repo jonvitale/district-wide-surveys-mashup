@@ -1,7 +1,12 @@
 .focus-questions {
+	.above-fold .instructions {
+		.text-block {
+			max-width: 40em;
+		}
+	}
 	.question-header {
 	  width:100%; 
-	  text-align:center;	  
+	  text-align:left;	  
 	  .question-intro {
 	  	color: #888;
 	  }
@@ -19,5 +24,20 @@
 		font-weight: bold;
 		color: #47aad8;
 		height:3.2em;
+		padding-left: 24px;
+  }
+
+  .kpi {
+  	width: 320px;
+  	padding-left: 24px;
+  	.qv-object-content-container {
+    	position: static !important;
+  	}
+  }
+
+  .combo-chart {
+  	.qv-object-content-container {
+    	position: static !important;
+  	}
   }
 }

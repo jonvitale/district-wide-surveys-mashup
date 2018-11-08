@@ -5,47 +5,55 @@
       <filter-pane></filter-pane>
     </section>
     <section>
-      <div class="instructions">     
-        <div class="row">
-          <div class="col col-lg-6 text-block"> 
-            <h2 class="header"> How many people responded to the surveys? </h2>
-            <p class="body">              
-              In the {{$ctrl.CYTD}} school year the School District of Philadelphia invited 
-              <span class="font-weight-bold">{{$ctrl.studentsEnrolledCYTD| number : 0}} students </span> (grades 3 - 12),
-              <span class="font-weight-bold">{{$ctrl.teachersEnrolledCYTD| number : 0}} teachers</span>,
-              <span class="font-weight-bold">{{$ctrl.parentsEnrolledCYTD| number : 0}} parents </span> (of children in grades K-12), and
-              <span class="font-weight-bold">{{$ctrl.principalsEnrolledCYTD| number : 0}} principals </span> from district and charter schools to participate in a survey.
-              <br><br>
-              The response rates (summarized on the right) are important indicators of how well the data reflects the population. Additionally, both student and parent response rate impact <a href="https://www.philasd.org/performance/programsservices/school-progress-reports/">School Progress Reports</a>. 
-              <br><br> 
-              In the tabs below you can see how response rate compares by years and schools.
-              <br><br>
-              <span class="font-weight-bold"> Three-Year Trends: </span> How did response rate change over the last three years?
-              <br>
-              <span class="font-weight-bold"> Yearly Change: </span> How do networks, schools, or grades compare to each other?
-              <br>
-              <span class="font-weight-bold"> Three-Year Trends: </span> How do schools compare across the Philadelphia area?
-            </p>   
-          </div>     
-          <div class="col vis-block">
-            <h3 class="header" style="text-align:center"> % Responded </h3>
-            <div class="d-flex flex-wrap" >        
-              <div ng-repeat="ids in $ctrl.qlikIds" class="kpi" ng-style="ids.style">
-                <div class="text-center">
-                  <h5>{{ids.title}}</h5>
-                </div>
-                <div>
-                  <qlik-object obj-id="{{ids.kpi}}" height="100px" width="200px" ></qlik-object>
+      <div class="above-fold">    
+        <div class="instructions">     
+          <div class="row">
+            <div class="col col-lg-6 text-block"> 
+              <h2 class="header"> How many people responded to the surveys? </h2>
+              <p class="body">              
+                In the {{$ctrl.CYTD}} school year the School District of Philadelphia invited 
+                <span class="font-weight-bold">{{$ctrl.studentsEnrolledCYTD| number : 0}} students </span> (grades 3 - 12),
+                <span class="font-weight-bold">{{$ctrl.teachersEnrolledCYTD| number : 0}} teachers</span>,
+                <span class="font-weight-bold">{{$ctrl.parentsEnrolledCYTD| number : 0}} parents </span> (of children in grades K-12), and
+                <span class="font-weight-bold">{{$ctrl.principalsEnrolledCYTD| number : 0}} principals </span> from district and charter schools to participate in a survey.
+                <br><br>
+                The response rates (summarized on the right) are important indicators of how well the data reflects the population. Additionally, both student and parent response rate impact <a href="https://www.philasd.org/performance/programsservices/school-progress-reports/">School Progress Reports</a>. 
+                <br><br> 
+                In the tabs below you can see how response rate compares by years and schools.
+                <br><br>
+                <span class="font-weight-bold"> Three-Year Trends: </span> How did response rate change over the last three years?
+                <br>
+                <span class="font-weight-bold"> Yearly Change: </span> How do networks, schools, or grades compare to each other?
+                <br>
+                <span class="font-weight-bold"> Map: </span> How do schools compare across the Philadelphia area?
+              </p>   
+            </div>     
+            <div class="col vis-block">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h4 class="header" style="text-align:center"> # Responded </h4>
+                  </div>
+                </div>    
+                <div class="row">  
+                  <div class="col kpi" ng-repeat="ids in $ctrl.qlikIds" ng-style="ids.style">
+                    <div class="text-center">
+                      <h5>{{ids.title}}</h5>
+                    </div>
+                    <div>
+                      <qlik-object obj-id="{{ids.kpi}}" height="100px" width="200px" ></qlik-object>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>  
+          </div>  
+        </div>
       </div>
     </section>
     <section>
       <div class="accordion" id="accordion">
-        <!-- Overview -->
+        <!-- 3 Year Trend -->
         <div class="card">
           <div class="card-header" id="headingOne">
             <h5 class="mb-0">
@@ -59,6 +67,11 @@
           </div>
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body"> 
+              <div class="instructions">
+                <p class="text-block pr-3">
+                  The line plots below demonstrate the change in response rate over a three-year period.
+                </p>
+              </div>
               <div class="row">
                 <div class="col-xs-3 m-2"
                     ng-repeat="ids in $ctrl.qlikIds"
@@ -89,8 +102,13 @@
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
+              <div class="instructions">
+                <p class="text-block pr-3">
+                  Select a group to view response rate by network or school. Bars display response rates in {{$ctrl.CYTD}}. Circles display response rates in {{$ctrl.PYTD}}. Each bar represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
+                </p>
+              </div>
               <variable-selection-pane  orient-survey="horiz"></variable-selection-pane>
-              <qlik-object obj-id="ZFNtJ" height="450px" width="80%"></qlik-object>
+              <qlik-object obj-id="ZFNtJ" height="400px" width="100%"></qlik-object>
             </div>
           </div>  
         </div>
@@ -108,11 +126,14 @@
             </h5>
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-            <div class="card-body"> 
-              <div class="container-fluid">
-                <variable-selection-pane orient-survey="horiz"></variable-selection-pane>
-                <qlik-object obj-id="xXTjfW" height="600px" width="80%"></qlik-object>
+            <div class="card-body">               
+              <div class="instructions">
+                <p class="text-block pr-3">
+                  Select a respondent group to view the response rate by school on the map. You can zoom or scroll the area of the map.
+                </p>
               </div>
+              <variable-selection-pane orient-survey="horiz"></variable-selection-pane>
+              <qlik-object obj-id="xXTjfW" height="450px" width="100%"></qlik-object>              
             </div>
           </div>
         </div>

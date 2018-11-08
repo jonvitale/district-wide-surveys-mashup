@@ -6,41 +6,45 @@ const ResponseRateComponent = {
     constructor(qlik, $openApp){
       'ngInject';
       this.qlik = qlik;
-      this.$openApp = $openApp;
+      this.$openApp = $openApp;      
+    }
+
+    $onInit(){
       this.groups = ['Student', 'Teacher', 'Parent', 'Principal'];
       this.qlikIds = {
         'Student':
           {kpi: "agjyrN", comboChart:"ubXkKJP",
-            nlines:1, title: "Students", style: {
-              'background-color':'#e2e8ff',
+            nlines:1, title: "Student", style: {
+              'background-color':'rgba(71, 170, 216, 0.2)',
             },
           },        
         "Parent": 
           {kpi: "gPCKLE", comboChart:"mKgBpN",
-            nlines:1, title:"Parents", style: {
-              'background-color':'#ddffe4',
+            nlines:1, title:"Parent/Guardian", style: {
+              'background-color':'rgba(57, 134, 53, 0.2)',
             },
           },
         "Teacher": 
           {kpi: "vzerBN", comboChart:"PRqJJDN",
-            nlines:1, title:"Teachers", style: {
-              'background-color':'#fff4ee',
+            nlines:1, title:"Teacher", style: {
+              'background-color':'rgba(255, 170, 48, 0.2)',
             },
           },
         "Principal": 
           {kpi: "fFmEEmX", comboChart:"XWYmtpS",
-            nlines:1, title:"Principals", 
+            nlines:1, title:"Principal", 
             style: {
-              'background-color':'#d3ccff',
+              'background-color':'rgba(11, 49, 91, 0.1)',
             },
           }
       };
-    }
 
-    $onInit(){
       this.accordionsCollapsed = true;
       this.$openApp.variable.getContent('vCYTD', reply => {
         this.CYTD = reply.qContent.qString;
+      });
+      this.$openApp.variable.getContent('vPYTD', reply => {
+        this.PYTD = reply.qContent.qString;
       });
 
       this.$openApp.variable.getContent('vCount1_Enrolled_Student_CYTD', reply => {

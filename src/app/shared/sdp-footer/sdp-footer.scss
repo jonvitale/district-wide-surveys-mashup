@@ -1,0 +1,18 @@
+.sdp-footer {
+  position: relative;
+  height: 5em;
+  margin-top: 2em;
+  background-color: #fff;
+  color: #444;
+
+  .social {
+    display: inline-block;
+    margin-left: 1em;
+    a {      
+      margin: 4px 8px 0px 0px;
+      width: 40px;
+      height: 40px;
+      color: #22779f;      
+    }
+  }  
+}

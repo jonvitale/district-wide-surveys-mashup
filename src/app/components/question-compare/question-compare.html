@@ -25,40 +25,40 @@
     </section>
      <!-- Above-the-fold instructions and content -->
     <section>
-      <div class="instructions">     
-        <div class="d-flex flex-wrap"> 
-          <div class="text-block">
-            <h2 class="header"> How were all questions answered? </h2>
-            <p class="body">
-              The {{$ctrl.CYTD}} District-Wide Surveys included <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
-              <strong>{{$ctrl.numQuestionsTeacher}} teacher </strong> questions, and
-              <strong>{{$ctrl.numQuestionsPrincipal}} principal </strong> questions. On this page you can view the responses to each of these questions.
-              <br><br>
-              Click the button <span style="background-color:#ffaa30; color:#fff; border-radius:4px; border-style:thin; border-color:#808000;padding:2px;">&nbsp;Select a new question&nbsp;</span> to choose a question by the type of respondent, the overall topic, and sub-topics. The chart displays the % of respondents who selected each of the possible responses. Blue bars represent the "most positive" response, while red bars represent the "least positive" response. You may hover over a bar to get the full response text.
-              <br><br>
-              In the tabs below you can compare two different groups of respondents or compare schools by year and location.
-            </p>
-          </div>
-          <div ng-if="$ctrl.accordionsCollapsed" class="vis-block" style="max-width:400px">
-            <button class="btn mx-auto" data-toggle="modal" data-target="#questionPicker">
-              ⊕ <span>Select a new question</span>
-            </button>
-            <div class="question-display">
-              <div class="survey-topic">
-                <div class="pill">{{$ctrl.survey}}</div>
-                <div class="pill">{{$ctrl.construct}}</div>
-                <hr>
-              </div>
-              <div style="margin: 0px 0px 4px 50px;">
+      <div class="above-fold">     
+        <div class="instructions">     
+          <div class="d-flex flex-wrap"> 
+            <div class="text-block">
+              <h2 class="header"> How were all questions answered? </h2>
+              <p class="body">
+                The {{$ctrl.CYTD}} District-Wide Surveys included <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
+                <strong>{{$ctrl.numQuestionsTeacher}} teacher </strong> questions, and
+                <strong>{{$ctrl.numQuestionsPrincipal}} principal </strong> questions. On this page you can view the responses to each of these questions.
+                <br><br>
+                Click the button <span style="background-color:#47aad8; color:#fff; border-radius:4px; border-style:thin; border-color:#808000;padding:2px;">&nbsp;Select a new question&nbsp;</span> to choose a question by the type of respondent, the overall topic, and sub-topics. The chart displays the % of respondents who selected each of the possible responses. Blue bars represent the "most positive" response, while red bars represent the "least positive" response. You may hover over a bar to get the full response text.
+                <br><br>
+                In the tabs below you can compare two different groups of respondents or compare schools by year and location.
+              </p>
+            </div>
+            <div ng-if="$ctrl.accordionsCollapsed" class="vis-block" style="max-width:400px">
+              <button class="btn mx-auto" data-toggle="modal" data-target="#questionPicker">
+                ⊕ <span>Select a new question</span>
+              </button>
+              <div class="question-display">
+                <div class="survey-topic">
+                  <div class="pill-title">Group: </div>
+                  <div class="pill">{{$ctrl.survey}}</div>
+                  <div class="pill-title">Topic: </div>
+                  <div class="pill">{{$ctrl.construct}}</div>
+                  <hr>
+                </div>
                 <div class="question-stem d-block">{{$ctrl.questionStem}}</div>
                 <div class="question-text d-block">{{$ctrl.questionText}}</div>
-              </div>
-              <div class="qlik-card">
-                <qlik-object class="mx-auto"  obj-id="GSWQJ" height="220px" width="300px" obj-options="{noSelections:true}"></qlik-object>
+                <qlik-object class="mx-auto"  obj-id="GSWQJ" height="220px" width="350px" obj-options="{noSelections:true}"></qlik-object>
               </div>
             </div>
-          </div>
-        </div>      
+          </div>      
+        </div>
       </div>
     </section>
 
@@ -85,30 +85,40 @@
               <div class="instructions">     
                 <div class="d-flex justify-content-between"> 
                   <p class="text-block pr-3">
-                    Choose a comparison set of schools or student groups. Your main selections - from the green bar above - will display on the left graph. Schools and student groups in the blue panel, below, will display on the right graph.
+                    Compare your selected schools or groups of students with another group. The selection you've made from the from the green bar above are displaye don the left graph. Choose comparison groups from the panel on the right. These students' responses will display on the right-hand chart.
                   </p>
                   <div>
                     <button class="btn" data-toggle="modal" data-target="#questionPicker">
                       ⊕ <span>Select a new question</span>
                     </button>
                     <div class="survey-topic">
+                      <div class="pill-title">Group: </div>
                       <div class="pill">{{$ctrl.survey}}</div>
+                      <div class="pill-title">Topic: </div>
                       <div class="pill">{{$ctrl.construct}}</div>
                     </div>
                   </div>
                 </div>              
               </div>
-              <div class="question-display mb-4 text-center">                
-                <h3 class="question-stem d-inline">{{$ctrl.questionStem}}</h3>&nbsp;
-                <h3 class="question-text d-inline">{{$ctrl.questionText}}</h3>
+              <div class="question-display">
+                <h3 class="question-stem">{{$ctrl.questionStem}}</h3>
+                <h3 class="question-text">{{$ctrl.questionText}}</h3>
               </div>
               <div class="row">
                 <div class="col col-lg-4" >
                   <div class="primary-selections">
-                    <h4 class="banner">Main Selections</h4>
+                    <div class="banner">
+                      <img src="img/icons/filters-light.png">
+                      <span>Selected groups</span>
+                    </div>
                     <div class="row">
                       <div class="col">
-                        <div class="qlik-card mx-auto" id="qlik-card-main">
+                        <p style="height:6em;">The chart below reflects the schools and student groups selected in the green bar at the top of the screen. If no selections have been made, city-wide averages are displayed.</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="combo-chart mx-auto">
                           <qlik-object obj-id="DQBUdJ" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>          
                         </div>
                       </div>
@@ -116,17 +126,25 @@
                     <div class="row">
                       <div class="col">
                         <br>
-                        <qlik-object obj-id="zWnZvf" width="300px"></qlik-object>                      
+                        <qlik-object obj-id="zWnZvf" width="300px"></qlik-object>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col col-lg-8">  
                   <div class="alternative-selections">
-                    <h4 class="banner">Comparison Selections</h4>
+                    <div class="banner">
+                      <img src="img/icons/filters-light.png">
+                      <span>Alternative selections</span>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <p style="height:6em;">The chart below allows you to create a comparison set of schools and student groups. Make selections below to change values in the chart. If no selections are made, city-wide averages are displayed.</p>
+                      </div>
+                    </div>
                     <div class="row">            
                       <div class="col">     
-                        <div class="qlik-card" id="qlik-card-alt">             
+                        <div class="combo-chart">             
                           <qlik-object obj-id="SFrRaJX" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
                         </div>
                       </div>
@@ -134,7 +152,7 @@
                         <qlik-object ng-if="$ctrl.useDemos" obj-id="YAtp" height="220px" width="300px"></qlik-object>
                         <qlik-object ng-if="!$ctrl.useDemos" obj-id="KkpDM" height="150px" width="300px"></qlik-object>
                         <br>
-                        <button type="button" class="btn btn-danger" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
+                        <button type="button" class="btn btn-secondary" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
                         Clear comparison selections
                         </button>
                       </div>
@@ -176,17 +194,19 @@
                       ⊕ <span>Select a new question</span>
                     </button>
                     <div class="survey-topic">
+                      <div class="pill-title">Group: </div>
                       <div class="pill">{{$ctrl.survey}}</div>
+                      <div class="pill-title">Topic: </div>
                       <div class="pill">{{$ctrl.construct}}</div>
                     </div>
                   </div>
                 </div>              
               </div> 
-              <div class="question-display mb-4 text-center">                
-                <h3 class="question-stem d-inline">{{$ctrl.questionStem}}</h3>&nbsp;
-                <h3 class="question-text d-inline">{{$ctrl.questionText}}</h3>
+              <div class="question-display">
+                <h3 class="question-stem">{{$ctrl.questionStem}}</h3>
+                <h3 class="question-text">{{$ctrl.questionText}}</h3>
               </div>
-              <qlik-object obj-id="zmNpP" width="80%" height="500px"></qlik-object>
+              <qlik-object obj-id="zmNpP" width="100%" height="400px"></qlik-object>
             </div>
           </div>
         </div>
@@ -208,24 +228,26 @@
               <div class="instructions">     
                 <div class="d-flex justify-content-between"> 
                   <p class="text-block pr-3">
-                    On the following map you can see the "% most positive" for all schools.
+                    View "% most positive" by school on the map. You can zoom or scroll the area of the map.
                   </p>
                   <div>
                     <button class="btn" data-toggle="modal" data-target="#questionPicker">
                       ⊕ <span>Select a new question</span>
                     </button>
                     <div class="survey-topic">
+                      <div class="pill-title">Group: </div>
                       <div class="pill">{{$ctrl.survey}}</div>
+                      <div class="pill-title">Topic: </div>
                       <div class="pill">{{$ctrl.construct}}</div>
                     </div>
                   </div>
                 </div>              
               </div> 
-              <div class="question-display mb-4 text-center">                
-                <h3 class="question-stem d-inline">{{$ctrl.questionStem}}</h3>&nbsp;
-                <h3 class="question-text d-inline">{{$ctrl.questionText}}</h3>
+              <div class="question-display">
+                <h3 class="question-stem">{{$ctrl.questionStem}}</h3>
+                <h3 class="question-text">{{$ctrl.questionText}}</h3>
               </div>
-              <qlik-object obj-id="mmQp" height="600px" width="80%"></qlik-object>
+              <qlik-object obj-id="mmQp" height="450px" width="100%"></qlik-object>
             </div>
           </div>
         </div>

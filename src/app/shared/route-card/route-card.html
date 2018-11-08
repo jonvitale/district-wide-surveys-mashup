@@ -1,7 +1,7 @@
 <a ng-href="#{{$ctrl.route}}"
     ng-click="$ctrl.navigateToRoute()">
   <div class="card-header text-center"
-    style="background-color:#333355; color: #EEEEFF"
+    style="background-color:#0b315b; color: #EEEEFF"
   >{{ $ctrl.title }}</div>
   <img class="card-img-top"
     ng-if="$ctrl.imgSrc != null"
@@ -10,6 +10,6 @@
     style="margin-top:5px; margin-bottom: 5px;"
   >
   <div class="card-body" ng-if="!$ctrl.hideText">
-      <p class="card-text" ng-transclude></p>
+      <p class="card-text"  style="color:#22779f" ng-transclude></p>
   </div>
 </a>

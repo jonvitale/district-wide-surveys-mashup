@@ -1,7 +1,7 @@
 <div class="filter-pane">
 	<div class="filter-header">
 		<div class="d-flex flex-wrap">
-			<button class="btn collapsed ml-3" data-toggle="collapse" data-target="#collapseMainFilter" aria-expanded="false" aria-controls="collapseMainFilter" ng-click="$ctrl.onClickFilterHeader();">
+			<button class="btn collapsed ml-3" data-toggle="collapse" data-target="#collapseMainFilter" aria-expanded="false" aria-controls="collapseMainFilter" ng-click="$ctrl.onClickFilterHeader($event);">
         <img src="img/icons/filters-light.png">
         <span ng-if="$ctrl.useDemos" class="text-demo"></span>
         <span ng-if="!$ctrl.useDemos" class="text-nondemo"></span>
@@ -13,7 +13,7 @@
 		<div class="col">
 			<div id="collapseMainFilter" class="collapse" aria-labelledby="headingMainFilter" data-parent="#filter-pane">
 	      <qlik-object ng-if="$ctrl.useDemos" obj-id="mStzpP" height="20rem" width="100%"></qlik-object>
-	      <qlik-object ng-if="!$ctrl.useDemos" obj-id="kbpHypC" height="20rem" width="100%"></qlik-object>
+	      <qlik-object ng-if="!$ctrl.useDemos" obj-id="kbpHypC" height="20rem" width="100%"></qlik-object>"
 	    </div>
 	  </div>
 	</div>

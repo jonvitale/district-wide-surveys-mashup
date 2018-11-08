@@ -165,7 +165,8 @@ export class QlikVariablesService {
 		}
 
 		function onlyUnique(value, index, self){ 
-   	  return self.indexOf(value) === index && value != '-';
+   	  return self.indexOf(value) === index && value != '-' && 
+          value != 'no construct/subconstruct assigned';
 		}
 
 		if (this.table == null) return null;

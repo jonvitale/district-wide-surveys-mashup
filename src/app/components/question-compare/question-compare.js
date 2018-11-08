@@ -86,8 +86,15 @@ const QuestionCompareComponent = {
           });
         }
       });
+    }
 
-      
+    $onChanges(){
+      this.QlikVariablesService.getVariableValue('vQuestionText_Selected').then(value => {
+        this.questionText = value;
+      });
+      this.QlikVariablesService.getVariableValue('vQuestionStem_Selected').then(value => {
+        this.questionStem = value;
+      });
     }
 
     $onDestroy(){
@@ -127,7 +134,7 @@ const QuestionCompareComponent = {
 
     onClickQuestionSelect(){
       this.questionCollapsed = !this.questionCollapsed; 
-      this.refreshQlik();
+      this.qlik.resize();
     }
   }
 }

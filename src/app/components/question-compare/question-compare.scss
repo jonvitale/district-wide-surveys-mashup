@@ -4,7 +4,7 @@
 			display:block; 
 			height: 3em;
 			width: 250px;
-			background-color:#ffaa30;
+			background-color:#47aad8;
 			box-shadow:4px 4px 2px #AAAAAA;
 			color: white;
 			span {
@@ -13,46 +13,72 @@
 		}
 		.btn:hover,
 		.btn:focus {
-			border-color:#ef9a20 !important;
+			border-color:#47aad8 !important;
+		}
+		.question-display {
+			.question-stem {
+				text-align: left;
+				color: #888;
+				margin-left: 26px;
+			}
+			.question-text {
+				text-align: left;
+				font-style: oblique;
+				font-weight: bold;
+				color: #47aad8;
+				margin-left: 26px;
+			}
+			.question-body {
+				display: block;
+			}
 		}
 	}
 	.survey-topic {
 		display:block;			
 		margin-top: 0.5em;
+		margin-bottom: 4px;
 		text-align:center;
+		.pill-title {
+			display: inline-block;
+			color: #888;
+			font-size: 10pt;
+			user-select: none;
+		}
 		.pill {
 			display: inline-block;
-			box-shadow:2px 2px 1px #aac;
+			//box-shadow:2px 2px 1px #aac;
 			text-align:center;
-			background-color: #47aad8;
-			color: #fff;
-			border-radius:20px;
+			font-style: oblique;
+			//background-color: #47aad8;
+			color: #888;
+			//border-radius:20px;
 			// border-color: #278ab8;
    //  	border-style: solid;
    //  	border-width: thin;
-			padding: 2px 1em 2px 1em;
-			margin-bottom: 4px;
+			padding: 2px 1em 2px 0em;
+			
 			font-size: 10pt;
 			user-select: none;
 		}
 	}
 
 	.primary-selections{
-		text-align: center; 
-		background-color: #f0fff8;
-		border-radius: 8px;
-		border-color: #e0f0e8;
-		border-style: solid;
-		border-width: thin;
+		text-align: left; 
+		//background-color: #f0fff8;
+		// border-radius: 8px;
+		// border-color: #e0f0e8;
+		// border-style: solid;
+		// border-width: thin;
 		display: block;
 		.banner {
 			border-radius: 8px 8px 0px 0px;
 			padding: 5px; 
+			padding-left: 1em;
 			background-color: #398635; 
 			color: #fff; 
 			width: 100%;
 		}
-		.qlik-card {
+		.combo-chart {
 			width: 350px;
 			text-align: center;
 			display: block;
@@ -60,20 +86,20 @@
 	}
 
 	.alternative-selections{
-		text-align:center; 
-		background-color:#fff0f8;
-		border-radius:8px;
-		border-color:#f0e0e8;
-		border-style: solid;
-		border-width: thin;
+		text-align:left; 
+		//background-color:#fff0f8;
+		// border-radius:8px;
+		// border-color:#444;
+		// border-style: solid;
+		// border-width: thin;
 		.banner {
-			border-radius:8px 8px 0px 0px;
-			padding:5px; 
-			background-color:#99082e; 
-			color:#fff; 
-			width:100%;
+			border-radius: 8px 8px 0px 0px;
+			padding: 5px; 
+			background-color: rgb(108, 117, 125); 
+			color: #fff; 
+			width: 100%;
 		}
-		.qlik-card {
+		.combo-chart {
 			margin-left: 1em;
 			width:350px;
 		}
@@ -82,19 +108,7 @@
 		}
 	}
 
-	.question-display {
-		.question-stem {
-			color: #888;
-		}
-		.question-text {
-			font-style: oblique;
-			font-weight: bold;
-			color: #47aad8;
-		}
-		.question-body {
-			display: block;
-		}
-	}
+	
 	#question-picker {
 	  .card-header {
 	  	padding: 2px;
@@ -125,5 +139,28 @@
 	
 	#accordion {
 		padding-top: 5px;
+		.question-display {
+			display: inline-block;
+			margin-bottom: 1rem;
+			.question-stem {
+				text-align: left;
+				color: #888;
+			}
+			.question-text {
+				text-align: left;
+				font-style: oblique;
+				font-weight: bold;
+				color: #47aad8;
+			}
+			.question-body {
+				display: block;
+			}
+		}
+		.qv-filterpane {
+    	overflow: scroll;
+    }
+		.qv-object-content-container {  
+			position: static !important;  
+		}  
 	}
 }

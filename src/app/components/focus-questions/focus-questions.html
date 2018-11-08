@@ -2,37 +2,25 @@
   <div class="main">
     <section class="sticky-top">
       <navbar current-page="Focus Questions"></navbar>
-      <filter-pane></filter-pane>
+      <filter-pane on-click-header="$ctrl.onClickFilterHeader(evt)"></filter-pane>
     </section>
     <section>
-      <div class="instructions">      
-        <div class="d-flex flex-wrap"> 
-          <div class="text-block">
-            <h2 class="header"> What are some of the highlights of the survey? </h2>
-            <p class="body">
-              Here are select questions for each respondent group (students, parents, and teachers) that give an overview of the data. Focus questions show positive trends in the data and Anchor Goal questions relate to the goals in the District's <a href="https://www.philasd.org/actionplan/">Action Plan</a>
-              <br><br>
-              You can view highlighted question by responding group or by Anchor Goal by selecting a tab below.
-            </p>
-          </div>
-          <div ng-if="$ctrl.accordionsCollapsed" style="max-width:400px" class="vis-block">
-            <div class="question-header"> 
-              <h5>                  
-                <span class="question-intro">{{$ctrl.demoHeaders.intro}}, 
-                </span>
-                <span class="question-response">                       {{$ctrl.demoHeaders.response}}
-                </span>
-                <span class="question-intro">to... </span>
-              </h5>
+      <div class="above-fold">
+        <div class="instructions">      
+          <div class="d-flex flex-wrap"> 
+            <div class="text-block"">
+              <h2 class="header"> What are some of the highlights of the survey? </h2>
+              <p class="body">
+                Here are select questions for each respondent group (students, parents, and teachers) that give an overview of the data related to Anchor Goals in the District's <a href="https://www.philasd.org/actionplan/">Action Plan</a>.
+                <br><br>
+                You can view questions for each Anchor Goal by selecting a section below.
+              </p>
             </div>
-            <div style="display:block">
-              <div>
-                <h5 class="question-text" style="height:1.2em;">{{$ctrl.demoIds.title}}</h5>
-              </div>
-              <qlik-object style="text-align:center;" obj-id="{{$ctrl.demoIds.kpi}}" width="300px"></qlik-object>
-              <div class="qlik-card">              
-                <span style="display:inline-block; text-align:center">Other Responses<span>        
-                <qlik-object obj-id="{{$ctrl.demoIds.comboChart}}" height="220px" width="300px" obj-options="{noSelections:true}"></qlik-object>
+            <div style="max-width:500px" class="vis-block">
+              <div style="display:block">
+                <img src="img/anchor-goals/Anchor-Goal-1.png" style="max-width:500px;">
+                <br>
+                <img src="img/anchor-goals/Anchor-Goal-2.png" style="max-width:500px;">
               </div>
             </div>
           </div>
@@ -43,13 +31,13 @@
     <section>    
       <div class="accordion" id="accordion">
 
-        <!-- highlights by survey type -->
+        <!-- highlights by AG1 -->
         <div class="card">
           <div class="card-header" id="headingOne">
             <h5 class="mb-0">
               <button class="btn collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
-                  <span class="symbol">&nbsp; By Respondent Group</span>
+                  <div><span class="symbol">&nbsp; Anchor Goal 1: </span><span style="font-style:oblique;">100% of students will graduate ready for college or career.</span></div>
                   <img class="icon" src="img/icons/icon-yoy.png"> 
                 </div>
               </button>            
@@ -58,24 +46,23 @@
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="container-fluid mt-3">
               <div class="row">
-                <div class="col-xs-1 ml-2 mr-5">
-                  <h5>Choose a group:</h5>
-                  <div class="btn-group-vertical" style="width:100%" role="group" aria-label="Respondent Group">
-                    <button type="button" class="btn btn-sdp"
-                        ng-repeat="group in $ctrl.groups"
-                        ng-click="$ctrl.onClickGroup(group)"
-                        ng-class="{active : group === $ctrl.activeGroup}">
-                      {{group}}
-                    </button>
+                <div class="col">
+                  <div class="instructions">
+                    <p class="text-block pr-3">
+                      In the following we display the % of respondents that selected the "most positive" response. In the charts bars display the % of each response selected in {{$ctrl.CYTD}}. Circles display the % of each response selected in {{$ctrl.PYTD}}.
+                    </p>
                   </div>
                 </div>
+              </div>
+              <div class="row">                
                 <div class="col">
                   <div class="row">
                     <div class="col question-header"> 
                       <h5>                  
-                        <span class="question-intro">                       {{$ctrl.groupHeaders[$ctrl.activeGroup].intro}}, 
+                        <span class="question-intro">
+                          % of {{$ctrl.ag1_Grades}}  {{$ctrl.agHeaders['AG1'].intro}} 
                         </span>
-                        <span class="question-response">                       {{$ctrl.groupHeaders[$ctrl.activeGroup].response}}
+                        <span class="question-response">{{$ctrl.agHeaders['AG1'].response}}
                         </span>
                         <span class="question-intro">to... </span>
                       </h5>
@@ -83,15 +70,16 @@
                   </div>
                   <div class="row">
                     <div class="col-xs-3 m-2"
-                        ng-repeat="ids in $ctrl.groupIds[$ctrl.activeGroup]"
-                        style="max-width:310px;">
+                        ng-repeat="ids in $ctrl.agIds['AG1']"
+                        style="max-width:320px;">
                       <div class="mt-2">
                         <div class="question-text">
-                          <h5>{{ids.title}}</h5>
+                          <h5>{{ids.title}}</h5>                         
                         </div>
-                        <qlik-object obj-id="{{ids.kpi}}" width="300px"></qlik-object>
-                        <div class="qlik-card">              
-                          <span style="display:inline-block; text-align:center">Other Responses<span>        
+                        <div class="kpi">  
+                          <qlik-object obj-id="{{ids.kpi}}" width="320px"></qlik-object>  
+                        </div>
+                        <div class="combo-chart">
                           <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
                         </div>
                       </div>
@@ -103,13 +91,13 @@
           </div>  
         </div>
 
-        <!-- highlights by AG -->
+        <!-- highlights by AG2 -->
         <div class="card">
           <div class="card-header" id="headingTwo">
             <h5 class="mb-0">
               <button class="btn collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
-                  <span class="symbol">&nbsp; By Anchor Goals </span>
+                   <div><span class="symbol">&nbsp; Anchor Goal 2: </span><span style="font-style:oblique;"> 100% of 8-year-olds will read on or above grade level. </span></div>
                   <img class="icon" src="img/icons/icon-yoy.png"> 
                 </div>
               </button>            
@@ -118,24 +106,22 @@
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="container-fluid mt-3">
               <div class="row">
-                <div class="col-xs-1 ml-2 mr-5">
-                  <h5>Choose an Anchor Goal:</h5>
-                  <div class="btn-group-vertical" style="width:100%" role="group" aria-label="Anchor Goal">
-                    <button type="button" class="btn btn-sdp"
-                        ng-repeat="ag in $ctrl.ags"
-                        ng-click="$ctrl.onClickAG(ag)"
-                        ng-class="{active : ag === $ctrl.activeAG}">
-                      {{ag}}
-                    </button>
+                <div class="col">
+                  <div class="instructions">
+                    <p class="text-block pr-3">
+                      In the following we display the % of respondents that selected the "most positive" response. In the charts bars display the % of each response selected in {{$ctrl.CYTD}}. Circles display the % of each response selected in {{$ctrl.PYTD}}.
+                    </p>
                   </div>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col">
                   <div class="row">
                     <div class="col question-header"> 
                       <h5>                  
-                        <span class="question-intro">                       {{$ctrl.groupHeaders[$ctrl.activeGroup].intro}}, 
+                        <span class="question-intro"> % of {{$ctrl.ag2_Grades}}                      {{$ctrl.agHeaders['AG2'].intro}} 
                         </span>
-                        <span class="question-response">                       {{$ctrl.groupHeaders[$ctrl.activeGroup].response}}
+                        <span class="question-response">                       {{$ctrl.agHeaders['AG2'].response}}
                         </span>
                         <span class="question-intro">to... </span>
                       </h5>
@@ -143,15 +129,75 @@
                   </div>
                   <div class="row">
                     <div class="col-xs-3 m-2"
-                        ng-repeat="ids in $ctrl.agIds[$ctrl.activeAG]"
-                        style="max-width:310px;">
-                      <div class="qlik-card">
+                        ng-repeat="ids in $ctrl.agIds['AG2']"
+                        style="max-width:320px;">
+                      <div class="mt-2">
                         <div class="question-text">
-                          <h5>{{ids.title}}</h5>
+                          <h5>{{ids.title}}</h5>                         
                         </div>
-                        <div style="margin-top:2em">
-                          <qlik-object obj-id="{{ids.kpi}}" height="100px" width="300px"></qlik-object>
-                          <br>
+                        <div class="kpi">  
+                          <qlik-object obj-id="{{ids.kpi}}" width="320px"></qlik-object>  
+                        </div>
+                        <div class="combo-chart">
+                          <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
+                        </div>
+                      </div>                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div>
+
+        <!-- highlights by AG3 -->
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                   <div><span class="symbol">&nbsp; Anchor Goal 3: </span><span style="font-style:oblique;"> 100% of positions are filled by great principals, teachers, and employees. </span></div>
+                  <img class="icon" src="img/icons/icon-yoy.png"> 
+                </div>
+              </button>            
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="container-fluid mt-3">
+              <div class="row">
+                <div class="col">
+                  <div class="instructions">
+                    <p class="text-block pr-3">
+                      In the following we display the % of respondents that selected the "most positive" response. In the charts bars display the % of each response selected in {{$ctrl.CYTD}}. Circles display the % of each response selected in {{$ctrl.PYTD}}.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col question-header"> 
+                      <h5>                  
+                        <span class="question-intro">% of                     {{$ctrl.agHeaders['AG3'].intro}} 
+                        </span>
+                        <span class="question-response">                       {{$ctrl.agHeaders['AG3'].response}}
+                        </span>
+                        <span class="question-intro">to... </span>
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-3 m-2"
+                        ng-repeat="ids in $ctrl.agIds['AG3']"
+                        style="max-width:320px;">
+                      <div class="mt-2">
+                        <div class="question-text">
+                          <h5>{{ids.title}}</h5>                         
+                        </div>
+                        <div class="kpi">  
+                          <qlik-object obj-id="{{ids.kpi}}" width="300px"></qlik-object>  
+                        </div>
+                        <div class="combo-chart">
                           <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
                         </div>
                       </div>
