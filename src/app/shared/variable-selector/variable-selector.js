@@ -6,12 +6,8 @@ const VariableSelectorComponent = {
       variableName: '@',
       variableLabel: '@',
       sourceField: '@',
-      sourceArray: '<',
-      governingFields: '<',
+      governingVariables: '<',
       orientation: '@',
-      onSelection: '&',
-      selections: '<',
-
   },
   require: {
     parent: '^variableSelectionPane'
@@ -23,7 +19,6 @@ const VariableSelectorComponent = {
       this.$scope = $scope;
       this.$openApp = $openApp;
       this.QlikVariablesService = QlikVariablesService;
-      
     }
  
     /**
@@ -31,49 +26,34 @@ const VariableSelectorComponent = {
      */
     $onInit(){
       console.log("---onInit---", this.variableName, this.currentValue, this.currentValues, this.parent);  
-      this.inputStateName = typeof this.inputStateName !== 'undefined' ? this.inputStateName : '$';     
-      this.currentValue = null;
+      
       this.currentValues = null;
+      this.currentValue = null;
       this.displayed = false;
-      if (this.orientation == 'combo'){
-        this.currentValues = [];
-      } else {   
-        this.QlikVariablesService.getVariableValue(this.variableName).then(
-          value => this.setVariableValue(value, false),
-          error => console.log(error)
-        );
-      }
-    }
-   
-   /**
-    * Receives notice that there has been a change. May be initialization or update to selections.
-    * Will continue to displayValues if:
-    * 1. We have not displayed anything yet
-    * 2. The originating variable (i.e. what the user has selected) is not this and is a governing field
-    * @return {[type]} [description]
-    */
-  	$onChanges(){
-       //console.log("---onChanges---", this.variableName, this.selections.originVariable, this.orientation);
-      if (this.selections.originVariable !== null && this.selections.originField !== null &&
-          (!this.displayed || 
-            this.selections.originVariable !== this.variableName && 
-            this.governingFields != null && this.governingFields.indexOf(this.selections.originField) >= 0)){
-        console.log("---3. Received onChange event, this: (", this.variableName, "), from: (", this.selections.originVariable, ")", this.selections);
-        this.displayValues();      
-      }
-    }
 
-    onClick(val, index){
-      if (typeof val === 'object'){
-        if (val.selectable){
-          this.setVariableValue(val.value, true);                        
-        }
-      } else {
-        this.setVariableValue(val, true);
+      //register listeners on governing variables
+      for (let i = 0; i < this.governingVariables.length; i++){
+        let gvar = this.governingVariables[i];
+        this.QlikVariablesService.registerVariableObserver(gvar, (variable, value) => {
+          console.log("---", this.variableName, " observed change of", variable, "new value", value);
+          this.displayValues();
+        });
       }
-    }
 
-   
+      this.QlikVariablesService.getVariableValue(this.variableName).then(
+        value => {
+          if (this.orientation == "combo"){
+            this.currentValues = value;
+          } else {
+            this.currentValue = value;
+          }          
+          this.displayValues();
+        },
+        error => console.log(error)
+      );
+    }
+  
+    
     /**
      * If there are governing fields and a governing state this will
      * apply current selections to the governing fields in the governing state.
@@ -82,127 +62,71 @@ const VariableSelectorComponent = {
      * @return {[type]} [description]
      */
     displayValues(){      
-      if (typeof this.sourceField === 'string' && this.sourceField.length > 0){
-        // console.log("---displayValues: with governance---", this.variableName, this.selectedValue, this.selections);
-        let governingSelections = null;
-        if (this.governingFields.length > 0){
-          for (let i = 0; i < this.governingFields.length; i++){
-            let gField = this.governingFields[i];
-            if (this.selections[gField] != null){
-              if (governingSelections == null) governingSelections = {};
-              governingSelections[gField] = this.selections[gField];
+      // get all and possible field values for this field with selections
+      this.QlikVariablesService.getFieldValuesWithSelections(this.variableName, this.governingVariables).then(
+        values => {
+          this.displayed = true;
+          this.values = values;
+
+          // get just selectable values, then determine if its the same as the previously selectableValues
+          let selectableValues = [];
+          for (let i = 0; i < values.length; i++){
+            if (values[i].selectable){
+              selectableValues.push(values[i].value);
             }
           }
-        }
+         
+          let selectableValuesUpdated = !angular.equals(selectableValues, this.selectableValues);
 
-        // get all and possible field values for this field with selections
-        this.QlikVariablesService.getFieldValuesWithSelections(this.sourceField, governingSelections).then(
-          values => {
-            this.displayed = true;
-            this.values = values;
+          // console.log("----4. Get updated fields (", this.variableName, ")", this.currentValue);//, selectableValues, selectableValuesUpdated, values);
+          this.selectableValues = selectableValues;
 
-            // get just selectable values, then determine if its the same as the previously selectableValues
-            let selectableValues = [];
-            for (let i = 0; i < values.length; i++){
-              if (values[i].selectable){
-                selectableValues.push(values[i].value);
+          // if there are multiple values take the intersection of the selectable values and current values
+          if (this.orientation == 'combo'){
+            // are there is an intersection of selectableValues on currentValues
+            let intersectingValues = [];
+            for (let i = 0; i < this.currentValues.length; i++){
+              if (selectableValues.indexOf(this.currentValues[i]) >= 0){
+                intersectingValues.push(this.currentValues[i]);
               }
             }
-           
-            let selectableValuesUpdated = !angular.equals(selectableValues, this.selectableValues);
-
-            console.log("----4. Get updated fields (", this.variableName, ")", this.currentValue);//, selectableValues, selectableValuesUpdated, values);
-            this.selectableValues = selectableValues;
-
-            // set defaults based upon combo or not
-            if (this.orientation == 'combo'){
-              // are there is an intersection of selectableValues on currentValues
-              let intersectingValues = [];
-              for (let i = 0; i < this.currentValues.length; i++){
-                if (selectableValues.indexOf(this.currentValues[i]) >= 0){
-                  intersectingValues.push(this.currentValues[i]);
-                }
-              }
-              if (intersectingValues.length > 0){
-                this.currentValues = intersectingValues
-              } else {
-                this.currentValues = selectableValues;
-              }
-              this.onSelection({'name': this.sourceField, 'value': this.currentValues, 'variable': this.variableName});
-                            
+            if (intersectingValues.length > 0){
+              this.currentValues = intersectingValues
             } else {
-              // if the (initialized, non-null) current value is no longer on the list, use the first value  
-              if (this.currentValue != null && selectableValues != null && selectableValues.length > 0 && selectableValues.indexOf(this.currentValue) < 0){
-                this.setVariableValue(selectableValues[0], true).then(
-                  //success => this.$scope.$apply()
-                );
-              } else if (selectableValuesUpdated) {
-                // if there is a change in selected values, fire a change
-                this.$scope.$apply();
-              }
-            }
-             
-          }, error => console.log(error)
-        );
-        
-      } else {
-        // for fields from an array all are possible
-        let values = []; 
-        for (let i = 0; i < this.sourceArray.length; i++){
-          values.push({'value': this.sourceArray[i], 'selectable':true});
-        }
-        selectableValues = this.sourceArray;
-        firstValue = this.sourceArray[0];
-        this.displayed = true;
-        this.values = values; 
-      }
+              // default to all selectable values
+              this.currentValues = selectableValues;
+            }           
+          } else {
+            // if the current value is not a selectable value
+            // set the value to the first on the selectable list
+            if (this.selectableValues.length > 0 && 
+                this.selectableValues.indexOf(this.currentValue) < 0)
+              this.setCurrentValue(this.selectableValues[0]);
+          }
+          // force a refresh
+          this.$scope.$apply(); 
+        }, error => console.log(error)
+      );
     }
 
-     /**
-     * Upon clicking a button an internal variable is set allowing an ng-class
-     * in the template check for active status.
-     * Additionally, if there is a sourceField and outputStateName, then we 
-     * set values in the field to this value.
-     * @param  {[string]} value [the selected value]
-     * @return {null}     
-     */
-    setVariableValue(value, updateService){
-      
-      return new Promise( (resolve, reject) => {
-        if (this.orientation == 'combo'){
-          if (this.currentValues.indexOf(value) >= 0){
-            // remove value
-            this.currentValues.splice(this.currentValues.indexOf(value), 1);
-          } else {
-            this.currentValues.push(value);
-          }
-          this.currentValues = this.currentValues.slice(); // make copy to trigger watchers.
-          console.log("-1. Set variable valueS",this.variableName, value, this.currentValues);          
-          this.onSelection({'name': this.sourceField, 'value': this.currentValues, 'variable': this.variableName});
-          resolve(true);
-        } else {
-          if (value !== this.currentValue){
-            console.log("-1. Set variable value ",this.variableName, value);  
-            if (updateService){
-              this.QlikVariablesService.setVariableValue(this.variableName, value).then(
-                success => {
-                  // console.log("    after qlik - setVariableValue---",this.variableName, value, this.currentValue);
-                  this.currentValue = value;
-                  this.onSelection({'name': this.sourceField, 'value': this.currentValue, 'variable': this.variableName});      
-                  resolve(true);
-                },
-                error => reject(error)
-              );
-            } else {
-              this.currentValue = value;
-              this.onSelection({'name': this.sourceField, 'value': this.currentValue, 'variable': this.variableName});          
-              resolve(true);
-            } 
-          } else {
-            resolve (true);
-          }
-        }
-      });
+    onClick(val, index){
+      if (val.selectable){
+        this.setCurrentValue(val.value);           
+      }      
+    }
+
+    setCurrentValue(value){
+      if (this.orientation == 'combo'){
+        this.QlikVariablesService.toggleVariableValueInArray(this.variableName, value).then(
+          values => this.currentValues = values,
+          error => console.log(error)
+        ); 
+      } else {
+        this.QlikVariablesService.setVariableValue(this.variableName, value).then(
+          value => this.currentValue = value,
+          error => console.log(error)
+        );     
+      }    
     }
 
   }

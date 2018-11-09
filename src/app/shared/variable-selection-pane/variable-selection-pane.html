@@ -6,12 +6,9 @@
 				ng-class="'{{$ctrl.survey.cssClass}}'"
 				variable-name={{$ctrl.survey.variableName}}
 				variable-label={{$ctrl.survey.variableLabel}}
-				source-array="$ctrl.survey.sourceArray"
 				source-field={{$ctrl.survey.sourceField}}
-				governing-fields="$ctrl.survey.governingFields"
+				governing-variables="$ctrl.survey.governingVariables"
 				orientation={{$ctrl.survey.orientation}}
-				on-selection="$ctrl.onSelection(name, value, variable)"
-				selections="$ctrl.selections" 
 		></variable-selector>
 		<variable-selector 
 				ng-if="$ctrl.construct != null"
@@ -19,12 +16,9 @@
 				ng-class="'{{$ctrl.construct.cssClass}}'"
 				variable-name={{$ctrl.construct.variableName}}
 				variable-label={{$ctrl.construct.variableLabel}}
-				source-array="$ctrl.construct.sourceArray"
 				source-field={{$ctrl.construct.sourceField}}
-				governing-fields="$ctrl.construct.governingFields"
+				governing-variables="$ctrl.construct.governingVariables"
 				orientation={{$ctrl.construct.orientation}}
-				on-selection="$ctrl.onSelection(name, value, variable)"
-				selections="$ctrl.selections" 
 		></variable-selector>
 		<variable-selector 
 				ng-if="$ctrl.subConstruct != null"
@@ -32,24 +26,18 @@
 				ng-class="'{{$ctrl.subConstruct.cssClass}}'"
 				variable-name={{$ctrl.subConstruct.variableName}}
 				variable-label={{$ctrl.subConstruct.variableLabel}}
-				source-array="$ctrl.subConstruct.sourceArray"
 				source-field={{$ctrl.subConstruct.sourceField}}
-				governing-fields="$ctrl.subConstruct.governingFields"
+				governing-variables="$ctrl.subConstruct.governingVariables"
 				orientation={{$ctrl.subConstruct.orientation}}
-				on-selection="$ctrl.onSelection(name, value, variable)"
-				selections="$ctrl.selections" 
 		></variable-selector>
 		<variable-selector 
 				ng-if="$ctrl.questionText != null"
 				ng-class="'{{$ctrl.questionText.cssClass}}'"
 				variable-name={{$ctrl.questionText.variableName}}
-				variable-label={{$ctrl.questionText.variableLabel}}
-				source-array="$ctrl.questionText.sourceArray"
-				source-field={{$ctrl.questionText.sourceField}}
-				governing-fields="$ctrl.questionText.governingFields"
+				variable-label={{$ctrl.questionText.variableLabel}}			
+				source-field={{$ctrl.questionText.sourceField}}	
+				governing-variables="$ctrl.questionText.governingVariables"
 				orientation={{$ctrl.questionText.orientation}}
-				on-selection="$ctrl.onSelection(name, value, variable)"
-				selections="$ctrl.selections" 
 		></variable-selector>
 	</div>
 </div>

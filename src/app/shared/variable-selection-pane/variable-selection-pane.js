@@ -16,56 +16,69 @@ const VariableSelectionPaneComponent = {
 
     $onInit(){
      
-      this.selections = {'_CYTD_Flag': 1};
-      this.fieldNames = [];
       this.questionText = null;
+      
+      let fieldNames = [];     
+      let variableNames = [];      
+      let variables = {};
+      let variableName = '';
+      let variableDetails = {};
 
+      // for each possible type of variable gather the details
+      // so that we can pass those parameters onto the individual selectors
+      // also gather all names of fields
       if (this.orientSurvey != null){
-        let survey = this.QlikVariablesService.getVariableDetails('Survey');
-        survey.orientation = this.orientSurvey;
-        this.survey = survey;
-        this.selections[survey.sourceField] = null;
-        this.fieldNames.push(survey.sourceField);
+        variableName = 'vSurvey_Selected';
+        variableDetails = this.QlikVariablesService.getVariableDetails(variableName);
+        variableDetails.orientation = this.orientSurvey;
+        variables['survey'] = variableDetails;
+        if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
+        variableNames.push(variableName);
       }
       if (this.orientConstruct != null){
-        let construct = this.QlikVariablesService.getVariableDetails('Construct');
-        construct.orientation = this.orientConstruct;
-        this.construct = construct;
-        this.selections[construct.sourceField] = null;
-        this.fieldNames.push(construct.sourceField);
+        variableName = 'vConstruct_Selected';
+        variableDetails = this.QlikVariablesService.getVariableDetails(variableName);
+        variableDetails.orientation = this.orientConstruct;
+        variables['construct'] = variableDetails;
+        if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
+        variableNames.push(variableName);
       }
       if (this.orientSubConstruct != null){
-        let subConstruct = this.QlikVariablesService.getVariableDetails('SubConstruct');
-        subConstruct.orientation = this.orientSubConstruct;
-        this.subConstruct = subConstruct;
-        this.selections[subConstruct.sourceField] = null;
-        this.fieldNames.push(subConstruct.sourceField);
+        variableName = 'vSubConstruct_Selected';
+        variableDetails = this.QlikVariablesService.getVariableDetails(variableName);
+        variableDetails.orientation = this.orientSubConstruct;
+        variables['subConstruct'] = variableDetails;
+        if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
+        variableNames.push(variableName);
       }
       if (this.orientQuestionText != null){
-        let questionText = this.QlikVariablesService.getVariableDetails('QuestionText');
-        questionText.orientation = this.orientQuestionText;
-        this.questionText = questionText;
-        this.selections[questionText.sourceField] = null;
-        this.fieldNames.push(questionText.sourceField);
+        variableName = 'vQuestionText_Selected';
+        variableDetails = this.QlikVariablesService.getVariableDetails(variableName);
+        variableDetails.orientation = this.orientQuestionText;
+        variables['questionText'] = variableDetails;
+        if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
+        variableNames.push(variableName);
       }
 
-      this.selections['originVariable'] = null;
-      this.selections['originField'] = null;
+      /// only include governing fields for an individual variable if
+      /// they are present in the fields list gathered above
+      /// that way, for example, if there is Survey, but not Construct
+      /// we don't have survey rely upon the value of Survey.  
+      for (let variableKey in variables){
+        let v = variables[variableKey];
+        if (v.governingVariables != null && v.governingVariables.length > 0){
+          for (let i = v.governingVariables.length - 1; i >= 0; i--){
+            let gvariable = v.governingVariables[i];
+            if (variableNames.indexOf(gvariable) < 0){
+              v.governingVariables.splice(i, 1);
+            }
+          }
+        }
+        // create objects with the information for each variable
+        this[variableKey] = v;
+      }
     }
-
-  	
-    onSelection(name, value, variable){
-      console.log("--2. Inform parent of change (variable-selection-pane.js), from (", variable, ")", name, value);
-      
-      // because an internal change in an object does not trigger child onChanges
-      // we make a copy of the object and then change the value
-      // then set back the new selections to the scoped var
-      let new_selections = angular.copy(this.selections);
-      new_selections[name] = value;
-      new_selections['originVariable'] = variable;
-      new_selections['originField'] = name;
-      this.selections = new_selections;   
-    }
+    
   }
 }
 

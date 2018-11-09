@@ -62,23 +62,23 @@ const QuestionCompareComponent = {
 
 
       //register listeners
-      this.QlikVariablesService.registerVariableObserver('vSurvey_Selected', value => {
+      this.QlikVariablesService.registerVariableObserver('vSurvey_Selected', (variable, value) => {
         if (this.survey !== value){
           this.survey = value;
           this.useDemos = this.survey == 'Student' || this.survey == "Parent";
         }
       });
-      this.QlikVariablesService.registerVariableObserver('vConstruct_Selected', value => {
+      this.QlikVariablesService.registerVariableObserver('vConstruct_Selected', (variable, value) => {
         if (this.construct !== value){
           this.construct = value;
         }
       });
-      this.QlikVariablesService.registerVariableObserver('vSubConstruct_Selected', value => {
+      this.QlikVariablesService.registerVariableObserver('vSubConstruct_Selected', (variable, value) => {
         if (this.subConstruct !== value){
           this.subConstruct = value;
         }
       });
-      this.QlikVariablesService.registerVariableObserver('vQuestionText_Selected', value => {
+      this.QlikVariablesService.registerVariableObserver('vQuestionText_Selected', (variable, value) => {
         if (this.questionText !== value){
           this.questionText = value;
           // when the questionText changes we also need the stem.

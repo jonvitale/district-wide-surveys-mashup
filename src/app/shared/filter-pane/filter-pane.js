@@ -25,7 +25,7 @@ const FilterPaneComponent = {
       });
 
       //register listeners
-      this.QlikVariablesService.registerVariableObserver('vSurvey_Selected', value => {
+      this.QlikVariablesService.registerVariableObserver('vSurvey_Selected', (variable, value) => {
         if (this.survey !== value){
           this.survey = value;
           this.useDemos = this.survey == 'Student' || this.survey == "Parent";
