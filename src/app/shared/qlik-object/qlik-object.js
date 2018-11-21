@@ -2,7 +2,7 @@
 
 const QlikObjectComponent = {
   template: `
-    <div id="{{$ctrl.objId}}" class="qvobject" ng-style="{ 'height': $ctrl.height, 'width': $ctrl.width }">Loading...</div>
+    <div id="qlik-{{$ctrl.objId}}" class="qvobject" ng-style="{ 'height': $ctrl.height, 'width': $ctrl.width }">Loading...</div>
   `,
   bindings: {
       objId: '@',
@@ -21,10 +21,10 @@ const QlikObjectComponent = {
     }
 
     $onInit(){
-      this.$openApp.getObject(this.objId, this.objId, this.objOptions || null);
+     // this.$openApp.getObject(this.objId, this.objId, this.objOptions || null);
     }
     $onChanges(){
-      this.$openApp.getObject(this.objId, this.objId, this.objOptions || null);
+      this.$openApp.getObject('qlik-'+this.objId, this.objId, this.objOptions || null);
     }
   }
 };

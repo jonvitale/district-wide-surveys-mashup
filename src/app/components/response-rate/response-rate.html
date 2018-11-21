@@ -55,11 +55,67 @@
     </section>
     <section>
       <div class="accordion" id="accordion">
-        <!-- 3 Year Trend -->
+        
+       
+        <!-- Map -->
         <div class="card">
-          <div class="card-header" id="headingOne">
+          <div class="card-header" id="headingMap">
             <h5 class="mb-0">
-              <button class="btn collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" ng-click="$ctrl.onClickAccordion($event)">             
+              <button class="btn collapsed" id="headingMap" data-toggle="collapse" data-target="#collapseMap" aria-expanded="false" aria-controls="collapseMap" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                  <span class="symbol">&nbsp;Map</span>
+                  <img class="icon" src="img/icons/icon-map.png"> 
+                </div>
+              </button>            
+            </h5>
+          </div>
+          <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordion">
+            <div class="card-body">               
+              <div class="instructions">
+                <p class="text-block pr-3">
+                  Select a respondent group to view the response rate by school on the map. You can zoom or scroll the area of the map.
+                </p>
+              </div>
+              <variable-selection-pane orient-survey="horiz" surveys-hidden="['Principal']"></variable-selection-pane>
+              <div class="qlik-object-with-title">
+                <qlik-object obj-id="xXTjfW" height="450px" width="100%" obj-options="{noSelections:true}"></qlik-object>
+              </div>              
+            </div>
+          </div>
+        </div>
+
+        <!-- YOY -->
+        <div class="card">
+          <div class="card-header" id="headingYOY">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingYOY" data-toggle="collapse" data-target="#collapseYOY" aria-expanded="false" aria-controls="collapseYOY" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                  <span class="symbol">&nbsp;Yearly Change</span>
+                  <img class="icon" src="img/icons/icon-yoy.png"> 
+                </div>
+              </button>      
+            </h5>
+          </div>
+          <div id="collapseYOY" class="collapse" aria-labelledby="headingYOY" data-parent="#accordion">
+            <div class="card-body">
+              <div class="instructions">
+                <p class="text-block pr-3">
+                  Select a group to view response rate by network or school. Bars display response rates in {{$ctrl.CYTD}}. Circles display response rates in {{$ctrl.PYTD}}. Each bar represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
+                </p>
+              </div>
+              <variable-selection-pane  orient-survey="horiz" surveys-hidden="['Principal']"></variable-selection-pane>
+              <div class="qlik-object-with-title-and-subtitle">
+                <qlik-object obj-id="ZFNtJ" height="400px" width="100%"></qlik-object>
+              </div>
+            </div>
+          </div>  
+        </div>
+
+         <!-- 3 Year Trend -->
+        <div class="card">
+          <div class="card-header" id="headingTrend">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingTrend" data-toggle="collapse" data-target="#collapseTrend" aria-expanded="false" aria-controls="collapseTrend" ng-click="$ctrl.onClickAccordion($event)">             
                 <div class="d-flex justify-content-between">
                   <span class="symbol">&nbsp;Three-Year Trends</span>
                   <img class="icon" src="img/icons/icon-line.png"> 
@@ -67,7 +123,7 @@
               </button>            
             </h5>
           </div>
-          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div id="collapseTrend" class="collapse" aria-labelledby="headingTrend" data-parent="#accordion">
             <div class="card-body"> 
               <div class="instructions">
                 <p class="text-block pr-3">
@@ -90,55 +146,7 @@
           </div>
         </div>
 
-        <!-- YOY -->
-        <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="$ctrl.onClickAccordion($event)">
-                <div class="d-flex justify-content-between">
-                  <span class="symbol">&nbsp;Yearly Change</span>
-                  <img class="icon" src="img/icons/icon-yoy.png"> 
-                </div>
-              </button>      
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-            <div class="card-body">
-              <div class="instructions">
-                <p class="text-block pr-3">
-                  Select a group to view response rate by network or school. Bars display response rates in {{$ctrl.CYTD}}. Circles display response rates in {{$ctrl.PYTD}}. Each bar represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
-                </p>
-              </div>
-              <variable-selection-pane  orient-survey="horiz"></variable-selection-pane>
-              <qlik-object obj-id="ZFNtJ" height="400px" width="100%"></qlik-object>
-            </div>
-          </div>  
-        </div>
-
-        <!-- Map -->
-        <div class="card">
-          <div class="card-header" id="headingThree">
-            <h5 class="mb-0">
-              <button class="btn collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" ng-click="$ctrl.onClickAccordion($event)">
-                <div class="d-flex justify-content-between">
-                  <span class="symbol">&nbsp;Map</span>
-                  <img class="icon" src="img/icons/icon-map.png"> 
-                </div>
-              </button>            
-            </h5>
-          </div>
-          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-            <div class="card-body">               
-              <div class="instructions">
-                <p class="text-block pr-3">
-                  Select a respondent group to view the response rate by school on the map. You can zoom or scroll the area of the map.
-                </p>
-              </div>
-              <variable-selection-pane orient-survey="horiz"></variable-selection-pane>
-              <qlik-object obj-id="xXTjfW" height="450px" width="100%"></qlik-object>              
-            </div>
-          </div>
-        </div>
+        
       </div>
     </section>
   </div>

@@ -4,8 +4,6 @@ const SdpFooterComponent = {
   template: templateUrl,
   bindings: {
       currentPage: '@',
-  },
-  controller: class SdpFooterComponent {
   }
 }
 

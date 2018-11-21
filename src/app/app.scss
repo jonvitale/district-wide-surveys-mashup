@@ -16,6 +16,24 @@ html, body {
   margin: 0 auto -2em;
 }
 
+// This z-index allows the popover filter selectors
+// to go over top of modal, which by default has a higher z-index (1050 I believe)
+.lui-popover-container{
+  z-index: 1100;
+}
+
+.qlik-object-with-title-and-subtitle{
+  margin-bottom: 64px;
+}
+
+.qlik-object-with-title{
+  margin-bottom: 30px;
+}
+
+.qlik-object-no-titles{
+  margin-bottom: 0px;
+}
+
 .bg-sdp { 
   background-color: $color-sdp-navy !important;
 }
@@ -25,7 +43,7 @@ html, body {
 }
 
 .above-fold .instructions .text-block{
-  max-width: 50em;
+  max-width: 40em;
 }
 
 .instructions {
@@ -38,14 +56,15 @@ html, body {
     //box-shadow:2px 2px 2px #ccc;
     
     padding: 1em;
-    margin-right: 1em;
+    margin-right: 0.5em;
     border-radius:8px;
     border-color:#e0e0e0;
     border-style: solid;
     border-width: thin;
   }
   .vis-block {
-    margin-left: 2em;
+
+    // margin-left: 0.5em;
   }
   h1, h2, h3, h4, h5 {
     color: #888;
@@ -60,6 +79,10 @@ button.bg-sdp:hover,
 button.bg-sdp:focus {
   background-color: #6666AA !important;
 }
+
+// .qv-object-content {
+//   position: static !important;
+// }
 
 .qv-object-content-container {
   position: static !important;

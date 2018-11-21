@@ -7,10 +7,15 @@ const VariableSelectionPaneComponent = {
     orientConstruct: '@',
     orientSubConstruct: '@',
     orientQuestionText: '@',
+    surveysHidden: '<',
+    constructsHidden: '<',
+    subConstructsHidden: '<',
+    questionTextsHideen: '<',
   },
   $inject: ['QlikVariablesService'],
   controller: class VariableSelectionPaneComponent {
     constructor(QlikVariablesService){
+      'ngInject';
       this.QlikVariablesService = QlikVariablesService;
     }
 
@@ -34,6 +39,12 @@ const VariableSelectionPaneComponent = {
         variables['survey'] = variableDetails;
         if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
         variableNames.push(variableName);
+        console.log("vsp", this.surveysHidden);
+        // if (this.hideOther != null && this.hideOther){
+        //   this.constructsHidden = ['Principal'];
+        // } else {
+        //   this.constructsHidden = null;
+        // }
       }
       if (this.orientConstruct != null){
         variableName = 'vConstruct_Selected';
@@ -42,6 +53,11 @@ const VariableSelectionPaneComponent = {
         variables['construct'] = variableDetails;
         if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
         variableNames.push(variableName);
+        // if (this.hideOther != null && this.hideOther){
+        //   this.constructsHidden = ['Other'];
+        // } else {
+        //   this.constructsHidden = null;
+        // }
       }
       if (this.orientSubConstruct != null){
         variableName = 'vSubConstruct_Selected';
@@ -78,7 +94,7 @@ const VariableSelectionPaneComponent = {
         this[variableKey] = v;
       }
     }
-    
+
   }
 }
 

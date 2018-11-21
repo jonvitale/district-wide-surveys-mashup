@@ -116,6 +116,12 @@ export class QlikVariablesService {
   	}
   }
 
+  /**
+   * Initially, uses the Qlik API to get the current value of a variable.
+   * Subsequently, this value is stored and retrieved immediately.
+   * @param  {string} variableName The name of the variable in Qlik.
+   * @return {Promise}              A promise of the value of the variable.
+   */
   getVariableValue(variableName){
     return new Promise( (resolve, reject) => {
       if (this.variables[variableName] != null){
@@ -164,7 +170,11 @@ export class QlikVariablesService {
     });
   }
 
-  
+  /**
+   * Sets a variable to the given value. Do not use with any variable that stores in an array.
+   * @param {string} variableName The name of a string or int variable
+   * @param {string} value        The value to set the current value to.
+   */
   setVariableValue(variableName, value){
     //console.log("????qlik service - setVariableValue--", variableName, value);
   	return new Promise( (resolve, reject) => {
@@ -191,6 +201,13 @@ export class QlikVariablesService {
     });
   }
 
+  /**
+   * For an array variable will either add the value to the current array, or if it already exists
+   * take it off. Additionally, if the possible values have not been loaded yet will load all
+   * possible values (with governing variables) as the current values.
+   * @param {string} variableName The name of a string or int variable
+   * @param {string} value        The value to add or remove from the current values array.
+   */
   toggleVariableValueInArray(variableName, value){
     return new Promise( (resolve, reject) => {
      

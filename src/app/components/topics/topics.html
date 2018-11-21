@@ -29,7 +29,7 @@
               </p>
             </div>
             <div class="ml-4">
-              <img style="max-width:400px;" src="img/survey-resources/constructs.jpg">
+              <img style="max-width:500px;" src="img/survey-resources/constructs.jpg">
             </div>
           </div>
         </div>
@@ -37,36 +37,12 @@
     </section>
     <section>
       <div class="accordion" id="accordion">
-         <!-- YOY -->
-        <div class="card">
-          <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-              <button class="btn collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" ng-click="$ctrl.onClickAccordion($event)">
-                <div class="d-flex justify-content-between">
-                  <span class="symbol">&nbsp; Yearly Change</span>
-                  <img class="icon" src="img/icons/icon-yoy.png"> 
-                </div>
-              </button>            
-            </h5>
-          </div>
-          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card-body">
-              <div class="instructions">
-                <p class="text-block pr-3">
-                  Select a respondent group and topic to view the average topic score by network. If a network is selected, schools within that network will be displayed. If a school is selected, grades may be displayed.
-                </p>
-              </div>
-              <variable-selection-pane  orient-survey="horiz" orient-construct="horiz"></variable-selection-pane> 
-              <qlik-object obj-id="JPhNfNh" height="400px" width="100%"></qlik-object> 
-            </div>
-          </div>  
-        </div>
-
+        
         <!-- Map -->
         <div class="card">
-          <div class="card-header" id="headingTwo">
+          <div class="card-header" id="headingMap">
             <h5 class="mb-0">
-              <button class="btn collapsed icon map" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="$ctrl.onClickAccordion($event)">
+              <button class="btn collapsed icon map" id="headingMap" data-toggle="collapse" data-target="#collapseMap" aria-expanded="false" aria-controls="collapseMap" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
                   <span class="symbol">&nbsp; Map</span>
                   <img class="icon" src="img/icons/icon-map.png"> 
@@ -74,15 +50,41 @@
               </button>            
             </h5>
           </div>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordion">
             <div class="card-body">
               <div class="instructions">
                 <p class="text-block pr-3">
                    Select a respondent group and topic to view the average topic score by school on the map. You can zoom or scroll the area of the map
                 </p>
               </div>
-              <variable-selection-pane  orient-survey="horiz" orient-construct="horiz"></variable-selection-pane>
-              <qlik-object obj-id="BHWkS" height="450px" width="100%"></qlik-object>
+              <variable-selection-pane  orient-survey="horiz" orient-construct="horiz" constructs-hidden="['Other']" surveys-hidden="['Principal']"></variable-selection-pane> 
+              <qlik-object obj-id="BHWkS" height="450px" width="100%" obj-options="{noSelections:true}"></qlik-object>
+            </div>
+          </div>  
+        </div>
+
+        <!-- YOY -->
+        <div class="card">
+          <div class="card-header" id="headingYOY">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingYOY" data-toggle="collapse" data-target="#collapseYOY" aria-expanded="false" aria-controls="collapseYOY" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                  <span class="symbol">&nbsp; Yearly Change</span>
+                  <img class="icon" src="img/icons/icon-yoy.png"> 
+                </div>
+              </button>            
+            </h5>
+          </div>
+          <div id="collapseYOY" class="collapse" aria-labelledby="headingYOY" data-parent="#accordion">
+            <div class="card-body">
+              <div class="instructions">
+                <p class="text-block pr-3">
+                  Select a respondent group and topic to view the average topic score by network. If a network is selected, schools within that network will be displayed. If a school is selected, grades may be displayed.
+                </p>
+              </div>
+              <variable-selection-pane  orient-survey="horiz" orient-construct="horiz" constructs-hidden="['Other']"></variable-selection-pane> 
+              <div class="qlik-object-with-title-and-subtitle">
+                <qlik-object obj-id="JPhNfNh" height="400px" width="100%"></qlik-object> 
               </div>
             </div>
           </div>  

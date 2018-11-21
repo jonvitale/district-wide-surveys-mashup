@@ -18,8 +18,10 @@
             </div>
             <div style="max-width:500px" class="vis-block">
               <div style="display:block">
+                <h6> Graduation Rate </h6>
                 <img src="img/anchor-goals/Anchor-Goal-1.png" style="max-width:500px;">
                 <br>
+                <h6> Early Literacy Rate </h6>
                 <img src="img/anchor-goals/Anchor-Goal-2.png" style="max-width:500px;">
               </div>
             </div>
@@ -33,9 +35,9 @@
 
         <!-- highlights by AG1 -->
         <div class="card">
-          <div class="card-header" id="headingOne">
+          <div class="card-header" id="headingAG1">
             <h5 class="mb-0">
-              <button class="btn collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" ng-click="$ctrl.onClickAccordion($event)">
+              <button class="btn collapsed" id="headingAG1" data-toggle="collapse" data-target="#collapseAG1" aria-expanded="false" aria-controls="collapseAG1" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
                   <div><span class="symbol">&nbsp; Anchor Goal 1: </span><span style="font-style:oblique;">100% of students will graduate ready for college or career.</span></div>
                   <img class="icon" src="img/icons/icon-yoy.png"> 
@@ -43,7 +45,7 @@
               </button>            
             </h5>
           </div>
-          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div id="collapseAG1" class="collapse" aria-labelledby="headingAG1" data-parent="#accordion">
             <div class="container-fluid mt-3">
               <div class="row">
                 <div class="col">
@@ -69,18 +71,18 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-3 m-2"
+                    <div class="col-xs-12 col-md-6 col-lg-3 m-2"
                         ng-repeat="ids in $ctrl.agIds['AG1']"
-                        style="max-width:320px;">
-                      <div class="mt-2">
+                        style="max-width:350px;">
+                      <div class="mt-2 ml-2">
                         <div class="question-text">
                           <h5>{{ids.title}}</h5>                         
                         </div>
                         <div class="kpi">  
-                          <qlik-object obj-id="{{ids.kpi}}" width="320px"></qlik-object>  
+                          <qlik-object obj-id="{{ids.kpi}}" width="330" ></qlik-object>  
                         </div>
                         <div class="combo-chart">
-                          <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
+                          <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="350px" obj-options="{noSelections:true}"></qlik-object>
                         </div>
                       </div>
                     </div>
@@ -93,9 +95,9 @@
 
         <!-- highlights by AG2 -->
         <div class="card">
-          <div class="card-header" id="headingTwo">
+          <div class="card-header" id="headingAG2">
             <h5 class="mb-0">
-              <button class="btn collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="$ctrl.onClickAccordion($event)">
+              <button class="btn collapsed" id="headingAG2" data-toggle="collapse" data-target="#collapseAG2" aria-expanded="false" aria-controls="collapseAG2" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
                    <div><span class="symbol">&nbsp; Anchor Goal 2: </span><span style="font-style:oblique;"> 100% of 8-year-olds will read on or above grade level. </span></div>
                   <img class="icon" src="img/icons/icon-yoy.png"> 
@@ -103,7 +105,7 @@
               </button>            
             </h5>
           </div>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div id="collapseAG2" class="collapse" aria-labelledby="headingAG2" data-parent="#accordion">
             <div class="container-fluid mt-3">
               <div class="row">
                 <div class="col">
@@ -121,27 +123,28 @@
                       <h5>                  
                         <span class="question-intro"> % of {{$ctrl.ag2_Grades}}                      {{$ctrl.agHeaders['AG2'].intro}} 
                         </span>
-                        <span class="question-response">                       {{$ctrl.agHeaders['AG2'].response}}
+                        <span class="question-response">                       
+                          {{$ctrl.agHeaders['AG2'].response}}
                         </span>
                         <span class="question-intro">to... </span>
                       </h5>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-3 m-2"
+                    <div class="col-xs-12 col-md-6 col-lg-3 m-2"
                         ng-repeat="ids in $ctrl.agIds['AG2']"
-                        style="max-width:320px;">
-                      <div class="mt-2">
+                        style="max-width:350px;">
+                      <div class="mt-2 ml-2">
                         <div class="question-text">
                           <h5>{{ids.title}}</h5>                         
                         </div>
                         <div class="kpi">  
-                          <qlik-object obj-id="{{ids.kpi}}" width="320px"></qlik-object>  
+                          <qlik-object obj-id="{{ids.kpi}}" width="330" ></qlik-object>  
                         </div>
                         <div class="combo-chart">
-                          <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
+                          <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="350px" obj-options="{noSelections:true}"></qlik-object>
                         </div>
-                      </div>                      
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -152,9 +155,9 @@
 
         <!-- highlights by AG3 -->
         <div class="card">
-          <div class="card-header" id="headingThree">
+          <div class="card-header" id="headingAG3">
             <h5 class="mb-0">
-              <button class="btn collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" ng-click="$ctrl.onClickAccordion($event)">
+              <button class="btn collapsed" id="headingAG3" data-toggle="collapse" data-target="#collapseAG3" aria-expanded="false" aria-controls="collapseAG3" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
                    <div><span class="symbol">&nbsp; Anchor Goal 3: </span><span style="font-style:oblique;"> 100% of positions are filled by great principals, teachers, and employees. </span></div>
                   <img class="icon" src="img/icons/icon-yoy.png"> 
@@ -162,7 +165,7 @@
               </button>            
             </h5>
           </div>
-          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+          <div id="collapseAG3" class="collapse" aria-labelledby="headingAG3" data-parent="#accordion">
             <div class="container-fluid mt-3">
               <div class="row">
                 <div class="col">
@@ -180,25 +183,26 @@
                       <h5>                  
                         <span class="question-intro">% of                     {{$ctrl.agHeaders['AG3'].intro}} 
                         </span>
-                        <span class="question-response">                       {{$ctrl.agHeaders['AG3'].response}}
+                        <span class="question-response">                       
+                          {{$ctrl.agHeaders['AG3'].response}}
                         </span>
                         <span class="question-intro">to... </span>
                       </h5>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-3 m-2"
+                    <div class="col-xs-12 col-md-6 col-lg-3 m-2"
                         ng-repeat="ids in $ctrl.agIds['AG3']"
-                        style="max-width:320px;">
-                      <div class="mt-2">
+                        style="max-width:350px;">
+                      <div class="mt-2 ml-2">
                         <div class="question-text">
                           <h5>{{ids.title}}</h5>                         
                         </div>
                         <div class="kpi">  
-                          <qlik-object obj-id="{{ids.kpi}}" width="300px"></qlik-object>  
+                          <qlik-object obj-id="{{ids.kpi}}" width="330" ></qlik-object>  
                         </div>
                         <div class="combo-chart">
-                          <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
+                          <qlik-object obj-id="{{ids.comboChart}}" height="300px" width="350px" obj-options="{noSelections:true}"></qlik-object>
                         </div>
                       </div>
                     </div>

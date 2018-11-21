@@ -8,6 +8,7 @@ const VariableSelectorComponent = {
       sourceField: '@',
       governingVariables: '<',
       orientation: '@',
+      hideValues: '<',
   },
   require: {
     parent: '^variableSelectionPane'
@@ -25,11 +26,16 @@ const VariableSelectorComponent = {
      * On initialization set the current value based upon the variable value in the app
      */
     $onInit(){
-      console.log("---onInit---", this.variableName, this.currentValue, this.currentValues, this.parent);  
+      console.log("---onInit---", this.variableName, this.currentValue, this.currentValues, this.parent, this.hideValues);  
       
       this.currentValues = null;
       this.currentValue = null;
       this.displayed = false;
+
+      //register lisener on this variable
+      this.QlikVariablesService.registerVariableObserver(this.variableName, (variable, value) => {
+        this.currentValue = value;
+      });
 
       //register listeners on governing variables
       for (let i = 0; i < this.governingVariables.length; i++){
@@ -59,6 +65,7 @@ const VariableSelectorComponent = {
      * apply current selections to the governing fields in the governing state.
      * Displayed values will then reflect possible fields with those selections made
      * If there is no governance, then we simply display all values. 
+     * However, there may be explicitely removed values (hideValues)
      * @return {[type]} [description]
      */
     displayValues(){      
@@ -66,6 +73,15 @@ const VariableSelectorComponent = {
       this.QlikVariablesService.getFieldValuesWithSelections(this.variableName, this.governingVariables).then(
         values => {
           this.displayed = true;
+          // make sure values are not in hideValues
+          if (angular.isArray(this.hideValues) && this.hideValues.length > 0){
+            for (let i = values.length-1; i >= 0; i--){
+              let value = values[i].value;
+              if (this.hideValues.indexOf(value) >= 0){
+                values.splice(i, 1);
+              }
+            }
+          }
           this.values = values;
 
           // get just selectable values, then determine if its the same as the previously selectableValues

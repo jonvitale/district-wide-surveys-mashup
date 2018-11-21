@@ -12,6 +12,12 @@ const QuestionCompareComponent = {
     }
 
     $onInit(){
+      // google analytics
+      gtag('event', 'screen_init', {
+        'event_category': 'navigation',
+        'event_label': 'AllQuestions'
+      });
+
       this.questionCollapsed = true;
       this.accordionsCollapsed = true;
       this.survey = '';
@@ -21,7 +27,28 @@ const QuestionCompareComponent = {
       this.questionStem = '';
       this.useDemos = true;    
 
-      this.$openApp.getObject('CurrentSelections', 'CurrentSelections');
+      let filters = ["Sector", "Current Network", "School Name", "Grade", "Gender", "Ethnicity"];
+      for (let f = 0; f < filters.length; f++){
+        let filter = filters[f];
+        this.$openApp.visualization.create('listbox',
+          [filter], {
+            "showTitles": true,
+            "title": filter,
+            "qListObjectDef": {
+              "qStateName": "Alt1",
+            }
+          }
+        ).then(vis => {
+          vis.show("altSelectionPlaceholder-"+f);
+        });
+      }
+
+      // console.log($(".collapse"));
+      // $(".collapse").on('shown.bs.collapse', function(){
+      //   console.log("accordion shown", event);
+      // });
+
+
 
       // what's the latest year
       this.$openApp.variable.getContent('vCYTD', reply => {
@@ -123,9 +150,23 @@ const QuestionCompareComponent = {
      * If they are we will hide the top graph and question selection button.
      */
     onClickAccordion(evt){
+      // if this is the map, do an arbitrary selection and clearing.
+      if (evt.currentTarget.id == "headingMap"){// && this.map_init == null){
+        // make an arbitrary selection to force the map to zoom.
+        let dfield = this.$openApp.field('_dummy_field');
+        dfield.select([0, 1]).then(() => {
+          dfield.clear();
+          this.map_init = true;
+        });
+      }
+
       // is the target of this event going from or to a collapsed state
       if (evt.currentTarget.className.includes("collapsed")){
         this.accordionsCollapsed = false;
+        gtag('event', 'accordion-open', {
+          'event_category': 'view-content',
+          'event_label': 'AllQuestions-' + evt.currentTarget.id
+        });
       } else {
         this.accordionsCollapsed = true;
       }
@@ -135,6 +176,10 @@ const QuestionCompareComponent = {
 
     onClickQuestionSelect(){
       this.questionCollapsed = !this.questionCollapsed; 
+      this.qlik.resize();
+    }
+
+    onClickAltSelectionsClose(){
       this.qlik.resize();
     }
   }

@@ -9,6 +9,7 @@
 				source-field={{$ctrl.survey.sourceField}}
 				governing-variables="$ctrl.survey.governingVariables"
 				orientation={{$ctrl.survey.orientation}}
+				hide-values="$ctrl.surveysHidden"
 		></variable-selector>
 		<variable-selector 
 				ng-if="$ctrl.construct != null"
@@ -19,6 +20,7 @@
 				source-field={{$ctrl.construct.sourceField}}
 				governing-variables="$ctrl.construct.governingVariables"
 				orientation={{$ctrl.construct.orientation}}
+				hide-values="$ctrl.constructsHidden"
 		></variable-selector>
 		<variable-selector 
 				ng-if="$ctrl.subConstruct != null"
@@ -29,6 +31,7 @@
 				source-field={{$ctrl.subConstruct.sourceField}}
 				governing-variables="$ctrl.subConstruct.governingVariables"
 				orientation={{$ctrl.subConstruct.orientation}}
+				hide-values="$ctrl.subConstructsHidden"
 		></variable-selector>
 		<variable-selector 
 				ng-if="$ctrl.questionText != null"
@@ -38,6 +41,7 @@
 				source-field={{$ctrl.questionText.sourceField}}	
 				governing-variables="$ctrl.questionText.governingVariables"
 				orientation={{$ctrl.questionText.orientation}}
+				hide-values="$ctrl.questionTextsHidden"
 		></variable-selector>
 	</div>
 </div>

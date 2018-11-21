@@ -1,13 +1,20 @@
 .home {
   .home-banner {
-    background: url("../img/headers/home.jpg") no-repeat center center;
+    background: url("../img/headers/6.jpg") no-repeat right center;
     background-size: cover;
     .home-gradient {
-        background: -moz-linear-gradient(45deg, rgba(34, 119, 159, 0.6), rgba(34, 119, 159, 0.4) 100%);
-        background: -webkit-linear-gradient(45deg, rgba(34, 119, 159, 0.6), rgba(34, 119, 159, 0.4) 100%);
-        background: -webkit-gradient(linear, 45deg, from(rgba(34, 119, 159, 0.6)), to(rgba(34, 119, 159, 0.4)));
-        background: -o-linear-gradient(45deg, rgba(34, 119, 159, 0.6), rgba(34, 119, 159, 0.4) 100%);
-        background: linear-gradient(to 45deg, rgba(34, 119, 159, 0.6), rgba(34, 119, 159, 0.4) 100%);
+        // background: -moz-linear-gradient(45deg, rgba(34, 119, 159, 0.75), rgba(34, 119, 159, 0.4) 100%);
+        // background: -webkit-linear-gradient(45deg, rgba(34, 119, 159, 0.75), rgba(34, 119, 159, 0.4) 100%);
+        // background: -webkit-gradient(linear, 45deg, from(rgba(34, 119, 159, 0.75)), to(rgba(34, 119, 159, 0.4)));
+        // background: -o-linear-gradient(45deg, rgba(34, 119, 159, 0.75), rgba(34, 119, 159, 0.4) 100%);
+        // background: linear-gradient(to 45deg, rgba(34, 119, 159, 0.75), rgba(34, 119, 159, 0.4) 100%);
+
+        background: -moz-linear-gradient(60deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1) 100%);
+        background: -webkit-linear-gradient(60deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1) 100%);
+        background: -webkit-gradient(linear, 60deg, from(rgba(0, 0, 0, 0.9)), to(rgba(0, 0, 0, 0.1)));
+        background: -o-linear-gradient(60deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1) 100%);
+        background: linear-gradient(to 60deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1) 100%);
+
     }
     .home-banner-title {
       color: #EEE;
@@ -17,7 +24,7 @@
     .home-banner-content {
       color: white;
       border-color: white;
-      margin-top: 100px;
+      margin-top: 200px;
       margin-bottom: 100px;
 
       hr {

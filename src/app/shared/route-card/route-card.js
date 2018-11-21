@@ -14,8 +14,6 @@ const RouteCardComponent = {
       this.title = "Loading...";
       this.imgSrc = null;
       this.hideText = false;
-      //this.imgSrc = "img/headers/3.jpg";
-      //this.imgSrc = "img/headers/home.jpg";
     }
 
     navigateToRoute(){

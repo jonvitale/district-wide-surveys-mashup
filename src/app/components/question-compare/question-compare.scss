@@ -1,4 +1,13 @@
+
 .question-compare {
+	
+
+	.listbox-placeholder {
+		min-height: 210px;
+		min-width: 150px;
+		margin-bottom: 32px;
+	}
+
 	.instructions {
 		.btn {
 			display:block; 
@@ -86,12 +95,13 @@
 	}
 
 	.alternative-selections{
-		text-align:left; 
-		//background-color:#fff0f8;
+		text-align: left; 
+		// background-color:#fff0f8;
 		// border-radius:8px;
 		// border-color:#444;
 		// border-style: solid;
 		// border-width: thin;
+		display: block;
 		.banner {
 			border-radius: 8px 8px 0px 0px;
 			padding: 5px; 
@@ -100,11 +110,16 @@
 			width: 100%;
 		}
 		.combo-chart {
-			margin-left: 1em;
-			width:350px;
+			width: 350px;
+			text-align: center;
+			display: block;
+			// margin-left: 1rem;
 		}
 		.btn {
 			box-shadow:4px 4px 2px #AAAAAA;
+			margin-top: 6px;
+			margin-right: 6px;
+			min-width: 227px;
 		}
 	}
 

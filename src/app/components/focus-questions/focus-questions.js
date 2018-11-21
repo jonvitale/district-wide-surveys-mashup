@@ -11,41 +11,23 @@ const FocusQuestionsComponent = {
     }
 
     $onInit(){
+
+      // google analytics
+      gtag('event', 'screen_init', {
+        'event_category': 'navigation',
+        'event_label': 'Highlights'
+      });
      
       this.groups = ['Student', 'Teacher', 'Parent'];
       this.ags = ['AG1', 'AG2', 'AG3'];
       this.ag1_Grades = '';
       this.ag2_Grades = '';
-      
-      this.demoHeaders = {
-        'intro': '% of Students that selected',
-        'response': '"Most or all the time"',
-        'stem': 'How often are these things true?',
-      };
-
-      this.groupHeaders = {
-        'Student': {
-          'intro': '% of Students that selected',
-          'response': '"Most or all the time"',
-          'stem': 'How often are these things true?',
-        },
-        'Parent': {
-          'intro': '% of Parents that selected',
-          'response': '"Strongly agree"',
-          'stem': 'How much do you agree with the following statements?',
-        },
-        'Teacher': {
-          'intro': '% of Teachers that selected',
-          'response': '"Strongly agree"',
-          'stem': 'How much do you agree or disagree with the following statements?',
-        },
-      }
 
       this.agHeaders = {
         'AG1': {
           'intro': 'Students that selected',
           'response': '"Strongly agree"',
-          'stem': 'How often are these things true?',
+          'stem': 'How much do you agree with the following statements?',
         },
         'AG2': {
           'intro': 'Parents that selected',
@@ -53,47 +35,13 @@ const FocusQuestionsComponent = {
           'stem': 'How much do you agree with the following statements?',
         },
         'AG3': {
-          'intro': 'Teachers that selected',
-          'response': '"Not a challenge"',
-          'stem': 'How much do you agree or disagree with the following statements?',
+          'intro': 'Students that selected',
+          'response': '"Most or all the time"',
+          'stem': 'How often are these things true?',
         },
       }
 
-      this.demoIds = {
-        kpi: "SkGwzt", 
-        comboChart: "EqPaCh",
-        nlines: 1, 
-        title: "I enjoy being in school."
-      }
-
-      this.groupIds = {
-        'Student': [
-          {kpi: "wwELJm", comboChart:"deDTty",
-            nlines:1, title: "When I am in school, I feel like I belong."},
-          {kpi: "mTJvZYa", comboChart:"fypwxT",
-            nlines:2, title:"My teachers have high expectations for me in school."},
-          {kpi: "mJkJzd", comboChart:"jqKeJMM",
-            nlines:1, title:"I feel safe in my classes."},
-        ],
-        "Parent": [
-          {kpi: "DYpjPgm", comboChart:"nTLYrD",
-            nlines:3, title:"I feel welcome in my child’s school."},
-          {kpi: "UAjtB", comboChart:"ZpLw",
-            nlines:3, title:"My child's school has high expectations for my child's learning."},
-          {kpi: "HSzxBtb", comboChart:"UqQzeE",
-            nlines:3, title:"My child's school values my feedback."},
-        ],
-        "Teacher": [
-          {kpi: "mEATKb", comboChart:"NkMKJg",
-            nlines:2, title:"Teacher morale is high."},
-          {kpi: "JSdtjzb", comboChart:"xJqeW",
-            nlines:2, title:"Teachers at my school support the idea that all students can learn."},
-          {kpi: "ruJVeP", comboChart:"tFVQ",
-            nlines:2, title:"I am encouraged to innovate to improve my teaching."},
-        ]
-      };
-
-      this.agIds = {
+     this.agIds = {
         'AG1': [
           {kpi: "nLvTP", comboChart:"NnQURGd",
             nlines:1, title: "My school is helping to prepare me for college."},
@@ -112,16 +60,14 @@ const FocusQuestionsComponent = {
         ],
         "AG3": [
           {kpi: "NNZBNrb", comboChart:"XPnvme",
-            nlines:2, title:"Teacher turnover."},
+            nlines:2, title:"My teachers explain information in a way I understand."},
           {kpi: "QJFds", comboChart:"qtCqfM",
-            nlines:2, title:"Shortage of highly qualified teachers."},
+            nlines:2, title:"My teachers have high expectations for me in school."},
           {kpi: "YGfjEg", comboChart:"XfPpVFW",
-            nlines:2, title:"Lack of high-quality professional development opportunities for teachers."},
+            nlines:2, title:"My teachers encourage me to work hard."},
         ]
       };
 
-      this.selectActiveGroup('Student');
-      this.selectActiveAG('AG1');
       this.accordionsCollapsed = true;
       this.$openApp.variable.getContent('vCYTD', reply => {
         this.CYTD = reply.qContent.qString;
@@ -129,7 +75,6 @@ const FocusQuestionsComponent = {
       this.$openApp.variable.getContent('vPYTD', reply => {
         this.PYTD = reply.qContent.qString;
       });
-      //this.$openApp.field('Survey').selectMatch("Teacher", true);
     }
 
 
@@ -150,14 +95,6 @@ const FocusQuestionsComponent = {
       this.selectActiveAG(ag);
     }
 
-    selectActiveGroup(group){
-      this.activeGroup = group;
-    }
-
-    selectActiveAG(ag){
-      this.activeAG = ag;
-    }
-
     /**
      * When an accordion tab is opened we need to resize the qlik object.
      * Additionally, we keep track if any accordion tabs are open.
@@ -166,6 +103,10 @@ const FocusQuestionsComponent = {
     onClickAccordion(evt){
       // is the target of this event going from or to a collapsed state
       if (evt.currentTarget.className.includes("collapsed")){
+        gtag('event', 'accordion-open', {
+          'event_category': 'view-content',
+          'event_label': 'Highlights-' + evt.currentTarget.id
+        });
         this.accordionsCollapsed = false;
         this.$openApp.variable.getContent('vGrades_AG1', reply => {
           this.ag1_Grades = reply.qContent.qString;

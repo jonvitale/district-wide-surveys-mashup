@@ -3,22 +3,23 @@
 		.kpi {
 			//box-shadow: 4px 4px 2px #CCCCCC;
 			width: calc(200px + 2rem);
-			color: 444;
+			color: #222;
 			background-color: #f0f0f8;
-			margin: 0.5rem;
-			padding: 1rem;
+			margin: 2px;
+			margin-bottom: 0.5rem;
+			padding: 0.5rem;
 		}
 		#kpi-Student {
-			background-color:rgba(71, 170, 216, 0.2);
+			background-color: rgba(71, 170, 216, 0.2);
 		}
 		#kpi-Parent {
-			background-color:rgba(57, 134, 53, 0.2);
+			background-color: rgba(57, 134, 53, 0.2);
 		}
 		#kpi-Teacher {
-			background-color:rgba(255, 170, 48, 0.2);
+			background-color: rgba(255, 170, 48, 0.2);
 		}
 		#kpi-Principal {
-			background-color:rgba(11, 49, 91, 0.1);
+			background-color: rgba(11, 49, 91, 0.1);
 		}
 
 		.qv-object-footnote {

@@ -3,8 +3,15 @@ import templateUrl from './survey-resources.html';
 const SurveyResourcesComponent = {
   template:  templateUrl,
   controller: class SurveyResourcesComponent {
-    constructor(){
-     
+    constructor(){     
+    }
+
+    $onInit(){
+    	// google analytics
+      gtag('event', 'screen_init', {
+        'event_category': 'navigation',
+        'event_label': 'About'
+      });
     }
   }
 }

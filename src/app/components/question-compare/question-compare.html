@@ -19,6 +19,39 @@
       </div>
     </div>
 
+    <div class="modal fade" id="altSelectionPicker" tabindex="-1" role="dialog" aria-labelledby="altSelectionTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="altSelectionTitle">Select values for a comparison group</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- <qlik-object ng-if="$ctrl.useDemos" obj-id="YAtp" height="220px" width="300px"></qlik-object>
+            <qlik-object ng-if="!$ctrl.useDemos" obj-id="KkpDM" height="150px" width="300px"></qlik-object> -->
+            <p>Click on a category below to make selections</p>
+            <div class="d-flex flex-wrap">              
+              <div id="altSelectionPlaceholder-0" class="listbox-placeholder">
+              </div>
+              <div id="altSelectionPlaceholder-1" class="listbox-placeholder"></div>
+              <div id="altSelectionPlaceholder-2" class="listbox-placeholder"></div>
+              <div id="altSelectionPlaceholder-3" class="listbox-placeholder" ng-if="$ctrl.useDemos"></div>
+              <div id="altSelectionPlaceholder-4" class="listbox-placeholder" ng-if="$ctrl.useDemos"></div>
+              <div id="altSelectionPlaceholder-5" class="listbox-placeholder" ng-if="$ctrl.useDemos"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
+              Clear comparison selections
+            </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$ctrl.onClickAltSelectionsClose()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <section class="sticky-top">
      <navbar current-page="Question Compare"></navbar> 
       <filter-pane></filter-pane>
@@ -67,9 +100,9 @@
       <div class="accordion" id="accordion">
         <!-- Compare Groups -->
         <div class="card">
-          <div class="card-header" id="headingOne">
+          <div class="card-header" id="headingCompare">
             <h5 class="mb-0">
-              <button class="btn collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" ng-click="$ctrl.onClickAccordion($event)">
+              <button class="btn collapsed" id="headingCompare" data-toggle="collapse" data-target="#collapseCompare" aria-expanded="false" aria-controls="collapseCompare" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
                   <span class="symbol">&nbsp; Compare Groups</span>
                   <div>
@@ -80,7 +113,7 @@
               </button>       
             </h5>
           </div>
-          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div id="collapseCompare" class="collapse" aria-labelledby="headingCompare" data-parent="#accordion">
             <div class="card-body"> 
               <div class="instructions">     
                 <div class="d-flex justify-content-between"> 
@@ -97,6 +130,7 @@
                       <div class="pill-title">Topic: </div>
                       <div class="pill">{{$ctrl.construct}}</div>
                     </div>
+                    
                   </div>
                 </div>              
               </div>
@@ -105,7 +139,7 @@
                 <h3 class="question-text">{{$ctrl.questionText}}</h3>
               </div>
               <div class="row">
-                <div class="col col-lg-4" >
+                <div class="col col-lg-6" >
                   <div class="primary-selections">
                     <div class="banner">
                       <img src="img/icons/filters-light.png">
@@ -113,25 +147,25 @@
                     </div>
                     <div class="row">
                       <div class="col">
-                        <p style="height:6em;">The chart below reflects the schools and student groups selected in the green bar at the top of the screen. If no selections have been made, city-wide averages are displayed.</p>
+                        <p style="min-height:4em;">The chart below reflects the schools and student groups selected in the green bar at the top of the screen. If no selections have been made, city-wide averages are displayed.</p>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col">
                         <div class="combo-chart mx-auto">
-                          <qlik-object obj-id="DQBUdJ" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>          
+                          <qlik-object obj-id="SFrRaJX" height="300px" width="350px" obj-options="{noSelections:true}"></qlik-object>          
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col">
                         <br>
-                        <qlik-object obj-id="zWnZvf" width="300px"></qlik-object>
+                        <qlik-object obj-id="zWnZvf" width="350px"></qlik-object>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col col-lg-8">  
+                <div class="col col-lg-6">  
                   <div class="alternative-selections">
                     <div class="banner">
                       <img src="img/icons/filters-light.png">
@@ -139,28 +173,31 @@
                     </div>
                     <div class="row">
                       <div class="col">
-                        <p style="height:6em;">The chart below allows you to create a comparison set of schools and student groups. Make selections below to change values in the chart. If no selections are made, city-wide averages are displayed.</p>
+                        <p style="min-height:4em;">The chart below allows you to create a comparison set of schools and student groups. Make selections below to change values in the chart. If no selections are made, city-wide averages are displayed.
+                        </p>
                       </div>
                     </div>
                     <div class="row">            
                       <div class="col">     
                         <div class="combo-chart">             
-                          <qlik-object obj-id="SFrRaJX" height="300px" width="300px" obj-options="{noSelections:true}"></qlik-object>
+                          <qlik-object obj-id="DQBUdJ" height="300px" width="350px" obj-options="{noSelections:true}"></qlik-object>
                         </div>
-                      </div>
-                      <div class="col text-left">
-                        <qlik-object ng-if="$ctrl.useDemos" obj-id="YAtp" height="220px" width="300px"></qlik-object>
-                        <qlik-object ng-if="!$ctrl.useDemos" obj-id="KkpDM" height="150px" width="300px"></qlik-object>
-                        <br>
-                        <button type="button" class="btn btn-secondary" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
-                        Clear comparison selections
+                      </div> 
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <button class="btn btn-secondary" data-toggle="modal" data-target="#altSelectionPicker">
+                          <span>Select a comparison group</span>
+                        </button>
+                        <button type="button" class="btn btn-danger" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
+                          Clear comparison selections
                         </button>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col">
                         <br>
-                        <qlik-object obj-id="RMJqN" width="300px"></qlik-object>                      
+                        <qlik-object obj-id="RMJqN" width="350px"></qlik-object>                    
                       </div>
                     </div>
                   </div>
@@ -170,52 +207,11 @@
           </div>
         </div>
 
-        <!-- YOY -->
-        <div class="card">
-          <div class="card-header"id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="$ctrl.onClickAccordion($event)">
-                <div class="d-flex justify-content-between">
-                  <span class="symbol">&nbsp; Yearly Change</span>
-                  <img class="icon" src="img/icons/icon-yoy.png"> 
-                </div>
-              </button>            
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-            <div class="card-body">
-              <div class="instructions">     
-                <div class="d-flex justify-content-between"> 
-                  <p class="text-block pr-3">
-                    On the following chart a bar represents the most current year's "% most positive" average. The circle represents the previous year. Each bar represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
-                  </p>
-                  <div>
-                    <button class="btn" data-toggle="modal" data-target="#questionPicker">
-                      ⊕ <span>Select a new question</span>
-                    </button>
-                    <div class="survey-topic">
-                      <div class="pill-title">Group: </div>
-                      <div class="pill">{{$ctrl.survey}}</div>
-                      <div class="pill-title">Topic: </div>
-                      <div class="pill">{{$ctrl.construct}}</div>
-                    </div>
-                  </div>
-                </div>              
-              </div> 
-              <div class="question-display">
-                <h3 class="question-stem">{{$ctrl.questionStem}}</h3>
-                <h3 class="question-text">{{$ctrl.questionText}}</h3>
-              </div>
-              <qlik-object obj-id="zmNpP" width="100%" height="400px"></qlik-object>
-            </div>
-          </div>
-        </div>
-
         <!-- Map -->
         <div class="card">
-          <div class="card-header" id="headingThree">
+          <div class="card-header" id="headingMap">
             <h5 class="mb-0">
-              <button class="btn collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" ng-click="$ctrl.onClickAccordion($event)">
+              <button class="btn collapsed" id="headingMap" data-toggle="collapse" data-target="#collapseMap" aria-expanded="false" aria-controls="collapseMap" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
                   <span class="symbol">&nbsp; Map</span>
                   <img class="icon" src="img/icons/icon-map.png"> 
@@ -223,7 +219,7 @@
               </button>            
             </h5>
           </div>
-          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+          <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordion">
             <div class="card-body"> 
               <div class="instructions">     
                 <div class="d-flex justify-content-between"> 
@@ -247,7 +243,52 @@
                 <h3 class="question-stem">{{$ctrl.questionStem}}</h3>
                 <h3 class="question-text">{{$ctrl.questionText}}</h3>
               </div>
-              <qlik-object obj-id="mmQp" height="450px" width="100%"></qlik-object>
+              <div class="qlik-object-with-title">
+                <qlik-object obj-id="mmQp" height="450px" width="100%" obj-options="{noSelections:true}"></qlik-object>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- YOY -->
+        <div class="card">
+          <div class="card-header"id="headingYOY">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingYOY" data-toggle="collapse" data-target="#collapseYOY" aria-expanded="false" aria-controls="collapseYOY" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                  <span class="symbol">&nbsp; Yearly Change</span>
+                  <img class="icon" src="img/icons/icon-yoy.png"> 
+                </div>
+              </button>            
+            </h5>
+          </div>
+          <div id="collapseYOY" class="collapse" aria-labelledby="headingYOY" data-parent="#accordion">
+            <div class="card-body">
+              <div class="instructions">     
+                <div class="d-flex justify-content-between"> 
+                  <p class="text-block pr-3">
+                    On the following chart a bar represents the most current year's "% most positive" average. The circle represents the previous year. Each bar represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
+                  </p>
+                  <div>
+                    <button class="btn" data-toggle="modal" data-target="#questionPicker">
+                      ⊕ <span>Select a new question</span>
+                    </button>
+                    <div class="survey-topic">
+                      <div class="pill-title">Group: </div>
+                      <div class="pill">{{$ctrl.survey}}</div>
+                      <div class="pill-title">Topic: </div>
+                      <div class="pill">{{$ctrl.construct}}</div>
+                    </div>
+                  </div>
+                </div>              
+              </div> 
+              <div class="question-display">
+                <h3 class="question-stem">{{$ctrl.questionStem}}</h3>
+                <h3 class="question-text">{{$ctrl.questionText}}</h3>
+              </div>
+              <div class="qlik-object-with-title-and-subtitle">
+                <qlik-object obj-id="zmNpP" width="100%" height="400px"></qlik-object>
+              </div>
             </div>
           </div>
         </div>
