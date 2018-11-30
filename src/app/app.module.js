@@ -6,6 +6,7 @@ import { ComponentsModule } from './components/components.module';
 import config from './config';
 import ngTouch from 'angular-touch';
 import ngRoute from 'angular-route';
+// import $ from 'jquery';
 import bootstrap from 'bootstrap';
 
 export const AppModule = qlik => (

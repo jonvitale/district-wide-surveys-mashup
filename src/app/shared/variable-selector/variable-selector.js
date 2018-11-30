@@ -26,8 +26,8 @@ const VariableSelectorComponent = {
      * On initialization set the current value based upon the variable value in the app
      */
     $onInit(){
-      console.log("---onInit---", this.variableName, this.currentValue, this.currentValues, this.parent, this.hideValues);  
-      
+      // console.log("---onInit---", this.variableName, this.currentValue, this.currentValues, this.parent, this.hideValues);  
+      this.paused = false;
       this.currentValues = null;
       this.currentValue = null;
       this.displayed = false;
@@ -41,19 +41,21 @@ const VariableSelectorComponent = {
       for (let i = 0; i < this.governingVariables.length; i++){
         let gvar = this.governingVariables[i];
         this.QlikVariablesService.registerVariableObserver(gvar, (variable, value) => {
-          console.log("---", this.variableName, " observed change of", variable, "new value", value);
+          // console.log("---", this.variableName, " observed change of", variable, "new value", value);
           this.displayValues();
         });
       }
 
       this.QlikVariablesService.getVariableValue(this.variableName).then(
         value => {
-          if (this.orientation == "combo"){
-            this.currentValues = value;
-          } else {
-            this.currentValue = value;
-          }          
-          this.displayValues();
+          if (!this.paused){
+            if (this.orientation == "combo"){
+              this.currentValues = value;
+            } else {
+              this.currentValue = value;
+            }          
+            this.displayValues();
+          }
         },
         error => console.log(error)
       );
@@ -73,7 +75,19 @@ const VariableSelectorComponent = {
       this.QlikVariablesService.getFieldValuesWithSelections(this.variableName, this.governingVariables).then(
         values => {
           this.displayed = true;
+          
+          // get just selectable values, then determine if its the same as the previously selectableValues
+          let selectableValues = [];
+          for (let i = 0; i < values.length; i++){
+            if (values[i].selectable){
+              selectableValues.push(values[i].value);
+            }
+          }
+          
           // make sure values are not in hideValues
+          // Note, this must come after selectableValues in case there are multiple open
+          // variable-selection-panes on the page with different hidden values
+          // one will tell the other that some values are not selectable even if they are.
           if (angular.isArray(this.hideValues) && this.hideValues.length > 0){
             for (let i = values.length-1; i >= 0; i--){
               let value = values[i].value;
@@ -84,14 +98,7 @@ const VariableSelectorComponent = {
           }
           this.values = values;
 
-          // get just selectable values, then determine if its the same as the previously selectableValues
-          let selectableValues = [];
-          for (let i = 0; i < values.length; i++){
-            if (values[i].selectable){
-              selectableValues.push(values[i].value);
-            }
-          }
-         
+
           let selectableValuesUpdated = !angular.equals(selectableValues, this.selectableValues);
 
           // console.log("----4. Get updated fields (", this.variableName, ")", this.currentValue);//, selectableValues, selectableValuesUpdated, values);

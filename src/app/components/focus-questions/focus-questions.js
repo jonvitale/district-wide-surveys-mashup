@@ -11,7 +11,7 @@ const FocusQuestionsComponent = {
     }
 
     $onInit(){
-
+      if (window.scrollTo != null) window.scrollTo(0, 0);
       // google analytics
       gtag('event', 'screen_init', {
         'event_category': 'navigation',

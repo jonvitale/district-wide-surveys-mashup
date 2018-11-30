@@ -17,6 +17,7 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-concat-css": "^3.1.0",
+    "gulp-ng-annotate": "^2.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
@@ -32,6 +33,7 @@
     "angular-touch": "1.5.8",
     "bootstrap": "^4.0.0",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.1"
+    "popper.js": "^1.14.1",
+    "user-home": "^2.0.0"
   }
 }

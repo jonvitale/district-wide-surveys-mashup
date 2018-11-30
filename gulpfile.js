@@ -5,6 +5,7 @@ const browserify = require('browserify')
 const babelify = require('babelify')
 const source = require('vinyl-source-stream')
 const buffer = require('vinyl-buffer')
+const ngAnnotate = require('gulp-ng-annotate')
 const uglify = require('gulp-uglify')
 const stringify = require('stringify')
 const rename = require('gulp-rename')
@@ -12,7 +13,8 @@ const zip = require('gulp-zip')
 const concatCss = require('gulp-concat-css');
 const sourcemaps = require('gulp-sourcemaps');
 const project = 'district-wide-surveys';
-const extensionpath = 'C:\\Users\\jvitale\\Documents\\Qlik\\Sense\\Extensions';
+const userHome = require("user-home");
+const extensionpath = userHome + "\\Documents\\Qlik\\Sense\\Extensions";
 const base = '';
 
 gulp.task('qext', function(){
@@ -31,8 +33,8 @@ gulp.task('html', function(){
 gulp.task('style', function(){
     gulp.src(['./src/app/**/*.scss', './src/app/*.scss', './src/*.css'])
     .pipe(sass())
-    //.pipe(sass({ outputStyle: 'compressed'}))
-    //.pipe(autoprefixer())
+    .pipe(sass({ outputStyle: 'compressed'}))
+    .pipe(autoprefixer())
     .pipe(concatCss('styles.css', {rebaseUrls:false}))
     .pipe(gulp.dest(`./${project}/css`))
     .pipe(gulp.dest(extensionpath + `/${project}/css`))
@@ -48,7 +50,8 @@ gulp.task('js', function(){
     .bundle()
     .pipe(source('config.js'))
     .pipe(buffer())
-    //.pipe(uglify())
+    .pipe(ngAnnotate())
+    // .pipe(uglify())
     .pipe(gulp.dest(`./${project}/app`))
     .pipe(gulp.dest(extensionpath + `/${project}/app`))
 })

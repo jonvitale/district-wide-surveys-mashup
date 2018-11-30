@@ -5,10 +5,11 @@ const FilterPaneComponent = {
   bindings: {
       onClickHeader: '&',
   },
-  $inject: ['qlik', '$openApp', 'QlikVariablesService'],
+  $inject: ['$timeout', 'qlik', '$openApp', 'QlikVariablesService'],
   controller: class FilterPaneComponent {
-    constructor(qlik, $openApp, QlikVariablesService){
+    constructor($timeout, qlik, $openApp, QlikVariablesService){
       'ngInject';
+      this.$timeout = $timeout;
       this.qlik = qlik;
       this.$openApp = $openApp;
       this.QlikVariablesService = QlikVariablesService;
@@ -52,10 +53,10 @@ const FilterPaneComponent = {
 
     /**
      * Resize qlik but also sends information to parent from one-way binding
-     * @param  {Object} evt ng-event
      */
-    onClickFilterHeader(evt){
-      this.qlik.resize();
+    onClickFilterHeader(){
+      
+      this.$timeout(() => {this.qlik.resize()}, 100);
       if (this.onClickHeader != null) this.onClickHeader();
     }
   }

@@ -15,7 +15,6 @@ export class QlikVariablesService {
         //sourceArray: ['Student', 'Teacher', 'Parent', 'Principal'],
         sourceField: 'Survey',
         cssClass: 'survey',
-        // governingFields: ['Construct'],
         governingVariables: ['vConstruct_Selected'],
         orientation: 'horiz',
         sortOrder: ['Student', 'Teacher', 'Parent', 'Principal'],
@@ -26,7 +25,6 @@ export class QlikVariablesService {
         variableLabel: 'Topic',
         sourceField: 'Construct',
         cssClass: 'construct',
-        // governingFields: ['Survey'],
         governingVariables: ['vSurvey_Selected'],
         orientation: 'horiz', 
         sortOrder: ['School Climate', 'Instruction', 'Parent/Guardian-Community Ties', 'School Leadership', 'Professional Capacity', 'Other'],
@@ -37,7 +35,6 @@ export class QlikVariablesService {
         variableLabel: 'Sub-Topic',
         sourceField: 'SubConstruct',
         cssClass: 'subConstruct',
-        // governingFields: ['Survey', 'Construct'],
         governingVariables: ['vSurvey_Selected', 'vConstruct_Selected'],
         orientation: 'combo', 
         useQlik: false,
@@ -47,7 +44,6 @@ export class QlikVariablesService {
         variableLabel: 'Question',
         sourceField: 'QuestionText',
         cssClass:'question-text',
-        // governingFields: ['Survey', 'Construct', 'SubConstruct'],
         governingVariables: ['vSurvey_Selected', 'vConstruct_Selected', 'vSubConstruct_Selected'],
         orientation: 'list',
         useQlik: true,
@@ -319,6 +315,8 @@ export class QlikVariablesService {
       }
 
       if (this.table == null) return null;
+
+      // console.log(targetVariable, selectionVariables);
 
       let _table = angular.copy(this.table);
       

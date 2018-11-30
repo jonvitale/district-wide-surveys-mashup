@@ -64,13 +64,13 @@
             <div class="text-block">
               <h2 class="header"> How were all questions answered? </h2>
               <p class="body">
-                The {{$ctrl.CYTD}} District-Wide Surveys included <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
+                The {{$ctrl.CYTD}} Philadelphia School Surveys included <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
                 <strong>{{$ctrl.numQuestionsTeacher}} teacher </strong> questions, and
                 <strong>{{$ctrl.numQuestionsPrincipal}} principal </strong> questions. On this page you can view the responses to each of these questions.
                 <br><br>
                 Click the button <span style="background-color:#47aad8; color:#fff; border-radius:4px; border-style:thin; border-color:#808000;padding:2px;">&nbsp;Select a new question&nbsp;</span> to choose a question by the type of respondent, the overall topic, and sub-topics. The chart displays the % of respondents who selected each of the possible responses. Blue bars represent the "most positive" response, while red bars represent the "least positive" response. You may hover over a bar to get the full response text.
                 <br><br>
-                In the tabs below you can compare two different groups of respondents or compare schools by year and location.
+                In the tabs below you can <span ng-if="$ctrl.includeComparison">compare two different groups of respondents or</span> compare schools by location and year.
               </p>
             </div>
             <div ng-if="$ctrl.accordionsCollapsed" class="vis-block" style="max-width:400px">
@@ -99,7 +99,7 @@
       <!-- Visualization accordion -->
       <div class="accordion" id="accordion">
         <!-- Compare Groups -->
-        <div class="card">
+        <div class="card" ng-if="$ctrl.includeComparisons">
           <div class="card-header" id="headingCompare">
             <h5 class="mb-0">
               <button class="btn collapsed" id="headingCompare" data-toggle="collapse" data-target="#collapseCompare" aria-expanded="false" aria-controls="collapseCompare" ng-click="$ctrl.onClickAccordion($event)">
@@ -116,9 +116,9 @@
           <div id="collapseCompare" class="collapse" aria-labelledby="headingCompare" data-parent="#accordion">
             <div class="card-body"> 
               <div class="instructions">     
-                <div class="d-flex justify-content-between"> 
+                <div class="d-flex flex-wrap"> 
                   <p class="text-block pr-3">
-                    Compare your selected schools or groups of students with another group. The selection you've made from the from the green bar above are displaye don the left graph. Choose comparison groups from the panel on the right. These students' responses will display on the right-hand chart.
+                    Compare your selected schools or groups of students with another group. The selection you've made from the from the green bar above are displayed on the left graph. Choose comparison groups from the panel on the right. These students' responses will display on the right-hand chart.
                   </p>
                   <div>
                     <button class="btn" data-toggle="modal" data-target="#questionPicker">
@@ -186,7 +186,7 @@
                     </div>
                     <div class="row">
                       <div class="col">
-                        <button class="btn btn-secondary" data-toggle="modal" data-target="#altSelectionPicker">
+                        <button class="btn btn-secondary" data-toggle="modal" data-target="#altSelectionPicker" ng-click="$ctrl.onClickAltSelectionsOpen()">
                           <span>Select a comparison group</span>
                         </button>
                         <button type="button" class="btn btn-danger" id="clear-left" ng-click="$ctrl.clearSelections('Alt1')">
@@ -222,7 +222,7 @@
           <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordion">
             <div class="card-body"> 
               <div class="instructions">     
-                <div class="d-flex justify-content-between"> 
+                <div class="d-flex flex-wrap"> 
                   <p class="text-block pr-3">
                     View "% most positive" by school on the map. You can zoom or scroll the area of the map.
                   </p>
@@ -265,7 +265,7 @@
           <div id="collapseYOY" class="collapse" aria-labelledby="headingYOY" data-parent="#accordion">
             <div class="card-body">
               <div class="instructions">     
-                <div class="d-flex justify-content-between"> 
+                <div class="d-flex flex-wrap"> 
                   <p class="text-block pr-3">
                     On the following chart a bar represents the most current year's "% most positive" average. The circle represents the previous year. Each bar represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
                   </p>

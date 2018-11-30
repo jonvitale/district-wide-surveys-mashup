@@ -24,7 +24,7 @@ const VariableSelectionPaneComponent = {
       this.questionText = null;
       
       let fieldNames = [];     
-      let variableNames = [];      
+      let variableNames = [];       
       let variables = {};
       let variableName = '';
       let variableDetails = {};
@@ -39,12 +39,6 @@ const VariableSelectionPaneComponent = {
         variables['survey'] = variableDetails;
         if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
         variableNames.push(variableName);
-        console.log("vsp", this.surveysHidden);
-        // if (this.hideOther != null && this.hideOther){
-        //   this.constructsHidden = ['Principal'];
-        // } else {
-        //   this.constructsHidden = null;
-        // }
       }
       if (this.orientConstruct != null){
         variableName = 'vConstruct_Selected';
@@ -53,11 +47,6 @@ const VariableSelectionPaneComponent = {
         variables['construct'] = variableDetails;
         if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
         variableNames.push(variableName);
-        // if (this.hideOther != null && this.hideOther){
-        //   this.constructsHidden = ['Other'];
-        // } else {
-        //   this.constructsHidden = null;
-        // }
       }
       if (this.orientSubConstruct != null){
         variableName = 'vSubConstruct_Selected';

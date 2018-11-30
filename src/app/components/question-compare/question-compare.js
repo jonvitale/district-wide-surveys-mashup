@@ -2,22 +2,25 @@ import templateUrl from './question-compare.html';
 
 const QuestionCompareComponent = {
   template:  templateUrl,
-  $inject: ['qlik', '$openApp', 'QlikVariablesService'],
+  $inject: ['$timeout', 'qlik', '$openApp', 'QlikVariablesService'],
   controller: class QuestionCompareComponent {
-     constructor(qlik, $openApp, QlikVariablesService){
+     constructor($timeout, qlik, $openApp, QlikVariablesService){
       'ngInject';
+      this.$timeout = $timeout;
       this.qlik = qlik;
       this.$openApp = $openApp;
       this.QlikVariablesService = QlikVariablesService;        
     }
 
     $onInit(){
+      if (window.scrollTo != null) window.scrollTo(0, 0);
       // google analytics
       gtag('event', 'screen_init', {
         'event_category': 'navigation',
         'event_label': 'AllQuestions'
       });
 
+      this.includeComparison = false;
       this.questionCollapsed = true;
       this.accordionsCollapsed = true;
       this.survey = '';
@@ -43,12 +46,12 @@ const QuestionCompareComponent = {
         });
       }
 
+
       // console.log($(".collapse"));
+      // $(".collapse").collapse();
       // $(".collapse").on('shown.bs.collapse', function(){
-      //   console.log("accordion shown", event);
+      //   console.log("accordion shown");
       // });
-
-
 
       // what's the latest year
       this.$openApp.variable.getContent('vCYTD', reply => {
@@ -170,8 +173,10 @@ const QuestionCompareComponent = {
       } else {
         this.accordionsCollapsed = true;
       }
+
+      this.$timeout(() => {console.log("here"); this.qlik.resize()}, 1000);
       
-      this.qlik.resize();
+      // this.qlik.resize();
     }
 
     onClickQuestionSelect(){
@@ -180,6 +185,10 @@ const QuestionCompareComponent = {
     }
 
     onClickAltSelectionsClose(){
+      this.qlik.resize();
+    }
+
+    onClickAltSelectionsOpen(){
       this.qlik.resize();
     }
   }
