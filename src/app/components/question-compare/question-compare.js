@@ -20,7 +20,7 @@ const QuestionCompareComponent = {
         'event_label': 'AllQuestions'
       });
 
-      this.includeComparison = false;
+      this.includeComparison = true;
       this.questionCollapsed = true;
       this.accordionsCollapsed = true;
       this.survey = '';
