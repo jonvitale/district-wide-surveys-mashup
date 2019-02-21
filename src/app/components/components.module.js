@@ -4,6 +4,7 @@ import { QuestionCompareModule } from './question-compare/question-compare';
 import { ResponseRateModule } from './response-rate/response-rate';
 import { TopicsModule } from './topics/topics';
 import { SurveyResourcesModule } from './survey-resources/survey-resources';
+import { TrackerModule } from './tracker/tracker';
 
 export const ComponentsModule = angular
   .module('components', [
@@ -13,5 +14,6 @@ export const ComponentsModule = angular
     ResponseRateModule,
     TopicsModule,
     SurveyResourcesModule,
+    TrackerModule,
   ])
   .name;

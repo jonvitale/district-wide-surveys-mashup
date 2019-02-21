@@ -63,8 +63,8 @@ const VariableSelectorComponent = {
   
     
     /**
-     * If there are governing fields and a governing state this will
-     * apply current selections to the governing fields in the governing state.
+     * If there are governing fields this will
+     * apply current selections to the governing fields.
      * Displayed values will then reflect possible fields with those selections made
      * If there is no governance, then we simply display all values. 
      * However, there may be explicitely removed values (hideValues)
@@ -75,7 +75,7 @@ const VariableSelectorComponent = {
       this.QlikVariablesService.getFieldValuesWithSelections(this.variableName, this.governingVariables).then(
         values => {
           this.displayed = true;
-          
+
           // get just selectable values, then determine if its the same as the previously selectableValues
           let selectableValues = [];
           for (let i = 0; i < values.length; i++){
@@ -83,7 +83,7 @@ const VariableSelectorComponent = {
               selectableValues.push(values[i].value);
             }
           }
-          
+
           // make sure values are not in hideValues
           // Note, this must come after selectableValues in case there are multiple open
           // variable-selection-panes on the page with different hidden values
@@ -98,27 +98,32 @@ const VariableSelectorComponent = {
           }
           this.values = values;
 
-
-          let selectableValuesUpdated = !angular.equals(selectableValues, this.selectableValues);
+          // let selectableValuesUpdated = !angular.equals(selectableValues, this.selectableValues);
 
           // console.log("----4. Get updated fields (", this.variableName, ")", this.currentValue);//, selectableValues, selectableValuesUpdated, values);
+          let pselectableValues = this.selectableValues;
           this.selectableValues = selectableValues;
 
           // if there are multiple values take the intersection of the selectable values and current values
           if (this.orientation == 'combo'){
-            // are there is an intersection of selectableValues on currentValues
-            let intersectingValues = [];
-            for (let i = 0; i < this.currentValues.length; i++){
-              if (selectableValues.indexOf(this.currentValues[i]) >= 0){
-                intersectingValues.push(this.currentValues[i]);
+            
+            // if a selectable value is either: New or existing and current, then make current
+            let currentValues = [];
+            
+            // get new values
+            for (let i = 0; i < this.selectableValues.length; i++){
+              if (!pselectableValues || pselectableValues.indexOf(this.selectableValues[i]) < 0) {
+                currentValues.push(this.selectableValues[i]);
               }
             }
-            if (intersectingValues.length > 0){
-              this.currentValues = intersectingValues
-            } else {
-              // default to all selectable values
-              this.currentValues = selectableValues;
-            }           
+            // get existing values if they are selected
+            for (let i = 0; i < this.currentValues.length; i++){
+              if (selectableValues.indexOf(this.currentValues[i]) >= 0){
+                currentValues.push(this.currentValues[i]);
+              }
+            }
+            
+            this.currentValues = currentValues;
           } else {
             // if the current value is not a selectable value
             // set the value to the first on the selectable list

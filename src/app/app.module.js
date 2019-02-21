@@ -38,6 +38,9 @@ export const AppModule = qlik => (
         .when('/topics', {
           template: '<topics></topics>'
         })
+        .when('/tracker', {
+          template: '<tracker></tracker>'
+        })
         .when('/survey-resources', {
           template: '<survey-resources></survey-resources>'
         })

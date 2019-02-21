@@ -1,7 +1,10 @@
 .main-nav {
 	z-index: 100;
 	a {
-		color: #fff !important;
+		color: #fff !important;	
+	}
+	a.standout {
+		color: #ffaa30 !important;
 	}
 	a:hover {
 		background-color: #2b416b;

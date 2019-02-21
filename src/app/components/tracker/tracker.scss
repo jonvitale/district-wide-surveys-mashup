@@ -1,0 +1,25 @@
+.tracker {
+	.instructions {
+		.kpi {
+			//box-shadow: 4px 4px 2px #CCCCCC;
+			width: calc(200px + 2rem);
+			color: #222;
+			background-color: #f0f0f8;
+			margin: 2px;
+			margin-bottom: 0.5rem;
+			padding: 0.5rem;
+		}
+		#kpi-Student {
+			background-color: rgba(71, 170, 216, 0.2);
+		}
+		#kpi-Parent {
+			background-color: rgba(57, 134, 53, 0.2);
+		}
+		#kpi-Teacher {
+			background-color: rgba(255, 170, 48, 0.2);
+		}
+		.qv-object-footnote {
+			text-align: center;
+		}
+	}	
+}

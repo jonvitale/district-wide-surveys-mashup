@@ -1,8 +1,3 @@
-html,
-body {
-  height: 100%;
-}
-
 .main {
   min-height: calc(100vh - 2em);
   margin: 0 auto -2em;
@@ -151,6 +146,105 @@ button.bg-sdp:focus {
   color: #fff;
   border-color: #0b315b;
   background-color: #0b315b;
+}
+.focus-questions .above-fold .instructions .text-block {
+  max-width: 40em;
+}
+
+.focus-questions .question-header {
+  width: 100%;
+  text-align: left;
+}
+
+.focus-questions .question-header .question-intro {
+  color: #888;
+}
+
+.focus-questions .question-header .question-response {
+  color: #888;
+  font-weight: bold;
+}
+
+.focus-questions .question-header .question-stem {
+  color: #888;
+}
+
+.focus-questions .question-text {
+  text-align: center;
+  font-style: oblique;
+  font-weight: bold;
+  color: #47aad8;
+  height: 3.2em;
+  min-width: 330px;
+  padding-left: 24px;
+}
+
+.focus-questions .kpi {
+  width: 320px;
+  padding-left: 24px;
+}
+
+.focus-questions .kpi .qv-object-content-container {
+  position: static !important;
+}
+
+.focus-questions .combo-chart .qv-object-content-container {
+  position: static !important;
+}
+.home .home-banner {
+  background: url("../img/headers/6.jpg") no-repeat right center;
+  background-size: cover;
+}
+
+.home .home-banner .home-gradient {
+  background: linear-gradient(60deg, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.1) 90%);
+}
+
+.home .home-banner .home-banner-title {
+  color: #EEE;
+  margin-top: 20px;
+  font-style: oblique;
+}
+
+.home .home-banner .home-banner-content {
+  color: white;
+  border-color: white;
+  margin-top: 200px;
+  margin-bottom: 100px;
+}
+
+.home .home-banner .home-banner-content hr {
+  border-color: white;
+  color: white;
+  background-color: white;
+}
+
+.home .home-content-block {
+  padding-top: 40px;
+  color: #555588;
+  background-color: #fff;
+}
+
+.home .home-content-block .card {
+  box-shadow: 4px 4px 2px #ccc;
+  border: none;
+  border-left: 1px solid #ddd;
+}
+
+.home .home-content-block .card a:hover {
+  text-decoration: none;
+}
+
+.home .home-content-block .card p {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.home .home-content-block .card:hover {
+  background-color: #F0F0FD;
 }
 .question-compare .accordion .text-block {
   max-width: 60em;
@@ -333,105 +427,6 @@ button.bg-sdp:focus {
 .question-compare #accordion .qv-object-content-container {
   position: static !important;
 }
-.focus-questions .above-fold .instructions .text-block {
-  max-width: 40em;
-}
-
-.focus-questions .question-header {
-  width: 100%;
-  text-align: left;
-}
-
-.focus-questions .question-header .question-intro {
-  color: #888;
-}
-
-.focus-questions .question-header .question-response {
-  color: #888;
-  font-weight: bold;
-}
-
-.focus-questions .question-header .question-stem {
-  color: #888;
-}
-
-.focus-questions .question-text {
-  text-align: center;
-  font-style: oblique;
-  font-weight: bold;
-  color: #47aad8;
-  height: 3.2em;
-  min-width: 330px;
-  padding-left: 24px;
-}
-
-.focus-questions .kpi {
-  width: 320px;
-  padding-left: 24px;
-}
-
-.focus-questions .kpi .qv-object-content-container {
-  position: static !important;
-}
-
-.focus-questions .combo-chart .qv-object-content-container {
-  position: static !important;
-}
-.home .home-banner {
-  background: url("../img/headers/6.jpg") no-repeat right center;
-  background-size: cover;
-}
-
-.home .home-banner .home-gradient {
-  background: linear-gradient(60deg, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.1) 90%);
-}
-
-.home .home-banner .home-banner-title {
-  color: #EEE;
-  margin-top: 20px;
-  font-style: oblique;
-}
-
-.home .home-banner .home-banner-content {
-  color: white;
-  border-color: white;
-  margin-top: 200px;
-  margin-bottom: 100px;
-}
-
-.home .home-banner .home-banner-content hr {
-  border-color: white;
-  color: white;
-  background-color: white;
-}
-
-.home .home-content-block {
-  padding-top: 40px;
-  color: #555588;
-  background-color: #fff;
-}
-
-.home .home-content-block .card {
-  box-shadow: 4px 4px 2px #ccc;
-  border: none;
-  border-left: 1px solid #ddd;
-}
-
-.home .home-content-block .card a:hover {
-  text-decoration: none;
-}
-
-.home .home-content-block .card p {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.home .home-content-block .card:hover {
-  background-color: #F0F0FD;
-}
 .response-rate .instructions .kpi {
   width: calc(200px + 2rem);
   color: #222;
@@ -495,6 +490,30 @@ button.bg-sdp:focus {
   background-color: #fff;
   border-color: #fff;
 }
+.tracker .instructions .kpi {
+  width: calc(200px + 2rem);
+  color: #222;
+  background-color: #f0f0f8;
+  margin: 2px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+}
+
+.tracker .instructions #kpi-Student {
+  background-color: rgba(71,170,216,0.2);
+}
+
+.tracker .instructions #kpi-Parent {
+  background-color: rgba(57,134,53,0.2);
+}
+
+.tracker .instructions #kpi-Teacher {
+  background-color: rgba(255,170,48,0.2);
+}
+
+.tracker .instructions .qv-object-footnote {
+  text-align: center;
+}
 .filter-pane .filter-header {
   background-color: #398635;
 }
@@ -545,12 +564,17 @@ button.bg-sdp:focus {
 .filter-pane #collapseMainFilter {
   background-color: #fff;
 }
+
 .main-nav {
   z-index: 100;
 }
 
 .main-nav a {
   color: #fff !important;
+}
+
+.main-nav a.standout {
+  color: #ffaa30 !important;
 }
 
 .main-nav a:hover {
@@ -571,7 +595,6 @@ button.bg-sdp:focus {
   border-bottom-style: solid;
   max-width: 12em;
 }
-
 .sdp-footer {
   position: relative;
   height: 5em;

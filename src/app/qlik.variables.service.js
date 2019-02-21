@@ -6,6 +6,7 @@ export class QlikVariablesService {
     this.variableObserverCallbacks = {};    
     this.table = null;
     this.initializing = true;
+    this.trackerStatus = null;
  		// let fieldNames = ['Survey', 'Construct', 'SubConstruct', 'QuestionText'];
  		this.variables = {
 
@@ -54,13 +55,26 @@ export class QlikVariablesService {
     this.fieldToVariable = {};
 
     // initialize each variable, set status and initial value
-    for (let variableName in this.variables){
+    for (let variableName in this.variables) {
       this.variables[variableName].status = "loading";
       let field = this.variables[variableName].sourceField;
       fieldNames.push(field);
       this.fieldToVariable[field] = variableName;
       this.getVariableValue(variableName);
     }
+
+    // for each variable determine which variables it is governing (we call these dependents)
+    for (let variableName in this.variables) {
+      this.variables[variableName].dependents = [];
+    }
+    
+    for (let variableName in this.variables) {
+      for (let gi = 0; gi < this.variables[variableName].governingVariables.length; gi++) {
+        let gvariableName = this.variables[variableName].governingVariables[gi];
+        this.variables[gvariableName].dependents.push(variableName);
+      }
+    }
+
     // add _CYTD_Flag to ensure that we are always using up to date data
     this.variables['_CYTD_Flag'] = {
       variableName: '_CYTD_Flag',
@@ -103,7 +117,27 @@ export class QlikVariablesService {
 			console.log("Question Table Initialized!!!!", this.table);
 		});
 
+  }
 
+  /**
+   * Stores the current state of the tracker. If the tracker is
+   * not working returns an empty string. If parents and students
+   * are working returns 'ps'. If all are working returns 'pst'
+   * @return {Promise<string>} one of 'ps', 'pst', ''
+   */
+  getTrackerStatus() {    
+    return new Promise((resolve, reject) => {
+      if (this.trackerStatus != null) {
+        resolve(this.trackerStatus);
+      } else {
+        this.$openApp.variable.getContent('vTrackerStatus', reply => {
+          let value = reply.qContent.qString;
+          this.trackerStatus = value; 
+          resolve(value);
+        }, error => reject(error)
+        )        
+      }
+    });
   }
 
   getVariableDetails(variableName){
@@ -141,11 +175,9 @@ export class QlikVariablesService {
               reject(variableName, "not set");
             });
           } else {
-            // if not from qlik set as blank
+            // combos need arrays
             if (this.variables[variableName]['orientation'] == 'combo'){
-              // we keep the status as loading because we need to make sure all
-              // selections are set before we load in all possibilites
-              this.variables[variableName]['status'] = 'loading'; 
+              this.variables[variableName]['status'] = 'loaded'; 
               this.variables[variableName]['currentValue'] = [];      
               resolve([]);
             } else {
@@ -171,7 +203,7 @@ export class QlikVariablesService {
    * @param {string} variableName The name of a string or int variable
    * @param {string} value        The value to set the current value to.
    */
-  setVariableValue(variableName, value){
+  setVariableValue(variableName, value) {
     //console.log("????qlik service - setVariableValue--", variableName, value);
   	return new Promise( (resolve, reject) => {
       // if this variable comes from Qlik set it there
@@ -180,6 +212,7 @@ export class QlikVariablesService {
     			success => {
             this.variables[variableName]['status'] = 'loaded';
     				this.variables[variableName]['currentValue'] = value;
+            this.setNonQlikDependentsToLoading(variableName);
     				this.notifyVariableObservers(variableName);
           	resolve(value);
           },
@@ -191,11 +224,29 @@ export class QlikVariablesService {
       } else {
         this.variables[variableName]['status'] = 'loaded';
         this.variables[variableName]['currentValue'] = value;
+        this.setNonQlikDependentsToLoading(variableName);
         this.notifyVariableObservers(variableName);
         resolve(value);
       }	    	
     });
   }
+ 
+     /*
+       For variables that are not being taken directly from qlik, they will need to 
+       be adjusted if governing variables change, thus their status should be set to "loading"
+       For example, if the default sub-construct of a survey is based upon the chosen construct
+       When the construct changes, the sub-construct must load up all the new possibilities to 
+       select a default.
+      */
+      setNonQlikDependentsToLoading(variableName) {
+        for (let di = 0; di < this.variables[variableName].dependents.length; di++) {
+         let dvariableName = this.variables[variableName].dependents[di];
+         if (!this.variables[dvariableName].useQlik) {
+          this.variables[dvariableName].status = 'loading';
+          this.variables[dvariableName].currentValue = [];
+         }       
+       }
+     }
 
   /**
    * For an array variable will either add the value to the current array, or if it already exists
@@ -205,8 +256,7 @@ export class QlikVariablesService {
    * @param {string} value        The value to add or remove from the current values array.
    */
   toggleVariableValueInArray(variableName, value){
-    return new Promise( (resolve, reject) => {
-     
+    return new Promise( (resolve, reject) => {     
       let variable = this.variables[variableName];
       // if the currentValue is not an array we pass this along to set
       if (angular.isArray(variable.currentValue)){
@@ -221,7 +271,11 @@ export class QlikVariablesService {
               for (let i = 0; i < values.length; i++){
                 if (values[i].selectable) selectableValues.push(values[i].value);
               }
+              
               this.variables[variableName]['currentValue'] = selectableValues;
+              // note, we are loading this here, but if there are any changes to governing
+              // variables, this will need to be reset
+              this.variables[variableName].status = 'loaded';
               resolve(this._toggleVariableValueInArray(variableName, value));
             },
             error => reject(error)
@@ -281,8 +335,8 @@ export class QlikVariablesService {
     });
   }
 
-    _getFieldValuesWithSelections(targetVariable, selectionVariables){  
-      function onlyUnique(value, index, self){ 
+    _getFieldValuesWithSelections(targetVariable, selectionVariables) {  
+      function onlyUnique(value, index, self) { 
         return self.indexOf(value) === index && value != '-' && 
             value != 'no construct/subconstruct assigned';
       }
@@ -336,6 +390,7 @@ export class QlikVariablesService {
         }
       }
 
+
       // reduce table based on selectionVariables
       // if selections are null, assume that all variables are possible
       if (selections == null){
@@ -381,7 +436,7 @@ export class QlikVariablesService {
         
         // get a list of unique selectable target values
         let selectableValues = [];
-        for (let i = 0; i < indicesToKeep.length; i++){       
+        for (let i = 0; i < indicesToKeep.length; i++){   
           let index = indicesToKeep[i]
           let value = _table[targetField][index];
           // is this value already in selectableValues?
