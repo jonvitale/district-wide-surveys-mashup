@@ -22,4 +22,12 @@
 			text-align: center;
 		}
 	}	
+	.qv-grid-object-scroll-area {
+    // overflow-y: auto!important;
+	}
+	.qv-object-content-container {
+    position: static !important;
+  }
+
+
 }

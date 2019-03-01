@@ -514,6 +514,10 @@ button.bg-sdp:focus {
 .tracker .instructions .qv-object-footnote {
   text-align: center;
 }
+
+.tracker .qv-object-content-container {
+  position: static !important;
+}
 .filter-pane .filter-header {
   background-color: #398635;
 }
@@ -564,7 +568,6 @@ button.bg-sdp:focus {
 .filter-pane #collapseMainFilter {
   background-color: #fff;
 }
-
 .main-nav {
   z-index: 100;
 }

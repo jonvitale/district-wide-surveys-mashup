@@ -70,6 +70,11 @@ const TrackerComponent = {
         this.teacherResponsesCYTD = reply.qContent.qString;
       });
     }  
+
+    onClickAccordion() {
+      console.log("resize")
+      this.qlik.resize();
+    }
   }
 }
 
