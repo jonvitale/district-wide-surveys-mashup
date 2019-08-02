@@ -12,9 +12,16 @@ const TrackerComponent = {
       this.qlik = qlik;
       this.$openApp = $openApp;   
       this.QlikVariablesService = QlikVariablesService;
+      this.afterMay31 = true;
     }
 
     $onInit(){
+       // google analytics
+      gtag('event', 'screen_init', {
+        'event_category': 'navigation',
+        'event_label': 'Tracker'
+      });
+
       this.qlikIds = {
         'Student': {
           kpi: "RAfuLTN",
@@ -71,9 +78,14 @@ const TrackerComponent = {
       });
     }  
 
-    onClickAccordion() {
-      console.log("resize")
+    onClickAccordion(evt) {
       this.qlik.resize();
+      if (evt.currentTarget.className.includes("collapsed")){
+        gtag('event', 'accordion-open', {
+          'event_category': 'view-content',
+          'event_label': 'Tracker-' + evt.currentTarget.id
+        });
+      } 
     }
   }
 }

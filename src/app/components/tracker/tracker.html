@@ -9,19 +9,25 @@
 	      <div class="instructions">     
 	        <div class="row">
 	          <div class="col col-lg-6 text-block"> 
-	            <h2 class="header"> How many people responded to the surveys so far in 2018-2019? </h2>	
-	            <p class="body">         
-                Since data collection for the {{$ctrl.EYTD}} school year began, we have received   
-                <span class="font-weight-bold">{{$ctrl.studentResponsesCYTD}} student </span> (grades 3 - 12)
-                <span ng-if="$ctrl.showTeacher"> , </span>
-                <span ng-if="!$ctrl.showTeacher"> and </span>
-                <span class="font-weight-bold">{{$ctrl.parentResponsesCYTD}} parent </span>
-                <span ng-if="$ctrl.showTeacher"> and
+	            <h2 class="header"> How many people responded to the surveys so far in {{$ctrl.EYTD}}? </h2>	
+	            <p class="body">     
+                Since data collection for the {{$ctrl.EYTD}} school year began, we have received    
+                <span class="font-weight-bold">{{$ctrl.studentResponsesCYTD}} student</span> 
+                (grades 3 - 12)
+                <span ng-if="$ctrl.showTeacher" style="margin-left:-4px;">, </span>
+                <span ng-if="!$ctrl.showTeacher">and</span>
+                <span class="font-weight-bold">{{$ctrl.parentResponsesCYTD}} parent</span>
+                <span ng-if="$ctrl.showTeacher" style="margin-left:-4px;">, and
                   <span class="font-weight-bold">{{$ctrl.teacherResponsesCYTD}} teacher</span>
                 </span> survey responses from district and charter schools across Philadelphia.
               </p>
               <p class="body">
-                Response rates are based on {{$ctrl.reloadDate}} enrollment data. Final response rates will be calculated based on May 31st enrollment data.
+                <span ng-if="$ctrl.afterMay31">
+                  Response rates are based on survey data collected through {{$ctrl.reloadDate}} and May 31st enrollment.
+                </span>
+                <span ng-if="!$ctrl.afterMay31">
+                  Response rates reflect the number of surveys completed through {{$ctrl.reloadDate}} out of the May 31st enrollment count.
+                </span>
               </p>
               <p class="body">Data is updated daily.</p>
             </div>
@@ -48,7 +54,7 @@
     <section>
       <div class="row">
         <div class="col">
-          <qlik-object obj-id="{{$ctrl.tableId}}" height="600px" width="95%"></qlik-object>
+          <qlik-object id="table" obj-id="{{$ctrl.tableId}}" height="600px" width="95%"></qlik-object>
         </div>
       </div>          
     </section>

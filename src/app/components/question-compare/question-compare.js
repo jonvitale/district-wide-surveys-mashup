@@ -46,19 +46,21 @@ const QuestionCompareComponent = {
         });
       }
 
-
-      // console.log($(".collapse"));
-      // $(".collapse").collapse();
-      // $(".collapse").on('shown.bs.collapse', function(){
-      //   console.log("accordion shown");
-      // });
-
       // what's the latest year
       this.$openApp.variable.getContent('vCYTD', reply => {
         this.CYTD = reply.qContent.qString;
       });
+      // previous year
+      this.$openApp.variable.getContent('vPYTD', reply => {
+        this.PYTD = reply.qContent.qString;
+      });
 
-      // constants
+      // constants, need to update manually
+      this.numQuestionsStudent = 90;
+      this.numQuestionsParent = 70;
+      this.numQuestionsTeacher = 190;
+      this.numQuestionsPrincipal = 170;
+      /*
       this.$openApp.variable.getContent('vCount_Questions_Student_CYTD', reply => {
         this.numQuestionsStudent = reply.qContent.qString;
       });
@@ -71,7 +73,7 @@ const QuestionCompareComponent = {
       this.$openApp.variable.getContent('vCount_Questions_Principal_CYTD', reply => {
         this.numQuestionsPrincipal = reply.qContent.qString;
       });
-
+      */
 
       // question-related variables
       this.QlikVariablesService.getVariableValue('vSurvey_Selected').then(value => {

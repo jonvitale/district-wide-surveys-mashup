@@ -1,4 +1,18 @@
 .filter-pane {
+	.current-selections {			
+		.qv-panel-current-selections {
+			background-color: #398635;
+			height: 100% !important;
+			//display: inline;
+		}
+		.buttons {
+			display: none;
+		}
+		.buttons-end {
+			display: none;
+		}
+	}
+
 	.filter-header {
 		background-color: #398635;
 		//display: flex;
@@ -30,18 +44,14 @@
 			content: 'Select schools' !important;
 		}
 
-		.current-selections {			
-			.qv-panel-current-selections {
-				background-color: #398635;
-				height: 100% !important;
-				//display: inline;
-			}
-			.buttons {
-				display: none;
-			}
-			.buttons-end {
-				display: none;
-			}
+		.text-show-hide span {
+		  display: none !important;
+		}
+		.text-show-hide:before {
+		  content: "Hide" !important;
+		}
+		.collapsed .text-show-hide:before {
+		  content: "Show" !important;
 		}
 	}
 

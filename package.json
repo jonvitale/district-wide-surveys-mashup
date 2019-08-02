@@ -33,6 +33,7 @@
     "angular-touch": "1.5.8",
     "bootstrap": "^4.0.0",
     "jquery": "^3.3.1",
+    "natives": "^1.1.6",
     "popper.js": "^1.14.1",
     "user-home": "^2.0.0"
   }

@@ -16,6 +16,7 @@ const FilterPaneComponent = {
     }
 
     $onInit(){
+      this.showCurrent = false;
       this.height = "100px";
       this.survey = 'Student';
       this.useDemos = true;
@@ -58,6 +59,10 @@ const FilterPaneComponent = {
       
       this.$timeout(() => {this.qlik.resize()}, 100);
       if (this.onClickHeader != null) this.onClickHeader();
+    }
+
+    onClickCurrent() {
+      this.showCurrent = !this.showCurrent;
     }
   }
 };

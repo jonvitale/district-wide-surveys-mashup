@@ -22,12 +22,19 @@
 			text-align: center;
 		}
 	}	
-	.qv-grid-object-scroll-area {
-    // overflow-y: auto!important;
+	#table {
+		.scrollbar-track {
+			opacity: 1 !important;
+	    margin-left: 3px;
+		}
+
+		.qv-grid-object-scroll-area {
+	    // overflow-y: auto!important;
+		}
+		.qv-object-content-container {
+	    // position: static !important;
+	  }
 	}
-	.qv-object-content-container {
-    position: static !important;
-  }
 
 
 }

@@ -62,6 +62,7 @@ export class QlikVariablesService {
       this.fieldToVariable[field] = variableName;
       this.getVariableValue(variableName);
     }
+    //fieldNames.push("SequenceNumber");
 
     // for each variable determine which variables it is governing (we call these dependents)
     for (let variableName in this.variables) {
@@ -86,6 +87,8 @@ export class QlikVariablesService {
  		let qTable = this.$openApp.createTable(fieldNames, ["Max(_CYTD_Flag)"], {rows:2000});
 		qTable.OnData.bind(() => {
 			qTable.OnData.unbind();
+      // console.log("qtable", qTable);
+      // debugger;
 			this.initializing = false;
 			let table = {};
 			// loop through rows of the qTable to populate a static table

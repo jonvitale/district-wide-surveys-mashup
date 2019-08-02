@@ -52,7 +52,7 @@
             <div class="card-body">
               <div class="instructions">
                 <p class="text-block pr-3">
-                   Select a respondent group and topic to view the average topic score by school on the map. You can zoom or scroll the area of the map
+                   Select a respondent group and topic to view the average topic score by school on the map for {{$ctrl.CYTD}}. You can zoom or scroll the area of the map.
                 </p>
               </div>
               <variable-selection-pane  orient-survey="horiz" orient-construct="horiz" constructs-hidden="['Other']" surveys-hidden="['Principal']"></variable-selection-pane> 
@@ -77,7 +77,7 @@
             <div class="card-body">
               <div class="instructions">
                 <p class="text-block pr-3">
-                  Select a respondent group and topic to view the average topic score by network. If a network is selected, schools within that network will be displayed. If a school is selected, grades may be displayed.
+                  Select a respondent group and topic to view the average topic score by network. Bars display averages for {{$ctrl.CYTD}}. Circles display averages for {{$ctrl.PYTD}}. Each bar and circle represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
                 </p>
               </div>
               <variable-selection-pane  orient-survey="horiz" orient-construct="horiz" constructs-hidden="['Other']"></variable-selection-pane> 

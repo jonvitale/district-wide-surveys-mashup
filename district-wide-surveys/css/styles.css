@@ -515,9 +515,23 @@ button.bg-sdp:focus {
   text-align: center;
 }
 
-.tracker .qv-object-content-container {
-  position: static !important;
+.tracker #table .scrollbar-track {
+  opacity: 1 !important;
+  margin-left: 3px;
 }
+.filter-pane .current-selections .qv-panel-current-selections {
+  background-color: #398635;
+  height: 100% !important;
+}
+
+.filter-pane .current-selections .buttons {
+  display: none;
+}
+
+.filter-pane .current-selections .buttons-end {
+  display: none;
+}
+
 .filter-pane .filter-header {
   background-color: #398635;
 }
@@ -552,17 +566,16 @@ button.bg-sdp:focus {
   content: 'Select schools' !important;
 }
 
-.filter-pane .filter-header .current-selections .qv-panel-current-selections {
-  background-color: #398635;
-  height: 100% !important;
+.filter-pane .filter-header .text-show-hide span {
+  display: none !important;
 }
 
-.filter-pane .filter-header .current-selections .buttons {
-  display: none;
+.filter-pane .filter-header .text-show-hide:before {
+  content: "Hide" !important;
 }
 
-.filter-pane .filter-header .current-selections .buttons-end {
-  display: none;
+.filter-pane .filter-header .collapsed .text-show-hide:before {
+  content: "Show" !important;
 }
 
 .filter-pane #collapseMainFilter {
@@ -693,7 +706,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 @-ms-viewport {

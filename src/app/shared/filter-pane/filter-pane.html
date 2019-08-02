@@ -1,14 +1,18 @@
 <div class="filter-pane">
-	<div class="filter-header">
-		<div class="d-flex flex-wrap">
+	<div class="filter-header">		
+		<div class="d-flex justify-content-between">
 			<button class="btn collapsed ml-3" data-toggle="collapse" data-target="#collapseMainFilter" aria-expanded="false" aria-controls="collapseMainFilter" ng-click="$ctrl.onClickFilterHeader();">
         <img src="img/icons/filters-light.png">
         <span ng-if="$ctrl.useDemos" class="text-demo"></span>
         <span ng-if="!$ctrl.useDemos" class="text-nondemo"></span>
       </button>
-			<span id="CurrentSelections" class="current-selections"></span>
+      <button class="btn ml-3" data-toggle="collapse" data-target="#CurrentSelections" aria-expanded="true" aria-controls="CurrentSelections">
+      	<span class="text-show-hide">&nbsp;current selections</span>
+      </button>
 		</div>
+		
 	</div>
+	<div id="CurrentSelections" class="current-selections collapse show" aria-labelledby="headingCurrentFilter"></div>
 	<div class="row">
 		<div class="col">
 			<div id="collapseMainFilter" class="collapse" aria-labelledby="headingMainFilter" data-parent="#filter-pane">
