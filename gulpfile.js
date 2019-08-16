@@ -1,4 +1,5 @@
 const gulp = require('gulp')
+const log = require('fancy-log')
 const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
 const browserify = require('browserify')
@@ -16,6 +17,8 @@ const project = 'district-wide-surveys';
 const userHome = require("user-home");
 const extensionpath = userHome + "\\Documents\\Qlik\\Sense\\Extensions";
 const base = '';
+
+log(userHome);
 
 gulp.task('qext', function(){
     gulp.src('./src/project.qext')

@@ -23,6 +23,15 @@ const TopicsComponent = {
 
       this.accordionsCollapsed = true;
       
+      // what's the latest year
+      this.$openApp.variable.getContent('vCYTD', reply => {
+        this.CYTD = reply.qContent.qString;
+      });
+      // previous year
+      this.$openApp.variable.getContent('vPYTD', reply => {
+        this.PYTD = reply.qContent.qString;
+      });
+      
       // get initial value of construct, if "Other" set to "School Climate"
       this.QlikVariablesService.getVariableValue('vConstruct_Selected').then(value => {
         this.construct_selected = value;

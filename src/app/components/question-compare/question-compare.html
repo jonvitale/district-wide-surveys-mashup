@@ -62,15 +62,17 @@
         <div class="instructions">     
           <div class="d-flex flex-wrap"> 
             <div class="text-block">
-              <h2 class="header"> How were all questions answered? </h2>
+              <h2 class="header"> How was each question answered? </h2>
               <p class="body">
-                The Philadelphia School Surveys include approximately <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
+                The District-Wide Survey includes approximately <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
                 <strong>{{$ctrl.numQuestionsTeacher}} teacher </strong> questions, and
-                <strong>{{$ctrl.numQuestionsPrincipal}} principal </strong> questions. On this page you can view responses to the questions.
+                <strong>{{$ctrl.numQuestionsPrincipal}} principal </strong> questions. On this page you can view aggregated responses to each of these questions. For a list of all questions included on the 2019 surveys, visit 
+                <a href="https://www.philasd.org/research/programsservices/district-wide-surveys/allquestions/">the Survey Questions website</a>.
                 <br><br>
-                Click the button <span style="background-color:#47aad8; color:#fff; border-radius:4px; border-style:thin; border-color:#808000;padding:2px;">&nbsp;Select a new question&nbsp;</span> to choose a question by the type of respondent, the overall topic, and sub-topics. The chart displays the % of respondents who selected each of the possible responses (bars for {{$ctrl.CYTD}}, circles for {{$ctrl.PYTD}}). Blue bars and circles represent the "most positive" response, while red bars and circles represent the "least positive" response. You may hover over a bar to get the full response text.
+                Click the button, "<span style="background-color:#47aad8; color:#fff; border-radius:4px; border-style:thin; border-color:#808000;padding:2px;">⊕ Select a new question</span>" 
+                to view questions based on respondent type, topic, and sub-topics. After choosing a question, the chart at right displays the % of respondents who selected each possible response (bars display data for {{$ctrl.CYTD}} while circles show the same data {{$ctrl.PYTD}}). Blue bars and circles represent the "most positive" response, while red bars and circles represent the "least positive" response. You may hover over a bar to see the numbers for each year.
                 <br><br>
-                In the tabs below you can <span ng-if="$ctrl.includeComparison">compare two different groups of respondents or</span> compare schools by location and year.
+                In the blue ribbons below you can compare responses to specific questions <span ng-if="$ctrl.includeComparison">by respondent charecteristics,&nbsp; </span> by locatation, or across networks and schools.
               </p>
             </div>
             <div ng-if="$ctrl.accordionsCollapsed" class="vis-block" style="max-width:400px">
@@ -118,7 +120,7 @@
               <div class="instructions">     
                 <div class="d-flex flex-wrap"> 
                   <p class="text-block pr-3">
-                    Compare your selected schools or groups of respondents with another group. The selection you've made from the green bar above are displayed on the left graph. Choose comparison groups from the panel on the right. These respondents' responses will display on the right-hand chart.
+                    Compare your selected schools or groups of respondents with another group. The selections you've made from the green bar above are displayed on the left graph. Choose comparison groups from the panel on the right. These respondents' responses will display on the right-hand chart.
                   </p>
                   <div>
                     <button class="btn" data-toggle="modal" data-target="#questionPicker">
@@ -256,7 +258,7 @@
             <h5 class="mb-0">
               <button class="btn collapsed" id="headingYOY" data-toggle="collapse" data-target="#collapseYOY" aria-expanded="false" aria-controls="collapseYOY" ng-click="$ctrl.onClickAccordion($event)">
                 <div class="d-flex justify-content-between">
-                  <span class="symbol">&nbsp; Yearly Change</span>
+                  <span class="symbol">&nbsp; Yearly Change by Network and School</span>
                   <img class="icon" src="img/icons/icon-yoy.png"> 
                 </div>
               </button>            
@@ -267,7 +269,7 @@
               <div class="instructions">     
                 <div class="d-flex flex-wrap"> 
                   <p class="text-block pr-3">
-                    The following chart displays the average "% most positive" scores by network or school. This is the average % of questions in which respondents selected the "most positive" response (such as "strongly agree"). Bars display "% most positive" in {{$ctrl.CYTD}}. Circles display "% most positive" in {{$ctrl.PYTD}}. Each bar and circle represents a learning network. You can click on a network to see all schools in that network. In some cases you may click on a school to show grade levels in that school.
+                    The following chart displays the average "% most positive" scores by network or school. This is the average % of questions in which respondents selected the "most positive" response (such as "strongly agree"). Bars display "% most positive" in {{$ctrl.CYTD}}. Circles display "% most positive" in {{$ctrl.PYTD}}. Each bar and circle represents a learning network. You can click on a network to see all schools in that network. For Student and Parent questions you may click on a school to show grade levels in that school.
                   </p>
                   <div>
                     <button class="btn" data-toggle="modal" data-target="#questionPicker">

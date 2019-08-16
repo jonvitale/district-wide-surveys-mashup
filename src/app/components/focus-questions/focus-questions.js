@@ -46,9 +46,9 @@ const FocusQuestionsComponent = {
           {kpi: "nLvTP", comboChart:"NnQURGd",
             nlines:1, title: "My school is helping to prepare me for college."},
           {kpi: "VVnuMSj", comboChart:"vTjs",
-            nlines:2, title:"I am learning skills in school that will help me when I am older. "},
+            nlines:2, title:"I am learning skills in school that will help me when I am older."},
           {kpi: "hMdjgP", comboChart:"JcdAcx",
-            nlines:1, title:"I am learning skills in school that can help me make my community better."},
+            nlines:1, title:"In school I learn about a lot of different careers."},
         ],
         "AG2": [
           {kpi: "HnXjwp", comboChart:"FmUmHB",
@@ -62,7 +62,7 @@ const FocusQuestionsComponent = {
           {kpi: "NNZBNrb", comboChart:"XPnvme",
             nlines:2, title:"My teachers explain information in a way I understand."},
           {kpi: "QJFds", comboChart:"qtCqfM",
-            nlines:2, title:"My teachers have high expectations for me in school."},
+            nlines:2, title:"I can talk with teachers or other school staff about problems."},
           {kpi: "YGfjEg", comboChart:"XfPpVFW",
             nlines:2, title:"My teachers encourage me to work hard."},
         ]
