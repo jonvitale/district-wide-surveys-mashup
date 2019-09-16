@@ -4,6 +4,7 @@ import { QlikObjectModule } from './qlik-object/qlik-object';
 import { RouteCardModule } from './route-card/route-card';
 import { VariableSelectionPaneModule } from './variable-selection-pane/variable-selection-pane';
 import { VariableSelectorModule } from './variable-selector/variable-selector';
+import { SimpleSelectorModule } from './simple-selector/simple-selector';
 import { SdpFooterModule } from './sdp-footer/sdp-footer';
 
 export const SharedModule = angular
@@ -14,6 +15,7 @@ export const SharedModule = angular
     FilterPaneModule,
     VariableSelectionPaneModule,
     VariableSelectorModule,
+    SimpleSelectorModule,
     SdpFooterModule,
   ])
   .name;

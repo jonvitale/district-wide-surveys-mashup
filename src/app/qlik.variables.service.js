@@ -1,5 +1,49 @@
+
+/** Functions applicable class-wide */
+const getUniqueValues = function(value, index, self) { 
+  return self.indexOf(value) === index && value != '-' && 
+      value != 'no construct/subconstruct assigned';
+}
+
+/** For an array, returns a map with each distinct array value as a key, and count as a value */
+const getValueCountObj = values => {
+  return values.reduce( function(acc, curr){
+    acc[curr] = typeof acc[curr] == 'undefined' ? 1 : acc[curr] + 1
+    return acc;
+  }, {});
+}
+
+const getSortedFieldValues = (values, sortOrder) => {
+  if (sortOrder != null){
+    // count each value in the values
+    const valueCounts = getValueCountObj(values);
+
+    let sortedKeys = [];
+    let sortedValues = [];
+    let value = null;
+    let valueArr =  [];
+    for (let i = 0; i < sortOrder.length; i++){
+      value = sortOrder[i];
+      sortedKeys.push(value);
+      valueArr = typeof valueCounts[value] === 'number' ? 
+        new Array(valueCounts[value]).fill(value) : [];
+      sortedValues = sortedValues.concat(valueArr);
+    }
+    // add on any values that we haven't added yet
+    for (let key in valueCounts){
+      if (sortedKeys.indexOf(key) == -1){
+        sortedValues = sortedValues.concat(new Array(valueCounts[key]).fill(key));
+      }
+    }
+    return sortedValues;
+  } else {
+    return values;
+  }
+}
+
 export class QlikVariablesService {
-	constructor(qlik, $openApp){
+   
+  constructor(qlik, $openApp){
     'ngInject';
     this.$openApp = $openApp;
     //this.variables = {};
@@ -21,6 +65,17 @@ export class QlikVariablesService {
         sortOrder: ['Student', 'Teacher', 'Parent', 'Principal'],
         useQlik: true,
       },
+      'vTopic_Selected': {
+        variableName: 'vTopic_Selected',
+        variableLabel: 'Topic',
+        //sourceField: 'Construct',
+        sourceArray: ['All Topics', 'Instruction', 'School Climate', 'Parent/Guardian-Community Ties', 'School Leadership', 'Professional Capacity'],
+        cssClass: 'construct',
+        governingVariables: [],
+        orientation: 'horiz', 
+        sortOrder: ['All Topics', 'Instruction', 'School Climate', 'Parent/Guardian-Community Ties', 'School Leadership', 'Professional Capacity'],
+        useQlik: true,
+      },
       'vConstruct_Selected': {
         variableName: 'vConstruct_Selected',
         variableLabel: 'Topic',
@@ -28,7 +83,7 @@ export class QlikVariablesService {
         cssClass: 'construct',
         governingVariables: ['vSurvey_Selected'],
         orientation: 'horiz', 
-        sortOrder: ['School Climate', 'Instruction', 'Parent/Guardian-Community Ties', 'School Leadership', 'Professional Capacity', 'Other'],
+        sortOrder: ['Instruction', 'School Climate', 'Parent/Guardian-Community Ties', 'School Leadership', 'Professional Capacity', 'Other'],
         useQlik: true,
       },
       'vSubConstruct_Selected': {
@@ -50,16 +105,18 @@ export class QlikVariablesService {
         useQlik: true,
       }
  		};
-
+     
     let fieldNames = [];
     this.fieldToVariable = {};
 
     // initialize each variable, set status and initial value
     for (let variableName in this.variables) {
       this.variables[variableName].status = "loading";
-      let field = this.variables[variableName].sourceField;
-      fieldNames.push(field);
-      this.fieldToVariable[field] = variableName;
+      if (this.variables[variableName].sourceField != null && this.variables[variableName].sourceField.length > 0) {
+        let field = this.variables[variableName].sourceField;
+        fieldNames.push(field);
+        this.fieldToVariable[field] = variableName;
+      }      
       this.getVariableValue(variableName);
     }
     //fieldNames.push("SequenceNumber");
@@ -89,35 +146,32 @@ export class QlikVariablesService {
 			qTable.OnData.unbind();
       // console.log("qtable", qTable);
       // debugger;
-			this.initializing = false;
 			let table = {};
+      let dimNames = [];
+      let dimValues = [];
+      let measures = [];
 			// loop through rows of the qTable to populate a static table
 			for (let i = 0; i < qTable.rows.length; i++){
-				let dims = qTable.rows[i].dimensions;
-				let measures = qTable.rows[i].measures
-				let valid = true;
-				// loop through any measures and make sure they are all 1
-				for (let j = 0; j < measures.length; j++){
-					if (measures[j].qNum != 1){
-						valid = false;
-						break;
-					}
-				}
-				// make sure that the first measure is 1
-				if (valid){
+        dimNames = qTable.rows[i].dimensions.map(dimObj => dimObj.qDimensionInfo.qFallbackTitle);
+				dimValues = qTable.rows[i].dimensions.map(dimObj => dimObj.qText);
+				measures = qTable.rows[i].measures.map(measureObj => measureObj.qNum);
+        
+        // the sum of all values of the measures (which are 1 or 0) should equal the length
+        if (measures.length == measures.reduce((acc, val) => acc+val, 0)){
 					// loop through each dim adding to table
-					for (let j = 0; j < dims.length; j++){
-						let dimName = dims[j].qDimensionInfo.qFallbackTitle;
+					for (let j = 0; j < dimNames.length; j++){
+						let dimName = dimNames[j];
 						// if this field name has not been defined yet, do so
 						if (table[dimName] == null){
 							table[dimName] = [];
 						}	
-						table[dimName].push(dims[j].qText);
+						table[dimName].push(dimValues[j]);
 					}
 				}
 			}
 			this.table = table;
-			console.log("Question Table Initialized!!!!", this.table);
+			this.initializing = false;
+      console.log("Question Table Initialized!!!!", this.table);
 		});
 
   }
@@ -134,7 +188,7 @@ export class QlikVariablesService {
         resolve(this.trackerStatus);
       } else {
         this.$openApp.variable.getContent('vTrackerStatus', reply => {
-          let value = reply.qContent.qString;
+          const value = reply.qContent.qString;
           this.trackerStatus = value; 
           resolve(value);
         }, error => reject(error)
@@ -180,13 +234,25 @@ export class QlikVariablesService {
           } else {
             // combos need arrays
             if (this.variables[variableName]['orientation'] == 'combo'){
-              this.variables[variableName]['status'] = 'loaded'; 
-              this.variables[variableName]['currentValue'] = [];      
-              resolve([]);
+              this.getFieldValuesWithSelections(variableName, this.variables[variableName].governingVariables).then(
+                values => {
+                  // set current value to selectable values returned
+                  const selectableValues = values
+                    .filter(valObj => valObj.selectable)
+                    .map(valObj => valObj.value);
+
+                  this.variables[variableName]['currentValue'] = selectableValues;
+                  // note, we are loading this here, but if there are any changes to governing
+                  // variables, this will need to be reset
+                  this.variables[variableName].status = 'loaded';
+                  resolve(selectableValues);
+                },
+                error => reject(error)
+              )
             } else {
               this.variables[variableName]['status'] = 'loaded'; 
               this.variables[variableName]['currentValue'] = '';  
-              resolve(value);
+              resolve('');
             }            
           }
         }
@@ -246,7 +312,14 @@ export class QlikVariablesService {
          let dvariableName = this.variables[variableName].dependents[di];
          if (!this.variables[dvariableName].useQlik) {
           this.variables[dvariableName].status = 'loading';
-          this.variables[dvariableName].currentValue = [];
+          // this.variables[dvariableName].currentValue = [];
+          // the following initializes the value
+          this.getVariableValue(dvariableName).then(
+            values => {
+              this.notifyVariableObservers(dvariableName);
+            },
+            error => console.log(error)
+          );
          }       
        }
      }
@@ -261,28 +334,14 @@ export class QlikVariablesService {
   toggleVariableValueInArray(variableName, value){
     return new Promise( (resolve, reject) => {     
       let variable = this.variables[variableName];
+      // console.log("toggleVariableValueInArray",variableName, variable, angular.isArray(variable.currentValue));
       // if the currentValue is not an array we pass this along to set
       if (angular.isArray(variable.currentValue)){
         // if the status of this variable is not loaded then we try to load all values
         if (variable.status == 'loaded'){
           resolve(this._toggleVariableValueInArray(variableName, value));
         } else {
-          this.getFieldValuesWithSelections(variableName, variable.governingVariables).then(
-            values => {
-              // set current value to selectable values returned
-              let selectableValues = [];
-              for (let i = 0; i < values.length; i++){
-                if (values[i].selectable) selectableValues.push(values[i].value);
-              }
-              
-              this.variables[variableName]['currentValue'] = selectableValues;
-              // note, we are loading this here, but if there are any changes to governing
-              // variables, this will need to be reset
-              this.variables[variableName].status = 'loaded';
-              resolve(this._toggleVariableValueInArray(variableName, value));
-            },
-            error => reject(error)
-          )
+          reject(variableName + " not loaded");
         }
       } else {
         return this.setVariableValue(variableName, value);
@@ -294,10 +353,11 @@ export class QlikVariablesService {
       let variable = this.variables[variableName];
       // is this variable in the current selections
       let index = variable.currentValue.indexOf(value);
-      if (index >= 0){
+      if (index >= 0) {
         // take it out
         variable.currentValue.splice(index, 1);
       } else {
+        // put it in
         variable.currentValue.push(value);
       }
       this.notifyVariableObservers(variableName);
@@ -312,68 +372,39 @@ export class QlikVariablesService {
    */
   getFieldValuesWithSelections(targetVariable, selectionVariables){
     return new Promise( (resolve, reject) => {
-      let maxAttempts = 10;
-      let attempts = 0;
-    
-      // if this is still initializing keeping polling
-      let poll = () => {
-        // console.log(this, maxAttempts, attempts);
-        maxAttempts++;
-        if (this.initializing){
-          if (attempts <= maxAttempts){
-            attempts++;
-            setTimeout(poll, 1000);
+      // if there is a static list of values, return that immediately
+      if (this.variables[targetVariable].sourceArray != null && this.variables[targetVariable].sourceArray.length > 0){
+        resolve(this.variables[targetVariable].sourceArray
+          .map(val => { return({'value': val, 'selectable': true}) })
+        );
+      } else {
+        let maxAttempts = 50;
+        let attempts = 0;
+        // if this is still initializing keeping polling
+        let poll = () => {
+          maxAttempts++;
+          if (this.initializing){
+            if (attempts <= maxAttempts){
+              attempts++;
+              setTimeout(poll, 1000);
+            } else {
+              reject('Could not get table from Qlik');
+            }
           } else {
-            reject('Could not get table from Qlik');
+            resolve(this._getFieldValuesWithSelections(targetVariable, selectionVariables));
           }
+        }
+        if (this.initializing){
+          setTimeout(poll, 1000);
         } else {
           resolve(this._getFieldValuesWithSelections(targetVariable, selectionVariables));
         }
-      }
-      if (this.initializing){
-        setTimeout(poll, 1000);
-      } else {
-        resolve(this._getFieldValuesWithSelections(targetVariable, selectionVariables));
       }
     });
   }
 
     _getFieldValuesWithSelections(targetVariable, selectionVariables) {  
-      function onlyUnique(value, index, self) { 
-        return self.indexOf(value) === index && value != '-' && 
-            value != 'no construct/subconstruct assigned';
-      }
-      let getSortedFieldValues = (variableName, values) => {
-        if (this.variables[variableName].sortOrder != null){
-          // count each value in the values
-          let valueCounts = values.reduce( function(acc, curr){
-            acc[curr] = typeof acc[curr] == 'undefined' ? 1 : acc[curr] + 1
-            return acc;
-          }, {});
-          let sortedValues = [];
-          let sortedKeys = [];
-          for (let i = 0; i < this.variables[variableName].sortOrder.length; i++){
-            let value = this.variables[variableName].sortOrder[i];
-            sortedKeys.push(value);
-            let valueArr = typeof valueCounts[value] === 'number' ? 
-              new Array(valueCounts[value]).fill(value) : [];
-            sortedValues = sortedValues.concat(valueArr);
-          }
-          // add on any values that we haven't added yet
-          for (let key in valueCounts){
-            if (sortedKeys.indexOf(key) == -1){
-              sortedValues = sortedValues.concat(new Array(valueCounts[key]).fill(key));
-            }
-          }
-          return sortedValues;
-        } else {
-          return values;
-        }
-      }
-
       if (this.table == null) return null;
-
-      // console.log(targetVariable, selectionVariables);
 
       let _table = angular.copy(this.table);
       
@@ -382,7 +413,7 @@ export class QlikVariablesService {
       let indicesToKeep = Array.apply(null, {length: targetValues.length}).map(Number.call, Number);
 
       // get all the unique values in the field (disregarding selections)
-      let uniqueVals = targetValues.filter(onlyUnique);
+      let uniqueVals = targetValues.filter(getUniqueValues);
       
       let selections = null;
       if (selectionVariables != null && selectionVariables.length > 0){
@@ -395,14 +426,10 @@ export class QlikVariablesService {
 
 
       // reduce table based on selectionVariables
-      // if selections are null, assume that all variables are possible
       if (selections == null){
-        let sortedUniqueVals = getSortedFieldValues(targetVariable, uniqueVals);
-        let values = []; 
-        for (let i = 0; i < sortedUniqueVals.length; i++){
-          values.push({'value': sortedUniqueVals[i], 'selectable':true});
-        }
-        return values;
+        // if there are no selections return all unique values as selectable, then map array to an object with selectable field
+        return getSortedFieldValues(uniqueVals, this.variables[targetVariable].sortOrder)
+          .map(val => { return({'value': val, 'selectable': true}) });
       } else {
         for (let variable in selections){
           let field = this.variables[variable].sourceField;
@@ -412,59 +439,30 @@ export class QlikVariablesService {
             let fieldInTable = _table[field];
             let fSelections = selections[variable].currentValue;        
             
-            // loop through the field in table
-            for (let i = indicesToKeep.length - 1; i >= 0; i--){
-              let index = indicesToKeep[i];
-              // a single value for this variable
-              if (typeof fSelections === 'int' || (typeof fSelections === 'string' && fSelections.length > 0)){
-                if (fieldInTable[index] != fSelections || fieldInTable[index] == "-"){
-                  indicesToKeep.splice(i, 1);
-                }
-              } else if (fSelections.length > 0) {
-              // an array of values, if empty we take everything
-                let found = false;
-                for (let j = 0; j < fSelections.length; j++){
-                  if (fieldInTable[index] == fSelections[j] || fieldInTable[index] == "-"){
-                    found = true;
-                    break;
-                  }
-                }
-                if (!found){
-                  indicesToKeep.splice(i, 1);             
-                }
-              }
+            // is this field selection a text/number or an array of text/numbers?
+            if (typeof fSelections === 'int' || (typeof fSelections === 'string' && fSelections.length > 0)){
+              // is this value on the table
+              indicesToKeep = indicesToKeep.filter(indexVal => fieldInTable[indexVal] == fSelections && fieldInTable[indexVal] != "-");
+            } else if (angular.isArray(fSelections)) {
+              indicesToKeep = indicesToKeep.filter(indexVal => fSelections.indexOf(fieldInTable[indexVal]) >= 0 && fieldInTable[indexVal] != "-");
             }
           }
         }
         
         // get a list of unique selectable target values
-        let selectableValues = [];
-        for (let i = 0; i < indicesToKeep.length; i++){   
-          let index = indicesToKeep[i]
-          let value = _table[targetField][index];
-          // is this value already in selectableValues?
-          if (value != '-' && (selectableValues.length == 0 || selectableValues.indexOf(value) < 0)){
-            selectableValues.push(_table[targetField][index]);
-          }
-        }
-        let sortedSelectableVals = getSortedFieldValues(targetVariable, selectableValues);
-
-        // create an array determing whether the value in the selectable array
-        let sortedUniqueVals = getSortedFieldValues(targetVariable, uniqueVals);
-
-        let values = [];
-        for (let i = 0; i < sortedUniqueVals.length; i++){
-          values.push({'value': sortedUniqueVals[i], 'selectable':selectableValues.indexOf(sortedUniqueVals[i]) >= 0});
-        }
-
-        return values;
+        const selectableValues = indicesToKeep.map(indexVal => _table[targetField][indexVal])
+          .filter(val => val != '-')
+          .filter(getUniqueValues);
+        
+        // create and return an array determing whether the value is in the selectable array
+        return getSortedFieldValues(uniqueVals, this.variables[targetVariable].sortOrder)
+          .map(val => { return({'value': val, 'selectable': selectableValues.indexOf(val) >= 0}) });
       }
     }
  
   
 
   registerVariableObserver(variableName, callback){
-  	//console.log("callback", callback);
   	// if we don't yet have an array of callbacks for this variable, add one
   	if (this.variableObserverCallbacks[variableName] == null){
   		this.variableObserverCallbacks[variableName] = [callback];
@@ -477,8 +475,7 @@ export class QlikVariablesService {
   	// console.log("notifyVariableObservers", variableName, this.variableObserverCallbacks);
   	if (this.variableObserverCallbacks[variableName] != null &&
   		  this.variableObserverCallbacks[variableName].length > 0){
-  		let observerCallbacks = this.variableObserverCallbacks[variableName];
-  		angular.forEach(observerCallbacks, callback => {
+  		angular.forEach(this.variableObserverCallbacks[variableName], callback => {
   			callback(variableName, this.variables[variableName].currentValue);
   		});
   	}

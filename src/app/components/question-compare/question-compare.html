@@ -64,15 +64,16 @@
             <div class="text-block">
               <h2 class="header"> How was each question answered? </h2>
               <p class="body">
-                The District-Wide Survey includes approximately <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
+                The District-Wide Surveys include approximately <strong>{{$ctrl.numQuestionsStudent}} student </strong> questions, <strong>{{$ctrl.numQuestionsParent}} parent </strong> questions, 
                 <strong>{{$ctrl.numQuestionsTeacher}} teacher </strong> questions, and
-                <strong>{{$ctrl.numQuestionsPrincipal}} principal </strong> questions. On this page you can view aggregated responses to each of these questions. For a list of all questions included on the 2019 surveys, visit 
+                <strong>{{$ctrl.numQuestionsPrincipal}} principal </strong> questions. Here you can view aggregated responses to each of these questions. For a list of all questions included on the {{$ctrl.CYTD}} surveys, visit 
                 <a href="https://www.philasd.org/research/programsservices/district-wide-surveys/allquestions/">the Survey Questions website</a>.
                 <br><br>
-                Click the button, "<span style="background-color:#47aad8; color:#fff; border-radius:4px; border-style:thin; border-color:#808000;padding:2px;">⊕ Select a new question</span>" 
-                to view questions based on respondent type, topic, and sub-topics. After choosing a question, the chart at right displays the % of respondents who selected each possible response (bars display data for {{$ctrl.CYTD}} while circles show the same data {{$ctrl.PYTD}}). Blue bars and circles represent the "most positive" response, while red bars and circles represent the "least positive" response. You may hover over a bar to see the numbers for each year.
+                Click <span style="background-color:#47aad8; color:#fff; border-radius:4px; border-style:thin; border-color:#808000;padding:2px;">⊕ Select a new question</span> 
+                to view questions based on respondent group, topic, and subtopic. After choosing a question, the chart on the right will display the percent of respondents who selected each possible response (bars represent data for 
+                {{$ctrl.CYTD}}, while circles show the same data for {{$ctrl.PYTD}}). Blue bars and circles represent the "most positive" response, while red bars and circles represent the "least positive" response. You can hover over a bar to see the numbers for each year.
                 <br><br>
-                In the blue ribbons below you can compare responses to specific questions <span ng-if="$ctrl.includeComparison">by respondent charecteristics,&nbsp; </span> by locatation, or across networks and schools.
+                In the blue ribbons below, you can compare responses to specific questions <span ng-if="$ctrl.includeComparison">by respondent characteristics,&nbsp; </span> by location, or across networks and schools.
               </p>
             </div>
             <div ng-if="$ctrl.accordionsCollapsed" class="vis-block" style="max-width:400px">
@@ -221,7 +222,7 @@
               </button>            
             </h5>
           </div>
-          <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordion">
+          <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordion"  style="margin-bottom:2em;">
             <div class="card-body"> 
               <div class="instructions">     
                 <div class="d-flex flex-wrap"> 

@@ -191,61 +191,6 @@ button.bg-sdp:focus {
 .focus-questions .combo-chart .qv-object-content-container {
   position: static !important;
 }
-.home .home-banner {
-  background: url("../img/headers/6.jpg") no-repeat right center;
-  background-size: cover;
-}
-
-.home .home-banner .home-gradient {
-  background: linear-gradient(60deg, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.1) 90%);
-}
-
-.home .home-banner .home-banner-title {
-  color: #EEE;
-  margin-top: 20px;
-  font-style: oblique;
-}
-
-.home .home-banner .home-banner-content {
-  color: white;
-  border-color: white;
-  margin-top: 200px;
-  margin-bottom: 100px;
-}
-
-.home .home-banner .home-banner-content hr {
-  border-color: white;
-  color: white;
-  background-color: white;
-}
-
-.home .home-content-block {
-  padding-top: 40px;
-  color: #555588;
-  background-color: #fff;
-}
-
-.home .home-content-block .card {
-  box-shadow: 4px 4px 2px #ccc;
-  border: none;
-  border-left: 1px solid #ddd;
-}
-
-.home .home-content-block .card a:hover {
-  text-decoration: none;
-}
-
-.home .home-content-block .card p {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.home .home-content-block .card:hover {
-  background-color: #F0F0FD;
-}
 .question-compare .accordion .text-block {
   max-width: 60em;
 }
@@ -427,33 +372,60 @@ button.bg-sdp:focus {
 .question-compare #accordion .qv-object-content-container {
   position: static !important;
 }
-.response-rate .instructions .kpi {
-  width: calc(200px + 2rem);
-  color: #222;
-  background-color: #f0f0f8;
-  margin: 2px;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
+.home .home-banner {
+  background: url("../img/headers/6.jpg") no-repeat right center;
+  background-size: cover;
 }
 
-.response-rate .instructions #kpi-Student {
-  background-color: rgba(71,170,216,0.2);
+.home .home-banner .home-gradient {
+  background: linear-gradient(60deg, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.1) 90%);
 }
 
-.response-rate .instructions #kpi-Parent {
-  background-color: rgba(57,134,53,0.2);
+.home .home-banner .home-banner-title {
+  color: #EEE;
+  margin-top: 20px;
+  font-style: oblique;
 }
 
-.response-rate .instructions #kpi-Teacher {
-  background-color: rgba(255,170,48,0.2);
+.home .home-banner .home-banner-content {
+  color: white;
+  border-color: white;
+  margin-top: 200px;
+  margin-bottom: 100px;
 }
 
-.response-rate .instructions #kpi-Principal {
-  background-color: rgba(11,49,91,0.1);
+.home .home-banner .home-banner-content hr {
+  border-color: white;
+  color: white;
+  background-color: white;
 }
 
-.response-rate .instructions .qv-object-footnote {
-  text-align: center;
+.home .home-content-block {
+  padding-top: 40px;
+  color: #555588;
+  background-color: #fff;
+}
+
+.home .home-content-block .card {
+  box-shadow: 4px 4px 2px #ccc;
+  border: none;
+  border-left: 1px solid #ddd;
+}
+
+.home .home-content-block .card a:hover {
+  text-decoration: none;
+}
+
+.home .home-content-block .card p {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.home .home-content-block .card:hover {
+  background-color: #F0F0FD;
 }
 .survey-resources {
   background-color: #fff;
@@ -489,6 +461,111 @@ button.bg-sdp:focus {
 .survey-resources .table .blank-col {
   background-color: #fff;
   border-color: #fff;
+}
+.response-rate .instructions .kpi {
+  width: calc(200px + 2rem);
+  color: #222;
+  background-color: #f0f0f8;
+  margin: 2px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+}
+
+.response-rate .instructions #kpi-Student {
+  background-color: rgba(71,170,216,0.2);
+}
+
+.response-rate .instructions #kpi-Parent {
+  background-color: rgba(57,134,53,0.2);
+}
+
+.response-rate .instructions #kpi-Teacher {
+  background-color: rgba(255,170,48,0.2);
+}
+
+.response-rate .instructions #kpi-Principal {
+  background-color: rgba(11,49,91,0.1);
+}
+
+.response-rate .instructions .qv-object-footnote {
+  text-align: center;
+}
+.topics .axisLabel {
+  opacity: 0;
+}
+
+.topics .color-key {
+  padding: 5px 1em 2em 5px;
+  text-align: center;
+  border: 1px solid #888888;
+}
+
+.topics .color-key h5 {
+  font-size: 12pt;
+}
+
+.topics .color-key p {
+  font-size: 10pt;
+}
+
+.topics .color-key .color-key-1 {
+  padding: 2px 0px 2px 0px;
+  color: #ffffff;
+  background-color: #3c52a1;
+}
+
+.topics .color-key .color-key-2 {
+  padding: 2px 0px 2px 0px;
+  color: #000000;
+  background-color: #5ea4d9;
+}
+
+.topics .color-key .color-key-3 {
+  padding: 2px 0px 2px 0px;
+  color: #000000;
+  background-color: #d1ebfb;
+}
+
+.topics .color-key .color-key-4 {
+  padding: 2px 0px 2px 0px;
+  color: #000000;
+  background-color: #f2d2ae;
+}
+
+.topics .color-key .color-key-5 {
+  padding: 2px 0px 2px 0px;
+  color: #000000;
+  background-color: #ed875e;
+}
+
+.topics .color-key .color-key-6 {
+  padding: 2px 0px 2px 0px;
+  color: #ffffff;
+  background-color: #ae1c3e;
+}
+
+.topics .color-key .color-key-is {
+  padding: 2px 0px 2px 0px;
+  color: #000000;
+  background-color: #dcdbde;
+}
+
+.topics .color-key .color-key-na {
+  padding: 2px 0px 2px 0px;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.topics .color-key .color-key-label {
+  margin-bottom: 0px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.topics .color-key .color-key-label-isna {
+  position: absolute;
+  left: 0px;
 }
 .tracker .instructions .kpi {
   width: calc(200px + 2rem);
@@ -630,6 +707,23 @@ button.bg-sdp:focus {
   height: 40px;
   color: #22779f;
 }
+.simple-selector {
+  padding-bottom: 20px;
+  min-width: 10em;
+}
+
+.simple-selector .label {
+  text-align: left;
+  color: #888;
+}
+
+.simple-selector .btn-group-vertical {
+  width: 100%;
+}
+
+.simple-selector .list-group {
+  overflow: scroll;
+}
 .variable-selection-pane {
   height: 100%;
   width: 100%;
@@ -647,6 +741,24 @@ button.bg-sdp:focus {
 .variable-selector .variable-title {
   text-align: left;
   color: #888;
+}
+
+.variable-selector .variable-search {
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  background-color: #aaa;
+  background-image: url("../img/icons/magnifying-glass.svg");
+  background-position: 2px 3px;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  margin-left: 1rem;
+  margin-bottom: 4px;
+  text-indent: 24px;
+}
+
+.variable-selector input[type="text"],
+.variable-selector textarea {
+  background-color: #d1d1d1;
 }
 
 .variable-selector .btn-group-vertical {

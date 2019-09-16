@@ -1,7 +1,13 @@
 <div class="variable-selector">
-	<h5 class="variable-title">
-	{{$ctrl.variableLabel}}
-	</h5>
+	<div ng-if="$ctrl.orientation !== 'list'">
+		<h5 class="variable-title"> {{$ctrl.variableLabel}}</h5>
+	</div>
+	<!-- For the list use a question filter -->
+	<div ng-if="$ctrl.orientation === 'list'" style="display:inline">
+		<h5 class="variable-title" style="display:inline"> {{$ctrl.variableLabel}}</h5>
+		<input type="text" ng-model="$ctrl.textFilterValue"  class="variable-search" id="list-input" class="variable-search-input"/>
+	</div>
+	
 	<div class="btn-group btn-group-toggle flex-wrap" 
 			ng-class="{'btn-group-vertical': $ctrl.orientation === 'vert'}" 
 			ng-if="$ctrl.orientation === 'horiz' || $ctrl.orientation === 'vert'">
@@ -32,7 +38,7 @@
 	<ul class="list-group"
 			ng-if="$ctrl.orientation === 'list'">
 		<li class="list-group-item btn-sdp"
-				ng-repeat="val in $ctrl.values | matchBooleanFilter: 'selectable': true"
+				ng-repeat="val in $ctrl.values | matchBooleanFilter: 'selectable': true | includeTextFilter: 'value': $ctrl.textFilterValue"
 				id="input-{{$ctrl.variableName}}-{{$index}}"
 				ng-class="{active: val.value === $ctrl.currentValue}"
 				ng-click="$ctrl.onClick(val, $index)">

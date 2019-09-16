@@ -12,6 +12,17 @@
 				hide-values="$ctrl.surveysHidden"
 		></variable-selector>
 		<variable-selector 
+				ng-if="$ctrl.topic != null"
+				style="padding-right:20px;"
+				ng-class="'{{$ctrl.topic.cssClass}}'"
+				variable-name={{$ctrl.topic.variableName}}
+				variable-label={{$ctrl.topic.variableLabel}}
+				source-field={{$ctrl.topic.sourceField}}
+				governing-variables="$ctrl.topic.governingVariables"
+				orientation={{$ctrl.topic.orientation}}
+				hide-values="$ctrl.topicsHidden"
+		></variable-selector>
+		<variable-selector 
 				ng-if="$ctrl.construct != null"
 				style="padding-right:20px;"
 				ng-class="'{{$ctrl.construct.cssClass}}'"

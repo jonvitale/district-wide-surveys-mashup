@@ -4,6 +4,7 @@ const VariableSelectionPaneComponent = {
   template: templateUrl,
   bindings: {
     orientSurvey: '@',
+    orientTopic: '@',
     orientConstruct: '@',
     orientSubConstruct: '@',
     orientQuestionText: '@',
@@ -40,6 +41,16 @@ const VariableSelectionPaneComponent = {
         if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
         variableNames.push(variableName);
       }
+      // note, orientTopic is specifically for the topic report and includes an "All Topics" option
+      if (this.orientTopic != null) {
+        variableName = 'vTopic_Selected';
+        variableDetails = this.QlikVariablesService.getVariableDetails(variableName);
+        variableDetails.orientation = this.orientTopic;
+        variables['topic'] = variableDetails;
+        if (variableDetails.sourceField != null) fieldNames.push(variableDetails.sourceField);
+        variableNames.push(variableName);
+      }
+
       if (this.orientConstruct != null){
         variableName = 'vConstruct_Selected';
         variableDetails = this.QlikVariablesService.getVariableDetails(variableName);

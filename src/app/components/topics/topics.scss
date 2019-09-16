@@ -1,0 +1,66 @@
+.topics {
+    .axisLabel {
+        opacity: 0; 
+    }
+    .color-key {
+        padding: 5px 1em 2em 5px;
+        text-align: center;
+        border: 1px solid #888888;
+        h5 {
+            font-size: 12pt;
+        }
+        p {
+            font-size: 10pt;
+        }
+        .color-key-1 {
+            padding: 2px 0px 2px 0px;
+            color: #ffffff;
+            background-color: #3c52a1;
+        }
+        .color-key-2 {
+            padding: 2px 0px 2px 0px;
+            color: #000000;
+            background-color: #5ea4d9;
+        }
+        .color-key-3 {
+            padding: 2px 0px 2px 0px;
+            color: #000000;
+            background-color: #d1ebfb;
+        }
+        .color-key-4 {
+            padding: 2px 0px 2px 0px;
+            color: #000000;
+            background-color: #f2d2ae;
+        }
+        .color-key-5 {
+            padding: 2px 0px 2px 0px;
+            color: #000000;
+            background-color: #ed875e;
+        }
+        .color-key-6 {
+            padding: 2px 0px 2px 0px;
+            color: #ffffff;
+            background-color: #ae1c3e;
+        }
+        .color-key-is {
+            padding: 2px 0px 2px 0px;
+            color: #000000;
+            background-color: #dcdbde;
+        }
+        .color-key-na {
+            padding: 2px 0px 2px 0px;
+            color: #000000;
+            background-color: #ffffff;
+        }
+        .color-key-label {
+            margin-bottom: 0px; 
+            position: absolute; 
+            bottom:0px;
+            left: 0px;
+        }
+        .color-key-label-isna {            
+            position: absolute;
+            left: 0px;
+        }
+    }
+}

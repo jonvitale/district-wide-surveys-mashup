@@ -2,15 +2,16 @@ import templateUrl from './topics.html';
 
 const TopicsComponent = {
   template: templateUrl,
-  $inject: ['qlik', '$openApp', 'QlikVariablesService'],
+  $inject: ['$scope', 'qlik', '$openApp', 'QlikVariablesService'],
   controller: class TopicsComponent {
-    constructor(qlik, $openApp, QlikVariablesService){
+    constructor($scope, qlik, $openApp, QlikVariablesService){
       'ngInject';
       this.qlik = qlik;      
       this.$openApp = $openApp;       
       this.QlikVariablesService = QlikVariablesService;
       this.groups = ['Student', 'Teacher', 'Parent', 'Principal'];
       this.topics = ['School Climate', 'Instruction', 'Parent/Guardian-Community Ties', 'Professional Capacity', 'School Leadership'];
+      $scope.$on('childPressEvent', this.onClickValueTypeSelector.bind(this));
     }
 
     $onInit(){
@@ -22,6 +23,9 @@ const TopicsComponent = {
       });
 
       this.accordionsCollapsed = true;
+
+      this.valueType = '0-10 Scale';
+      this.useScaledScore = true;
       
       // what's the latest year
       this.$openApp.variable.getContent('vCYTD', reply => {
@@ -40,6 +44,8 @@ const TopicsComponent = {
         }
       });
     }
+
+    
     /**
      * When an accordion tab is opened we need to resize the qlik object.
      * Additionally, we keep track if any accordion tabs are open.
@@ -68,6 +74,16 @@ const TopicsComponent = {
       }
       
       this.qlik.resize();
+    }
+
+    onClickValueTypeSelector(event, val) {
+      // console.log("hi", event, val);
+      this.valueType = val;
+      if (val == '% Most Positive') {
+        this.useScaledScore = false;
+      } else {
+        this.useScaledScore = true;
+      }
     }
   }
 }

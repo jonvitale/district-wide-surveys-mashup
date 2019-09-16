@@ -2,10 +2,25 @@
   padding-bottom: 20px;
  //width: 100%;
   min-width:10em;
-  // height: 200px;
+  // height: 200px; 
   .variable-title {
     text-align: left; 
     color: #888;
+  }
+  .variable-search {
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    background-color: #aaa;
+    background-image: url("../img/icons/magnifying-glass.svg");
+    background-position: 2px 3px;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    margin-left: 1rem;
+    margin-bottom: 4px;
+    text-indent: 24px;
+  }
+  input[type="text"], textarea {
+    background-color : #d1d1d1;   
   }
   .btn-group-vertical {
     width: 100%;
@@ -13,5 +28,6 @@
   .list-group {
     overflow: scroll;
   }
+  
 }
   

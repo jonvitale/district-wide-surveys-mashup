@@ -1,0 +1,17 @@
+.simple-selector {
+    padding-bottom: 20px;
+   //width: 100%;
+    min-width:10em;
+    // height: 200px;
+    .label {
+      text-align: left; 
+      color: #888;
+    }
+    .btn-group-vertical {
+      width: 100%;
+    }
+    .list-group {
+      overflow: scroll;
+    }
+  }
+    

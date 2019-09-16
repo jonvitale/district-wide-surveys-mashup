@@ -1,0 +1,16 @@
+<div class="simple-selector">
+    <h5 class="label">
+        {{$ctrl.label}}
+    </h5>
+    <div class="btn-group btn-group-toggle flex-wrap" 
+            ng-class="{'btn-group-vertical': $ctrl.orientation === 'vert'}" 
+            ng-if="$ctrl.orientation === 'horiz' || $ctrl.orientation === 'vert'">
+        <button type="button" class="btn btn-sdp"
+                id="input-{{$ctrl.variableName}}"
+                ng-repeat="val in $ctrl.values"
+                ng-class="{active: val === $ctrl.currentValue}"
+                ng-click="$ctrl.onClick(val, $index)">
+            {{val}}
+        </button>    
+    </div> 
+</div>

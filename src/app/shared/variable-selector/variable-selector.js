@@ -46,6 +46,7 @@ const VariableSelectorComponent = {
         });
       }
 
+      // initialize values
       this.QlikVariablesService.getVariableValue(this.variableName).then(
         value => {
           if (!this.paused){
@@ -75,60 +76,37 @@ const VariableSelectorComponent = {
       this.QlikVariablesService.getFieldValuesWithSelections(this.variableName, this.governingVariables).then(
         values => {
           this.displayed = true;
-
           // get just selectable values, then determine if its the same as the previously selectableValues
-          let selectableValues = [];
-          for (let i = 0; i < values.length; i++){
-            if (values[i].selectable){
-              selectableValues.push(values[i].value);
-            }
-          }
-
+          let selectableValues = values.filter(valObj => valObj.selectable).map(valObj => valObj.value);
+          
           // make sure values are not in hideValues
           // Note, this must come after selectableValues in case there are multiple open
           // variable-selection-panes on the page with different hidden values
           // one will tell the other that some values are not selectable even if they are.
           if (angular.isArray(this.hideValues) && this.hideValues.length > 0){
-            for (let i = values.length-1; i >= 0; i--){
-              let value = values[i].value;
-              if (this.hideValues.indexOf(value) >= 0){
-                values.splice(i, 1);
-              }
-            }
+            values = values.filter(valObj => this.hideValues.indexOf(valObj.value) === -1);
           }
           this.values = values;
 
           // let selectableValuesUpdated = !angular.equals(selectableValues, this.selectableValues);
 
           // console.log("----4. Get updated fields (", this.variableName, ")", this.currentValue);//, selectableValues, selectableValuesUpdated, values);
-          let pselectableValues = this.selectableValues;
+          const pselectableValues = this.selectableValues;
           this.selectableValues = selectableValues;
 
           // if there are multiple values take the intersection of the selectable values and current values
           if (this.orientation == 'combo'){
             
-            // if a selectable value is either: New or existing and current, then make current
-            let currentValues = [];
-            
-            // get new values
-            for (let i = 0; i < this.selectableValues.length; i++){
-              if (!pselectableValues || pselectableValues.indexOf(this.selectableValues[i]) < 0) {
-                currentValues.push(this.selectableValues[i]);
-              }
-            }
-            // get existing values if they are selected
-            for (let i = 0; i < this.currentValues.length; i++){
-              if (selectableValues.indexOf(this.currentValues[i]) >= 0){
-                currentValues.push(this.currentValues[i]);
-              }
-            }
-            
-            this.currentValues = currentValues;
+            // if a selectable value is new (not on the previous list of selectableValues) or value is currently selectable
+            this.currentValues = this.selectableValues.filter(val => 
+                !pselectableValues || pselectableValues.indexOf(val) < 0
+              ).concat(
+                this.currentValues.filter(val => this.selectableValues.indexOf(val) >= 0)
+              );            
           } else {
             // if the current value is not a selectable value
             // set the value to the first on the selectable list
-            if (this.selectableValues.length > 0 && 
-                this.selectableValues.indexOf(this.currentValue) < 0)
+            if (this.selectableValues.length > 0 && this.selectableValues.indexOf(this.currentValue) < 0)
               this.setCurrentValue(this.selectableValues[0]);
           }
           // force a refresh
@@ -163,7 +141,7 @@ const VariableSelectorComponent = {
 export const VariableSelectorModule = angular
   .module('variableSelector', [])
   .filter('matchBooleanFilter', function(){
-    return function(input, column, trueOrFalse){
+    return function(input, column, trueOrFalse) {
       // console.log("!!!!!!!filter!!!!!!!!!!!")
       var ret = [];
       if (!angular.isDefined(trueOrFalse)) {
@@ -171,6 +149,22 @@ export const VariableSelectorModule = angular
       }
       angular.forEach(input, function (v) {
         if (angular.isDefined(v[column]) && v[column] === trueOrFalse) {
+          ret.push(v);
+        }
+      });
+      return ret;
+    }
+  })
+  .filter('includeTextFilter', function(){
+    return function(input, column, textToMatch) {
+      //  console.log("filter text", input, column, textToMatch);
+      var ret = [];
+      if (!angular.isDefined(textToMatch)) {
+        textToMatch = '';
+      }
+      angular.forEach(input, function (v) {
+        // console.log("filter this", column, v[column], textToMatch);
+        if (angular.isDefined(v[column]) && v[column].toLowerCase().includes(textToMatch.toLowerCase())) {
           ret.push(v);
         }
       });

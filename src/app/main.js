@@ -1,10 +1,5 @@
 import config from './config';
 import { AppModule } from './app.module';
-//import waves from 'node-waves';
-//import mdbootstrap from 'mdbootstrap';
-
-//var waves = required('node-waves');
-//window.Waves = waves;
 
 let baseUrl = {
     protocol: config.isSecure ? "https://" : "http://",

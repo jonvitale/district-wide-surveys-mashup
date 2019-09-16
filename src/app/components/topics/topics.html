@@ -5,27 +5,29 @@
       <filter-pane></filter-pane>  
     </section>
     <section>
-      <div class="above-fold">  
+      <div class="above-fold"> 
+        
         <div class="instructions">  
           <div class="d-flex"> 
-            <div class="text-block">   
+            <div class="text-block">  
+                
               <h2 class="header"> What are the main topics in the surveys? </h2>
               <p>
-                After analyzing survey results, the Office of Research and Evaluation categorized each question into one of five general topics.
-                For each topic a score is constructed by calculating the % of responses to topic-related questions that are the best possible choice.
-
-                On this page you can choose a topic to compare schools and other groups of students for each of these topics.
+                  Each question relates to one of five topics. 
               </p>
               <p class="ml-2">
-                <strong>School Climate</strong> refers to the attitudes, feelings, and interpersonal relationships associated with the school environment. Sub-topics include bullying, safety, attendance, discipline, and relationships.
+                <strong>School Climate</strong> refers to the attitudes, feelings, and interpersonal relationships associated with the school environment. Subtopics include bullying, safety, attendance, discipline, and relationships. All respondents are asked questions about school climate.
                 <br>
-                <strong>Instruction</strong> refers to teaching and learning within the classroom and through assigned coursework. Sub-topics include teaching, student engagement, data usage, and district support.
+                <strong>Instruction</strong> refers to teaching and learning within the classroom and through assigned coursework. Subtopics include teaching, student engagement, data usage, and District support. All respondents are asked questions about school climate.
                 <br>
-                <strong>Parent/Guardian-Community Ties</strong> refers to the connectedness of a school with its parents,guardians, and surrounding community. Sub-topics include outreach, communication quality, guardian involvement, and networks. These questions are asked of parent/guardianss, teachers, and principals.
+                <strong>Parent/Guardian-Community Ties</strong> includes questions intended to capture the level of connection between a school, its parents/guardians, and its surrounding community. Subtopics include outreach, communication quality, guardian involvement, and networks. These questions appear on the parent/guardian, teacher, and principal surveys.
                 <br>
-                <strong>School Leadership</strong> refers to decision making related to the school and the overall management of the building and its staff. Sub-topics include leadership decisions, feedback, and school focus priorities. These questions appear on the parent/guardian, teacher and principal surveys.
+                <strong>School Leadership</strong> refers to decision-making related to the school and the overall management of its building and staff. Subtopics include leadership decisions, feedback, and school focus priorities. These questions appear on the parent/guardian, teacher, and principal surveys.
                 <br>
-                <strong>Professional Capacity</strong> refers to the cultivation and mastery of instructional practice within the school. Sub-topics include professional development, peer collaboration, and opportunities for innovation. These questions appear on the teacher and principal surveys only.
+                <strong>Professional Capacity</strong> refers to the cultivation and mastery of instructional practice within the school. Subtopics include professional development, peer collaboration, and opportunities for innovation. These questions appear on the teacher and principal surveys only.
+              </p>
+              <p>
+                  Click the “Topic Report” bar and select a school in the green bar above to see a radar chart and tables displaying survey feedback by topic and subtopic. These reports use topic and subtopic scores, which are numeric versions of survey responses. The higher the score, the more positive the response.
               </p>
             </div>
             <img style="width:40%;height:40%;" src="img/survey-resources/constructs.jpg">
@@ -36,6 +38,113 @@
     <section>
       <div class="accordion" id="accordion">
         
+        <!-- Report -->
+        <div class="card">
+          <div class="card-header" id="headingReport">
+            <h5 class="mb-0">
+              <button class="btn collapsed" id="headingReport" data-toggle="collapse" data-target="#collapseReport" aria-expanded="false" aria-controls="collapseReport" ng-click="$ctrl.onClickAccordion($event)">
+                <div class="d-flex justify-content-between">
+                  <span class="symbol">&nbsp; Topic Report</span>
+                  <img class="icon" src="img/icons/icon-line.png"> 
+                </div>
+              </button>            
+            </h5>
+          </div>
+          <div id="collapseReport" class="collapse" aria-labelledby="headingReport" data-parent="#accordion">
+            <div class="card-body">
+              <div class="instructions">
+                <p class="text-block pr-3">
+                    This report uses topic and subtopic average scores scaled from 0 to 10 (where 10 is the highest score).
+                </p>
+              </div>
+              <variable-selection-pane  orient-topic="horiz"></variable-selection-pane> 
+              <div class="row">
+                <div class="col-xs-12 col-md-12 col-xl-5" style="padding-bottom:80px;">
+                  <qlik-object obj-id="BMPGjFN" height="400px" width="100%"></qlik-object> 
+                </div>
+                <div class="col-xs-12 col-md-8 col-xl-5">
+                  <qlik-object obj-id="DqgmaBt" height="400px" width="100%"></qlik-object> 
+                </div>
+                <div class="col-xs-12 col-md-4 col-xl-2">
+                  <div class="color-key">
+                    <h5> Color Key</h5>
+                    <div class="row">  
+                      <div class="col">                            
+                        <p class="color-key-1"> ≥ 9.0</p>
+                      </div> 
+                      <div class="col" style="position:relative">                            
+                        <p class="color-key-label"> Excellent</p>
+                      </div>                    
+                    </div>
+                    <div class="row">  
+                      <div class="col">
+                        <p class="color-key-2"> 8.0 - 8.9</p>
+                      </div> 
+                      <div class="col" style="position:relative">                            
+                        <p class="color-key-label"> &nbsp; </p>
+                      </div>                     
+                    </div>
+                    <div class="row">  
+                      <div class="col">
+                        <p class="color-key-3"> 7.0 - 7.9</p>
+                      </div> 
+                      <div class="col" style="position:relative">                            
+                        <p class="color-key-label"> Good </p>
+                      </div>                      
+                    </div>
+                    <div class="row">  
+                      <div class="col">
+                        <p class="color-key-4"> 6.0 - 6.9</p>
+                      </div>      
+                      <div class="col" style="position:relative">                            
+                          <p class="color-key-label"> &nbsp; </p>
+                      </div>                 
+                    </div>
+                    <div class="row">  
+                      <div class="col">
+                        <p class="color-key-5"> 5.0 - 6.0</p>
+                      </div>      
+                      <div class="col" style="position:relative">                            
+                        <p class="color-key-label"> Needs attention </p>
+                      </div>                 
+                    </div>
+                    <div class="row">  
+                      <div class="col">
+                        <p class="color-key-6"> &#60; 5.0</p>                        
+                      </div>    
+                      <div class="col">                            
+                        <p class="color-key-label"> &nbsp; </p>
+                      </div>                   
+                    </div>
+                    <div class="row">  
+                      <div class="col">
+                        <p class="color-key-is"> i.s. </p>
+                      </div>                    
+                      <div class="col">                            
+                        <p class="color-key-label-isna"> Too few responses </p>
+                      </div>   
+                    </div>
+                    <div class="row">  
+                      <div class="col">
+                        <p class="color-key-na"> n/a </p>
+                      </div>
+                      <div class="col">                            
+                        <p class="color-key-label-isna"> Not applicable for this group </p>
+                      </div>   
+                    </div>                      
+                  </div>                  
+                </div>
+              </div>
+              <div class="row" style="padding-bottom:20px;">
+                <div class="col">
+                  <qlik-object obj-id="JmyWyxL" height="400px" width="100%"></qlik-object>
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div>
+
+
         <!-- Map -->
         <div class="card">
           <div class="card-header" id="headingMap">
@@ -48,15 +157,21 @@
               </button>            
             </h5>
           </div>
-          <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordion">
+          <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordion"  style="margin-bottom:2em;">
             <div class="card-body">
               <div class="instructions">
                 <p class="text-block pr-3">
-                   Select a respondent group and topic to view the average topic score by school on the map for {{$ctrl.CYTD}}. You can zoom or scroll the area of the map.
+                    Select a respondent group and topic to view the average school-level scores for that topic on the map for {{ctrl.CYTD}}. You can zoom or scroll within the map, and you can switch your view to see scores on a 0-10 scale or “% most positive.” (The “% most positive” is the percent of respondents that selected the most positive response.)
                 </p>
               </div>
-              <variable-selection-pane  orient-survey="horiz" orient-construct="horiz" constructs-hidden="['Other']" surveys-hidden="['Principal']"></variable-selection-pane> 
-              <qlik-object obj-id="BHWkS" height="450px" width="100%" obj-options="{noSelections:true}"></qlik-object>
+              <div class="d-flex flex-wrap">
+                  <variable-selection-pane  orient-survey="horiz" orient-construct="horiz" surveys-hidden="['Principal']" constructs-hidden="['Other']"></variable-selection-pane> 
+                  <simple-selector label="Show score by:" default-value="$ctrl.valueType" values="['0-10 Scale', '% Most Positive']"></simple-selector>
+              </div>  
+              <div style="padding-bottom:20px">
+                <qlik-object ng-if="$ctrl.useScaledScore" obj-id="BbvscrJ" height="450px" width="100%" obj-options="{noSelections:true}"></qlik-object>
+                <qlik-object ng-if="!$ctrl.useScaledScore" obj-id="BHWkS" height="450px" width="100%" obj-options="{noSelections:true}"></qlik-object>
+              </div>
             </div>
           </div>  
         </div>
@@ -77,13 +192,18 @@
             <div class="card-body">
               <div class="instructions">
                 <p class="text-block pr-3">
-                  Select a respondent group and topic to view the average topic score by network. Bars display averages for {{$ctrl.CYTD}}. Circles display averages for {{$ctrl.PYTD}}. Each bar and circle represents a learning network. You can click on a network to see all schools in that network. For Student and Parent topics you may click on a school to show grade levels in that school.
+                    Select a respondent group and topic to view the average topic score by network. Bars display averages for {{$ctrl.CYTD}}. Circles display averages for {{$ctrl.PYTD}}. Each bar and circle represents a learning network. You can click on a network to see all schools in that network. For student and parent topics, you can also click on a school to view the scores by grade level. You can switch your view to see scores on a 0-10 scale or “% most positive.” (“% most positive” is the percent of respondents that selected the best response.)
                 </p>
               </div>
-              <variable-selection-pane  orient-survey="horiz" orient-construct="horiz" constructs-hidden="['Other']"></variable-selection-pane> 
+              <div class="d-flex flex-wrap">
+                  <variable-selection-pane  orient-survey="horiz" orient-construct="horiz" constructs-hidden="['Other']"></variable-selection-pane> 
+                  <simple-selector label="Show score by:" default-value="$ctrl.valueType" values="['0-10 Scale', '% Most Positive']"></simple-selector>
+              </div>              
               <div class="qlik-object-with-title-and-subtitle">
-                <qlik-object obj-id="JPhNfNh" height="400px" width="100%"></qlik-object> 
+                <qlik-object ng-if="$ctrl.useScaledScore" obj-id="AMmmK" height="400px" width="100%"></qlik-object>
+                <qlik-object ng-if="!$ctrl.useScaledScore" obj-id="JPhNfNh" height="400px" width="100%"></qlik-object>
               </div>
+              
             </div>
           </div>  
         </div>

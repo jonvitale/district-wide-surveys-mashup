@@ -132,7 +132,7 @@ const QuestionCompareComponent = {
 
     $onDestroy(){
       // unregister listeners
-      console.log("---onDestroy question-compare--");
+      // console.log("---onDestroy question-compare--");
       this.QlikVariablesService.unregisterVariableObservers('vSurvey_Selected');
       this.QlikVariablesService.unregisterVariableObservers('vConstruct_Selected');
       this.QlikVariablesService.unregisterVariableObservers('vSubConstruct_Selected');
@@ -176,7 +176,7 @@ const QuestionCompareComponent = {
         this.accordionsCollapsed = true;
       }
 
-      this.$timeout(() => {console.log("here"); this.qlik.resize()}, 1000);
+      this.$timeout(() => {this.qlik.resize()}, 1000);
       
       // this.qlik.resize();
     }
