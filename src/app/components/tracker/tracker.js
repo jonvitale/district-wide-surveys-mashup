@@ -12,7 +12,12 @@ const TrackerComponent = {
       this.qlik = qlik;
       this.$openApp = $openApp;   
       this.QlikVariablesService = QlikVariablesService;
-      this.afterMay31 = true;
+      this.afterMay31 = false;
+      // these are overwritten by variables
+      this.showTracker = true
+      this.showParent = true
+      this.showTeacher = true
+
     }
 
     $onInit(){
@@ -45,12 +50,17 @@ const TrackerComponent = {
           },
         }
       };
-
+      
       this.QlikVariablesService.getTrackerStatus()
         .then(status => {
-          this.showTeacher = status == 'spt';
-          if (this.showTeacher) {
+          this.showTeacher = status.includes('t');
+          this.showParent = status.includes('p');
+          
+          if (this.showTeacher && this.showParent) {
             this.tableId = 'PbMGPNn';
+          } else if (this.showTeacher) {
+            this.tableId = 'mNp';
+            delete this.qlikIds['Parent'];
           } else {
             this.tableId = 'UGeqLT';
             delete this.qlikIds['Teacher'];
@@ -67,11 +77,18 @@ const TrackerComponent = {
         this.reloadDate = reply.qContent.qString;
       });
 
+      this.$openApp.variable.getContent('_vDate_Household', reply => {
+        this.householdDate = reply.qContent.qString;
+      });
+
       this.$openApp.variable.getContent('vSum_ResponseCount_Student_Current', reply => {
         this.studentResponsesCYTD = reply.qContent.qString;
       });
       this.$openApp.variable.getContent('vSum_ResponseCount_Parent_Current', reply => {
         this.parentResponsesCYTD = reply.qContent.qString;
+      });
+      this.$openApp.variable.getContent('vSum_ResponseCount_Household_Current', reply => {
+        this.householdResponsesCYTD = reply.qContent.qString;
       });
       this.$openApp.variable.getContent('vSum_ResponseCount_Teacher_Current', reply => {
         this.teacherResponsesCYTD = reply.qContent.qString;

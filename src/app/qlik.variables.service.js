@@ -179,8 +179,9 @@ export class QlikVariablesService {
   /**
    * Stores the current state of the tracker. If the tracker is
    * not working returns an empty string. If parents and students
-   * are working returns 'ps'. If all are working returns 'pst'
-   * @return {Promise<string>} one of 'ps', 'pst', ''
+   * are working returns 'sp'. If only students and teacher, return 'st'.
+   * If all are working returns 'pst'.
+   * @return {Promise<string>} one of 'st', 'sp', 'spt', ''
    */
   getTrackerStatus() {    
     return new Promise((resolve, reject) => {

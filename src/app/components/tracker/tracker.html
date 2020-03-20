@@ -10,23 +10,28 @@
 	        <div class="row">
 	          <div class="col col-lg-6 text-block"> 
 	            <h2 class="header"> How many people responded to the surveys so far in {{$ctrl.EYTD}}? </h2>	
-	            <p class="body">     
+	            <p class="body"> 
                 Since data collection for the {{$ctrl.EYTD}} school year began, we have received    
                 <span class="font-weight-bold">{{$ctrl.studentResponsesCYTD}} student</span> 
                 (grades 3 - 12)
-                <span ng-if="$ctrl.showTeacher" style="margin-left:-4px;">, </span>
-                <span ng-if="!$ctrl.showTeacher">and</span>
-                <span class="font-weight-bold">{{$ctrl.parentResponsesCYTD}} parent</span>
-                <span ng-if="$ctrl.showTeacher" style="margin-left:-4px;">, and
+                <span ng-if="$ctrl.showTeacher && $ctrl.showParent" style="margin-left:-4px;">, </span>
+                <span ng-if="!$ctrl.showTeacher || !$ctrl.showParent">and&nbsp;</span>
+                <span ng-if="$ctrl.showParent" class="font-weight-bold">{{$ctrl.householdResponsesCYTD}} household (from parents/guardians)</span>
+                <span ng-if="$ctrl.showTeacher && $ctrl.showParent" style="margin-left:-4px;">, and&nbsp;</span>
+                <span ng-if="$ctrl.showTeacher" style="margin-left:-4px;">
                   <span class="font-weight-bold">{{$ctrl.teacherResponsesCYTD}} teacher</span>
                 </span> survey responses from district and charter schools across Philadelphia.
+                <span ng-if="!$ctrl.showParent"> Parent/guardian response rates will be available soon.</span>
               </p>
               <p class="body">
                 <span ng-if="$ctrl.afterMay31">
-                  Response rates are based on survey data collected through {{$ctrl.reloadDate}} and May 31st enrollment.
+                    Response counts are based on survey data collected through {{ $ctrl.reloadDate }}.
+                    Response rates are based on May 1st enrollment and employment records.
                 </span>
                 <span ng-if="!$ctrl.afterMay31">
-                  Response rates reflect the number of surveys completed through {{$ctrl.reloadDate}} out of the May 31st enrollment count.
+                  Student and teacher response rates are based on survey data and enrollment or employment records collected through {{ $ctrl.reloadDate }}.
+                  Parent/guardian rates are based on survey data as of {{ $ctrl.reloadDate }} and enrollment data as of {{ $ctrl.householdDate }}. 
+                  Please note that final response rates will reflect enrollment based on a May 1st snapshot.
                 </span>
               </p>
               <p class="body">Data is updated daily.</p>
